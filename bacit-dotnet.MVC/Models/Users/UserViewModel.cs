@@ -9,6 +9,8 @@ namespace bacit_dotnet.MVC.Models.Users
       
         public string Email { get; set; }
 
+        public string adresse { get; set; }
+
         public List<UserEntity> Users { get; set; }
         
         public bool IsAdmin { get; set; }
