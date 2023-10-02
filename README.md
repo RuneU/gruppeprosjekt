@@ -48,3 +48,6 @@ The scripts allow us to build and deploy our application faster, which can be be
 Have fun and experiment :)
 
 Code can be copied freely
+
+<br>
+Andreas
