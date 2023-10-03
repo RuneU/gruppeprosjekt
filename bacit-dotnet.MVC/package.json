@@ -1,0 +1,15 @@
+{
+  "name": "gruppeprosjekt",
+  "version": "1.0.0",
+  "description": "Base project for IS202 in dotnet\r Text provided by Trym (https://github.com/Nosp1) - Modified slightly to fit this project.",
+  "main": "index.js",
+  "scripts": {
+    "css:build": "npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/css/styles.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}
