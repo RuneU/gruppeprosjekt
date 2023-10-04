@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using bacit_dotnet.MVC.Models;
+using bacit_dotnet.MVC.Models.ServiceOrdre;
 using bacit_dotnet.MVC.Views.FormsMain;
 
 namespace bacit_dotnet.MVC.Controllers
@@ -10,7 +11,12 @@ namespace bacit_dotnet.MVC.Controllers
     {
         public IActionResult ServiceOrdre()
         {
-            return View();
+            var model = new ServiceOrderViewModel
+            {
+                Mechanic = "rune"
+            }
+            ;
+            return View(model);
         }
     }
 }
