@@ -13,7 +13,24 @@ namespace bacit_dotnet.MVC.Controllers
         {
             var model = new ServiceOrderViewModel
             {
-                Mechanic = "rune"
+                Mechanic = "rune",
+                OpprettetAv = "",
+                Ordrenummer = 0,
+                MottaDato = "",
+                AArsmodell = 0,
+                hvaErAvtaltMedKunde = "",
+                Reperasjonsbeskrivelse = "",
+                MedgåtteDeler = "",
+                Arbeidstimer = 0,
+                FerdigstiltDato = "",
+                UtskriftDelerRetunert = "",
+                Forsendelsemåte = "",
+                SignaturKunde = "",
+                SignaturReperatoer = "",
+                
+                
+                
+                
             }
             ;
             return View(model);
