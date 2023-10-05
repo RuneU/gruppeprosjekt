@@ -92,7 +92,19 @@
     </div>
 </div>
 
+<h2>
+    <form asp-action="Save" asp-controller="FormsMain" method="post">
+        @Html.ValidationSummary();
+        <label asp-for="Mechanic"></label>
+        <input asp-for="Mechanic" type="text" /><br/>
 
+        <label asp-for="ConsumedHours"></label>
+        <input asp-for="ConsumedHours" type="number" />
+        @Html.ValidationMessageFor(x=>x.ConsumedHours)<br/>
+        <input type="submit" />
+
+    </form>
+</h2>
 @{
     <h2>@Model.Mechanic</h2>
 }
