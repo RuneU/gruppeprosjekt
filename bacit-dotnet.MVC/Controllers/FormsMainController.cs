@@ -17,7 +17,7 @@ namespace bacit_dotnet.MVC.Controllers
                 OpprettetAv = "",
                 Ordrenummer = 0,
                 MottaDato = "",
-                AArsmodell = 0,
+                AArsmodell = 1939,
                 hvaErAvtaltMedKunde = "",
                 Reperasjonsbeskrivelse = "",
                 MedgåtteDeler = "",

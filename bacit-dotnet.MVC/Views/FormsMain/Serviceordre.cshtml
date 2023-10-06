@@ -30,7 +30,7 @@
                     </div>
                     <div>
                         <label asp-for="AArsmodell" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Årsmodell</label>
-                        <input asp-for="AArsmodell" type="number" min="1939¨" id="AArsmodell" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1997" required>
+                        <input asp-for="AArsmodell" type="number" min="1939" max="3000" id="AArsmodell" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1997" required>
                     </div>
                 </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-1">
@@ -50,7 +50,7 @@
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label asp-for="Arbeidstimer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Arbeidstimer</label>
-                        <input asp-for="Arbeidstimer" type="number" id="MedgåtteDeler" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="20" required>
+                        <input asp-for="Arbeidstimer" type="number" id="MedgåtteDeler" min="0" max="20000" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="20" required>
                     </div>
                     <div>
                         <label asp-for="FerdigstiltDato" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ferdigstilt dato</label>
@@ -72,12 +72,13 @@
                         <label asp-for="SignaturReperatoer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Signatur Reperatør</label>
                         <input asp-for="SignaturReperatoer" type="text" id="SignaturReperatoer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Reperatørs signatur her" required>
                     </div>
+                     
                 </div>
-               @* <input type="submit" /> *@
-            </form>
+           
+            
             <div class="grid  mb-6 md:grid-cols-2">
                 <div class="inline-flex gap-6">
-                    <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                    <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" >
                         Tilbake
                     </button>
                     <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
@@ -85,25 +86,27 @@
                     </button>
                 </div>
                 <div>
-                    <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                <input type="submit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded"/>
+                  @*  <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                         Lagre
-                    </button> 
+                    </button>  *@
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </div>
 
 <h2>
- @*   <form asp-action="Save" asp-controller="FormsMain" method="post">
-        @Html.ValidationSummary();
+@* <form asp-action="Save" asp-controller="FormsMain" method="post">
+       @* @Html.ValidationSummary(); 
         <label asp-for="Mechanic"></label>
         <input asp-for="Mechanic" type="text" /><br/>
         <label asp-for="ConsumedHours"></label>
         <input asp-for="ConsumedHours" type="number" />
-       @Html.ValidationMessageFor(x=>x.ConsumedHours)<br/>
+      @* @Html.ValidationMessageFor(x=>x.ConsumedHours)<br/> 
        
         <input type="submit" />
 
-    </form> *@
+    </form>  *@
 </h2>
