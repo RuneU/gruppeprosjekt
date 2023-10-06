@@ -2,5 +2,9 @@
 
 public class KundeInformasjonViewModel
 {
-    public required string Mechanic { get; set; }
+    public string? Fornavn { get; set; }
+    public string? Etternavn{ get; set; }
+    public string? Email{ get; set; }
+    public string? Adresse { get; set; }
+    public string? Postnummer { get; set; }
 }

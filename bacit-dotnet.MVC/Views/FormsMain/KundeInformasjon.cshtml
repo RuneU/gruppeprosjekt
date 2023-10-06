@@ -1,0 +1,76 @@
+﻿@{
+
+    ViewData["Title"] = "bacit_dotnet.MVC";
+}
+@model bacit_dotnet.MVC.Models.KundeInformasjon.KundeInformasjonViewModel
+
+
+
+
+<div>
+    <div class="absolute inset-x-0 top-5 h-16 left-1/3">
+        <div>
+            <h1>
+                Kunde informasjon 1/4
+            </h1>
+        </div>
+        <br>
+        <div>
+            <form asp-action="Save" asp-controller="FormsMain" method="post">
+                @* @Html.ValidationSummary(); *@
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label asp-for="Fornavn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fornavn</label>
+                        <input asp-for="Fornavn" type="text" id="¨Fornavn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
+                    </div>
+                    <div>
+                        <label asp-for="Etternavn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Etternavn</label>
+                        <input asp-for="Etternavn" type="text" id="Etternavn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
+                    </div>
+                    <div>
+                        <label asp-for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                        <input asp-for="Email" type="text" id="Email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
+                    </div>
+                    <div>
+                        <label asp-for="Adresse" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse</label>
+                        <input asp-for="Adresse" type="text" id="Adresse" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
+                    </div>
+                    <div>
+                        <label asp-for="Postnummer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Postnummer</label>
+                        <input asp-for="Postnummer" type="text" id="Postnummer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
+                    </div>
+                    
+                </div>
+                @* <input type="submit" /> *@
+            </form>
+            <div class="grid  mb-6 md:grid-cols-2">
+                <div class="inline-flex gap-6">
+                    <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                        Tilbake
+                    </button>
+                    <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                        Neste
+                    </button>
+                </div>
+                <div>
+                    <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                        Lagre
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>
+    @*   <form asp-action="Save" asp-controller="FormsMain" method="post">
+    @Html.ValidationSummary();
+    <label asp-for="Mechanic"></label>
+    <input asp-for="Mechanic" type="text" /><br/>
+    <label asp-for="ConsumedHours"></label>
+    <input asp-for="ConsumedHours" type="number" />
+    @Html.ValidationMessageFor(x=>x.ConsumedHours)<br/>
+
+    <input type="submit" />
+    </form> *@
+</h2>
