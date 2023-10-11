@@ -1,5 +1,112 @@
-﻿@page
-@model bacit_dotnet.MVC.Views.FormsMain.ServiceordreModel
+﻿
 @{
-    
+    ViewData["Title"] = "bacit_dotnet.MVC";
 }
+@model bacit_dotnet.MVC.Models.ServiceOrdre.ServiceOrderViewModel
+
+<div>
+    <div class="absolute inset-x-0 top-5 h-16 left-1/3">
+        <div>
+            <h1>
+                Service ordre 2/4
+            </h1>
+        </div>
+        <br>
+        <div>
+            <form asp-action="Save" asp-controller="FormsMain" method="post">
+           @* @Html.ValidationSummary(); *@
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label asp-for="OpprettetAv" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opprettet av</label>
+                        <input asp-for="OpprettetAv" type="text" id="OpprettetAv" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
+                    </div>
+                    <div>
+                        <label asp-for="Ordrenummer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ordrenummer</label>
+                        <input asp-for="Ordrenummer" type="text" id="Ordrenummer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="42069" required>
+                    </div>
+                    <div>
+                        <label asp-for="MottaDato" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mottat dato</label>
+                        <input asp-for="MottaDato" type="date" id="MottaDato" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="01/01/2000" required>
+                    </div>
+                    <div>
+                        <label asp-for="AArsmodell" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Årsmodell</label>
+                        <input asp-for="AArsmodell" type="number" min="1939" max="3000" id="AArsmodell" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1997" required>
+                    </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-1">
+                    <div>
+                        <label asp-for="hvaErAvtaltMedKunde" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hva er avtalt med kunde</label>
+                        <input asp-for="hvaErAvtaltMedKunde" type="text" id="hvaErAvtaltMedKunde" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Hva har du avtalt med kunden?" required>
+                    </div>
+                    <div>
+                        <label asp-for="Reperasjonsbeskrivelse" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reperasjonsbeskrivelse</label>
+                        <input asp-for="Reperasjonsbeskrivelse" type="text" id="Reperasjonsbeskrivelse" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Reprasjonsbeskrivelse" required>
+                    </div>
+                    <div>
+                        <label asp-for="MedgåtteDeler" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Medgåtte deler</label>
+                        <input asp-for="MedgåtteDeler" type="text" id="MedgåtteDeler" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Medgåtte deler" required>
+                    </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label asp-for="Arbeidstimer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Arbeidstimer</label>
+                        <input asp-for="Arbeidstimer" type="number" id="MedgåtteDeler" min="0" max="20000" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="20" required>
+                    </div>
+                    <div>
+                        <label asp-for="FerdigstiltDato" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ferdigstilt dato</label>
+                        <input asp-for="FerdigstiltDato" type="date" id="ferdigstiltDato" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="01/01/2023" required>
+                    </div>
+                    <div>
+                        <label asp-for="UtskriftDelerRetunert" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Utskrift deler retunert</label>
+                        <input asp-for="UtskriftDelerRetunert" type="text" id="utskriftDelerRetunert" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Utskiftet deler returnert" required>
+                    </div>
+                    <div>
+                        <label asp-for="Forsendelsemåte" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Forsendelsemåte</label>
+                        <input asp-for="Forsendelsemåte" type="text" id="Forsendelsemåte" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Forsendelsemåte" required>
+                    </div>
+                    <div>
+                        <label asp-for="SignaturKunde" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Signatur kunde</label>
+                        <input asp-for="SignaturKunde" type="text" id="signaturKunde" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kundes signatur her" required>
+                    </div>
+                    <div>
+                        <label asp-for="SignaturReperatoer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Signatur Reperatør</label>
+                        <input asp-for="SignaturReperatoer" type="text" id="SignaturReperatoer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Reperatørs signatur her" required>
+                    </div>
+                     
+                </div>
+           
+            
+            <div class="grid  mb-6 md:grid-cols-2">
+                <div class="inline-flex gap-6">
+                    <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" >
+                        Tilbake
+                    </button>
+                    <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                        Neste
+                    </button>
+                </div>
+                <div>
+                <input type="submit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded"/>
+                  @*  <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                        Lagre
+                    </button>  *@
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h2>
+@* <form asp-action="Save" asp-controller="FormsMain" method="post">
+       @* @Html.ValidationSummary(); 
+        <label asp-for="Mechanic"></label>
+        <input asp-for="Mechanic" type="text" /><br/>
+        <label asp-for="ConsumedHours"></label>
+        <input asp-for="ConsumedHours" type="number" />
+      @* @Html.ValidationMessageFor(x=>x.ConsumedHours)<br/> 
+       
+        <input type="submit" />
+
+    </form>  *@
+</h2>
