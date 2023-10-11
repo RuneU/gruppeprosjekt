@@ -7,9 +7,9 @@ using bacit_dotnet.MVC.Views.FormsMain;
 
 namespace bacit_dotnet.MVC.Controllers
 {
-    public class FormsMainController : Controller
+    public class ServiceOrderController : Controller
     {
-        public IActionResult ServiceOrdre()
+        public IActionResult ServiceOrder()
         {
             var model = new ServiceOrderViewModel
             {
@@ -42,7 +42,7 @@ namespace bacit_dotnet.MVC.Controllers
                 var s = "ineedabreakpoint";
 
             }
-            return View("Serviceordre", model);
+            return View("ServiceOrder", model);
         }
     }
 }
