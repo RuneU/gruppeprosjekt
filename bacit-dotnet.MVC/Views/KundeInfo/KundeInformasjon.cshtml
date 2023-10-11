@@ -1,6 +1,9 @@
-﻿@{
+﻿
+
+@{
 
     ViewData["Title"] = "bacit_dotnet.MVC";
+   
 }
 @model bacit_dotnet.MVC.Models.KundeInformasjon.KundeInformasjonViewModel
 
@@ -16,7 +19,7 @@
         </div>
         <br>
         <div>
-            <form asp-action="Save" asp-controller="FormsMain" method="post">
+            <form asp-action="Save" asp-controller="KundeInfo" method="post">
                 @* @Html.ValidationSummary(); *@
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -39,7 +42,11 @@
                         <label asp-for="Postnummer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Postnummer</label>
                         <input asp-for="Postnummer" type="text" id="Postnummer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
                     </div>
-                    
+                    <div>
+                        <button type="submit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                            Lagre
+                        </button>
+                    </div>
                 </div>
                 @* <input type="submit" /> *@
             </form>
@@ -52,11 +59,7 @@
                         Neste
                     </button>
                 </div>
-                <div>
-                    <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
-                        Lagre
-                    </button>
-                </div>
+                
             </div>
         </div>
     </div>
