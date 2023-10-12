@@ -1,6 +1,6 @@
 --drop database webAppDatabase;
-create database if not exists webAppDatabase;
-use webAppDatabase;
+create database if not exists webAppDatabase1;
+use webAppDatabase1;
 create table if not EXISTS users
 (
     Id int not null unique auto_increment,
@@ -90,6 +90,15 @@ create table if not EXISTS AspNetRoleClaims
     foreign key(RoleId) 
         references AspNetRoles(Id)
 ); 
+
+create table if not EXISTS Kunder
+(
+    Id varchar(255) not null,
+    Name varchar(255),
+    NormalizedName  varchar(255),
+    ConcurrencyStamp  varchar(255),
+    CONSTRAINT U_ROLE_ID_PK PRIMARY KEY (Id)
+);
 
         
      
