@@ -9,5 +9,6 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+bacit-dotnet.MVC/node_modules
 *.csproj.user
 /database
