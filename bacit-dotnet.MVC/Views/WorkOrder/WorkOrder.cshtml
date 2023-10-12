@@ -1,0 +1,90 @@
+@{
+    ViewData["Title"] = "WorkOrder";
+}
+@model bacit_dotnet.MVC.Models.WorkOrder.WorkOrderViewModel
+<div>
+    <div>
+        <div class="absolute inset-x-0 top-5 h-16 left-1/3">
+            <div>
+                <h1 class="text-xl">
+                    Arbeidsordre 3/4
+                </h1>
+            </div>
+            <br>
+            <form asp-action="Save" asp-controller="WorkOrder" method="post">
+                @* @Html.ValidationSummary(); *@
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label asp-for="BookedService" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Booket service til uke</label>
+                        <input asp-for="BookedService" type="text" id="BookedService" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
+                    </div>
+                    <div>
+                        <label asp-for="InquiryRegRec" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hendvendelse mottat og reg.ddmmåå</label>
+                        <input asp-for="InquiryRegRec" type="date" id="InquiryRegRec" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="42069" required>
+                    </div>
+                    <div>
+                        <label asp-for="CaseDone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                        <select asp-for="CaseDone" id="CaseDone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <option value="Done">Ferdig</option>
+                            <option value="Not finished">Ikke ferdig</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label asp-for="ReceivedDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mottat dato</label>
+                        <input asp-for="ReceivedDate" type="date" id="ReceivedDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Hva har du avtalt med kunden?" required>
+                    </div>
+                    <div>
+                        <label asp-for="ModellYear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Årsmodell</label>
+                        <input asp-for="ModellYear" type="text" id="Modellyear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Hva har du avtalt med kunden?" required>
+                    </div>
+                    <div>
+                        <label asp-for="ProductType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Produkt type</label>
+                        <input asp-for="ProductType" type="text" id="ProductType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Reprasjonsbeskrivelse" required>
+                    </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-1">
+                    <div>
+                        <label asp-for="ScheduledDelivery" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">avtalt levering ddmmåå</label>
+                        <input asp-for="ScheduledDelivery" type="date" id="ScheduledDelivery" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Medgåtte deler" required>
+                    </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label asp-for="HoursService" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Timer på service</label>
+                        <input asp-for="HoursService" type="text" id="HoursService" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="20" required>
+                    </div>
+                    <div>
+                        <label asp-for="ServiceDone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service ferdig</label>
+                        <select asp-for="ServiceDone" id="ServiceDone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <option value="Done">Ferdig</option>
+                            <option value="Not finished">ikke ferdig</option>
+                        </select>
+                    </div>
+                </div>
+                <div grid gap-6 mb-6 md:grid-cols-1>
+                    <label asp-for="OrderDescriptionFromCustomer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bestillt/feilbeskrivelse fra kunde</label>
+                    <textarea asp-for="OrderDescriptionFromCustomer" type="textarea" id="OrderDescriptionFromCustomer" rows="5" cols="50" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Utskiftet deler returnert" required> </textarea>
+                    <div grid gap-6 mb-6 md:grid-cols-1>
+                        <label asp-for="CustomerInfo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kunde info</label>
+                        <textarea asp-for="CustomerInfo" type="textarea" id="CustomerInfo" rows="5" cols="50" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Info om kunden" required></textarea>
+                    </div>
+
+                </div>
+
+                <div class="grid mb-6 md:grid-cols-2 mt-5">
+                    <div class="inline-flex gap-6">
+                        <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                            Tilbake
+                        </button>
+                        <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                            Neste
+                        </button>
+                    </div>
+                    <div class="mt-5">
+                        <input type="submit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
