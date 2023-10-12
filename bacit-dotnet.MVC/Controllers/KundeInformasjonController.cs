@@ -23,16 +23,13 @@ namespace bacit_dotnet.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var serializedModel = JsonConvert.SerializeObject(model);
-                HttpContext.Session.SetString("KundeInformasjonViewModel", serializedModel);
+                var s = "ineedabreakpoint";
 
-                return RedirectToAction("Index", "Home");
             }
-            return View(model);
-        }
-        public ActionResult Display()
-        { 
-            return View(kunder); 
-        }
+            return View("KundeInformasjon", model);
+        } // public ActionResult Display()
+       //{ 
+      //     return View(kunder); 
+     //   }
     }
 }
