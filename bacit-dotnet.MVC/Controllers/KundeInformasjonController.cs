@@ -22,6 +22,7 @@ namespace bacit_dotnet.MVC.Controllers
         [HttpPost]
         public IActionResult Save(KundeInformasjonViewModel model)
         {
+
            
             
                 if (ModelState.IsValid)
@@ -36,5 +37,6 @@ namespace bacit_dotnet.MVC.Controllers
         { 
             return View(kunder); 
         }
+
     }
 }
