@@ -1,0 +1,613 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model bacit_dotnet.MVC.Models.Sjekkliste.SjekklisteViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NøstedWeb</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true" />
+    <script>
+        function checkAllOkMek() {
+            let lamellerRadios = document.querySelectorAll('input[name="lameller"]');
+            let BremserRadios = document.querySelectorAll('input[name="Bremser"]');
+            let trommelRadios = document.querySelectorAll('input[name="trommel"]');
+            let PTORadios = document.querySelectorAll('input[name="PTO"]');
+            let kjedestrammerRadios = document.querySelectorAll('input[name="kjedestrammer"]');
+            let wireRadios = document.querySelectorAll('input[name="wire"]');
+            let pinionRadios = document.querySelectorAll('input[name="pinion"]');
+            let kjedehjulRadios = document.querySelectorAll('input[name="kjedehjul"]');
+
+            
+            lamellerRadios[0].checked = true;
+            BremserRadios[0].checked = true;
+            trommelRadios[0].checked = true;
+            PTORadios[0].checked = true;
+            kjedestrammerRadios[0].checked = true;
+            wireRadios[0].checked = true;
+            pinionRadios[0].checked = true;
+            kjedehjulRadios[0].checked = true;
+
+
+            updateColorMek('lamellerBox', 'ok');
+            updateColorMek('BremserBox', 'ok');
+            updateColorMek('trommelBox', 'ok');
+            updateColorMek('PTOBox', 'ok');
+            updateColorMek('kjedestrammerBox', 'ok');
+            updateColorMek('wireBox', 'ok');
+            updateColorMek('pinionBox', 'ok');
+            updateColorMek('kjedehjulBox', 'ok');
+    
+        }
+
+       
+
+        function updateColorMek(boxId, value) {
+            const box = document.getElementById(boxId);
+            box.classList.remove('bg-green-200', 'bg-yellow-200', 'bg-red-200');
+
+            switch (value) {
+                case 'ok':
+                    box.classList.add('bg-green-200');
+                    break;
+                case 'skiftes':
+                    box.classList.add('bg-yellow-200');
+                    break;
+                case 'defekt':
+                    box.classList.add('bg-red-200');
+                    break;
+            }
+        }
+
+        function checkAllOkHyd() {
+            let sylinderRadios = document.querySelectorAll('input[name="sylinder"]');
+            let slangerRadios = document.querySelectorAll('input[name="slanger"]');
+            let hydraulikkblokkRadios = document.querySelectorAll('input[name="hydraulikkblokk"]');
+            let tankRadios = document.querySelectorAll('input[name="tank"]');
+            let boksRadios = document.querySelectorAll('input[name="boks"]');
+            let ringsylinderRadios = document.querySelectorAll('input[name="ringsylinder"]');
+            let tetningerRadios = document.querySelectorAll('input[name="tetninger"]');
+
+            sylinderRadios[0].checked = true;
+            slangerRadios[0].checked = true;
+            hydraulikkblokkRadios[0].checked = true;
+            tankRadios[0].checked = true;
+            boksRadios[0].checked = true;
+            ringsylinderRadios[0].checked = true;
+            tetningerRadios[0].checked = true;
+
+            updateColorHyd('sylinderBox', 'ok');
+            updateColorHyd('slangerBox', 'ok');
+            updateColorHyd('hydraulikkblokkBox', 'ok');
+            updateColorHyd('tankBox', 'ok');
+            updateColorHyd('boksBox', 'ok');
+            updateColorHyd('ringsylinderBox', 'ok');
+            updateColorHyd('tetningerBox', 'ok');
+            
+        }
+
+        function updateColorHyd(boxId, value) {
+            const box = document.getElementById(boxId);
+            box.classList.remove('bg-green-200', 'bg-yellow-200', 'bg-red-200');
+
+            switch (value) {
+                case 'ok':
+                    box.classList.add('bg-green-200');
+                    break;
+                case 'skiftes':
+                    box.classList.add('bg-yellow-200');
+                    break;
+                case 'defekt':
+                    box.classList.add('bg-red-200');
+                    break;
+            }
+        }
+
+        function checkAllOkEl() {
+            let ledningsnettRadios = document.querySelectorAll('input[name="ledningsnett"]');
+            let radioRadios = document.querySelectorAll('input[name="radio"]');
+            let knappekasseRadios = document.querySelectorAll('input[name="knappekasse"]');
+            
+
+            ledningsnettRadios[0].checked = true;
+            radioRadios[0].checked = true;
+            knappekasseRadios[0].checked = true;
+            
+
+            updateColorEl('ledningsnettBox', 'ok');
+            updateColorEl('radioBox', 'ok');
+            updateColorEl('knappekasseBox', 'ok');
+            
+
+        }
+
+        function updateColorEl(boxId, value) {
+            const box = document.getElementById(boxId);
+            box.classList.remove('bg-green-200', 'bg-yellow-200', 'bg-red-200');
+
+            switch (value) {
+                case 'ok':
+                    box.classList.add('bg-green-200');
+                    break;
+                case 'skiftes':
+                    box.classList.add('bg-yellow-200');
+                    break;
+                case 'defekt':
+                    box.classList.add('bg-red-200');
+                    break;
+            }
+        }
+
+        function updateColorSet(boxId, value) {
+            const box = document.getElementById(boxId);
+            box.classList.remove('bg-green-200', 'bg-yellow-200', 'bg-red-200');
+
+            switch (value) {
+                case 'ok':
+                    box.classList.add('bg-green-200');
+                    break;
+                case 'skiftes':
+                    box.classList.add('bg-yellow-200');
+                    break;
+                case 'defekt':
+                    box.classList.add('bg-red-200');
+                    break;
+            }
+        }
+
+
+        function checkAllOkTest() {
+            let funksjonerRadios = document.querySelectorAll('input[name="funksjoner"]');
+            let trekkraftRadios = document.querySelectorAll('input[name="trekkraft"]');
+            let bremsekraftRadios = document.querySelectorAll('input[name="bremsekraft"]');
+
+
+            funksjonerRadios[0].checked = true;
+            trekkraftRadios[0].checked = true;
+            bremsekraftRadios[0].checked = true;
+
+
+            updateColorTest('funksjonerBox', 'ok');
+            updateColorTest('trekkraftBox', 'ok');
+            updateColorTest('bremsekraftBox', 'ok');
+
+
+        }
+
+        function updateColorTest(boxId, value) {
+            const box = document.getElementById(boxId);
+            box.classList.remove('bg-green-200', 'bg-yellow-200', 'bg-red-200');
+
+            switch (value) {
+                case 'ok':
+                    box.classList.add('bg-green-200');
+                    break;
+                case 'skiftes':
+                    box.classList.add('bg-yellow-200');
+                    break;
+                case 'defekt':
+                    box.classList.add('bg-red-200');
+                    break;
+            }
+        }
+
+
+    </script>
+
+</head>
+    <body class="bg-white">
+    <form asp-action="Save" asp-controller="Sjekkliste" method="post">
+    <div class="w-2/3 ml-auto p-8 space-y-6">
+        <!-- Sjekkliste for service på vinsj -->
+        <div>
+            <h2 class="font-bold text-4xl mb-4">Sjekkliste for service på vinsj</h2>
+            <div class="space-y-4">
+                <input type="text" placeholder="Dok.nr" class="p-2 w-full border rounded">
+                <input type="text" placeholder="Dato" class="p-2 w-full border rounded">
+                <input type="text" placeholder="Godkjent av" class="p-2 w-full border rounded">
+            </div>
+        </div>
+        
+        <div class="p-6 space-y-6">
+          <div>
+            <h2 class="font-bold text-4xl mb-4">Mekanisk</h2>
+                <button type="button" onclick="checkAllOkMek()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">Check OK på alt mekanisk</button>
+            <div class="grid grid-cols-4 gap-4">
+                <span></span>
+                <span class="text-center text-xl">Ok</span>
+                <span class="text-center text-xl">Bør skiftes</span>
+                <span class="text-center text-xl">Defekt</span>
+                </div>
+            </div>
+            <div>
+                <!-- Sjekk clutch lameller for slitasje -->
+                      
+                            <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="lamellerBox">
+                                <span class="font-bold">Sjekk clutch lameller for slitasje</span>
+                            <div class="flex justify-center items-center">
+                            <input type="radio" name="lameller" value="ok" onchange="updateColorMek('lamellerBox', this.value)" style="width: 24px; height: 24px;">
+                            </div>
+                            <div class="flex justify-center items-center">
+                            <input type="radio" name="lameller" value="skiftes" onchange="updateColorMek('lamellerBox', this.value)" style="width: 24px; height: 24px;">
+                            </div>
+                            <div class="flex justify-center items-center">
+                            <input type="radio" name="lameller" value="defekt" onchange="updateColorMek('lamellerBox', this.value)" style="width: 24px; height: 24px;">
+                            </div>
+                        </div>
+
+                <!-- Sjekk bremser. Bånd/pedal -->
+
+                           <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="BremserBox">
+                           <span class="font-bold">Sjekk bremser. Bånd/pedal</span>
+                           <div class="flex justify-center items-center">
+                            <input type="radio" name="Bremser" value="ok" onchange="updateColorMek('BremserBox', this.value)" style="width: 24px; height: 24px;">
+                           </div>
+                           <div class="flex justify-center items-center">
+                            <input type="radio" name="Bremser" value="skiftes" onchange="updateColorMek('BremserBox', this.value)" style="width: 24px; height: 24px;">
+                           </div>
+                           <div class="flex justify-center items-center">
+                            <input type="radio" name="Bremser" value="defekt" onchange="updateColorMek('BremserBox', this.value)" style="width: 24px; height: 24px;">
+                           </div>
+                           </div>
+
+
+                <!-- Sjekk lager for trommel -->
+
+                           <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="trommelBox">
+                           <span class="font-bold">Sjekk lager for trommel</span>
+                           <div class="flex justify-center items-center">
+                            <input type="radio" name="trommel" value="ok" onchange="updateColorMek('trommelBox', this.value)" style="width: 24px; height: 24px;">
+                           </div>
+                           <div class="flex justify-center items-center">
+                            <input type="radio" name="trommel" value="skiftes" onchange="updateColorMek('trommelBox', this.value)" style="width: 24px; height: 24px;">
+                           </div>
+                           <div class="flex justify-center items-center">
+                            <input type="radio" name="trommel" value="defekt" onchange="updateColorMek('trommelBox', this.value)" style="width: 24px; height: 24px;">
+                           </div>
+                           </div>
+
+
+                <!-- Sjekk PTO og opplagring -->
+
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="PTOBox">
+                        <span class="font-bold">Sjekk PTO og opplagring</span>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="PTO" value="ok" onchange="updateColorMek('PTOBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="PTO" value="skiftes" onchange="updateColorMek('PTOBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="PTO" value="defekt" onchange="updateColorMek('PTOBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        </div>
+
+
+                <!-- Sjekk kjedestrammer -->
+
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="kjedestrammerBox">
+                        <span class="font-bold">Sjekk kjedestrammer</span>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="kjedestrammer" value="ok" onchange="updateColorMek('kjedestrammerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="kjedestrammer" value="skiftes" onchange="updateColorMek('kjedestrammerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="kjedestrammer" value="defekt" onchange="updateColorMek('kjedestrammerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        </div>
+
+
+                <!-- Sjekk wire -->
+
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="wireBox">
+                        <span class="font-bold">Sjekk wire</span>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="wire" value="ok" onchange="updateColorMek('wireBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="wire" value="skiftes" onchange="updateColorMek('wireBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="wire" value="defekt" onchange="updateColorMek('wireBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        </div>
+
+
+                <!-- Sjekk pinion lager -->
+
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="pinionBox">
+                        <span class="font-bold">Sjekk pinion lager</span>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="pinion" value="ok" onchange="updateColorMek('pinionBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="pinion" value="skiftes" onchange="updateColorMek('pinionBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="pinion" value="defekt" onchange="updateColorMek('pinionBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        </div>
+
+                <!-- Sjekk kile på kjedehjul -->
+
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="kjedehjulBox">
+                        <span class="font-bold">Sjekk kile på kjedehjul</span>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="kjedehjul" value="ok" onchange="updateColorMek('kjedehjulBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="kjedehjul" value="skiftes" onchange="updateColorMek('kjedehjulBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                         <input type="radio" name="kjedehjul" value="defekt" onchange="updateColorMek('kjedehjulBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        </div>
+
+                <!-- Hydralisk -->
+                     
+
+                    <div>
+                        <h2 class="font-bold text-4xl mt-10">Hydralisk</h2>
+                        <button type="button" onclick="checkAllOkHyd()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded center-left mt-5">Check OK på alt hydralisk</button>
+                    </div>
+
+
+                    <!-- Sjekk hydraulikk sylinder for lekkasje -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="sylinderBox">
+                        <span class="font-bold">Sjekk hydraulikk sylinder for lekkasje</span>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="sylinder" value="ok" onchange="updateColorHyd('sylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="sylinder" value="skiftes" onchange="updateColorHyd('sylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="sylinder" value="defekt" onchange="updateColorHyd('sylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk slanger for skader og lekkasje -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="slangerBox">
+                        <span class="font-bold">Sjekk slanger for skader og lekkasje</span>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="slanger" value="ok" onchange="updateColorHyd('slangerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="slanger" value="skiftes" onchange="updateColorHyd('slangerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="slanger" value="defekt" onchange="updateColorHyd('slangerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Test hydraulikkblokk i testbenk -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="hydraulikkblokkBox">
+                        <span class="font-bold">Test hydraulikkblokk i testbenk</span>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="hydraulikkblokk" value="ok" onchange="updateColorHyd('hydraulikkblokkBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="hydraulikkblokk" value="skiftes" onchange="updateColorHyd('hydraulikkblokkBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="hydraulikkblokk" value="defekt" onchange="updateColorHyd('hydraulikkblokkBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Skift olje i tank -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="tankBox">
+                        <span class="font-bold">Skift olje i tank</span>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="tank" value="ok" onchange="updateColorHyd('tankBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="tank" value="skiftes" onchange="updateColorHyd('tankBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="tank" value="defekt" onchange="updateColorHyd('tankBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Skift olje på gir boks  -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="boksBox">
+                        <span class="font-bold">Skift olje på gir boks </span>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="boks" value="ok" onchange="updateColorHyd('boksBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="boks" value="skiftes" onchange="updateColorHyd('boksBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="boks" value="defekt" onchange="updateColorHyd('boksBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk ringsylinder åpne og skifteretninger -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="ringsylinderBox">
+                        <span class="font-bold text-sm">Sjekk ringsylinder åpne og skifteretninger</span>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="ringsylinder" value="ok" onchange="updateColorHyd('ringsylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="ringsylinder" value="skiftes" onchange="updateColorHyd('ringsylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="ringsylinder" value="defekt" onchange="updateColorHyd('ringsylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+                    <!-- Sjekk bremse sylinder åpne og skifte tetninger -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="tetningerBox">
+                        <span class="font-bold text-sm">Sjekk bremse sylinder åpne og skifte tetninger</span>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="tetninger" value="ok" onchange="updateColorHyd('tetningerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="tetninger" value="skiftes" onchange="updateColorHyd('tetningerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                        <input type="radio" name="tetninger" value="defekt" onchange="updateColorHyd('tetningerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+                    <!-- Elektro -->
+
+
+                    <div>
+                        <h2 class="font-bold text-4xl mt-10">Elektro</h2>
+                        <button type="button" onclick="checkAllOkEl()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded center-left mt-5">Check OK på alt Elektro</button>
+                    </div>
+
+
+                    <!-- Sjekk ledningsnett på vinsj -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="ledningsnettBox">
+                        <span class="font-bold">Sjekk ledningsnett på vinsj</span>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="ledningsnett" value="ok" onchange="updateColorEl('ledningsnettBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="ledningsnett" value="skiftes" onchange="updateColorEl('ledningsnettBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="ledningsnett" value="defekt" onchange="updateColorEl('ledningsnettBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk og test på radio -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="radioBox">
+                        <span class="font-bold">Sjekk og test på radio</span>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="radio" value="ok" onchange="updateColorEl('radioBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="radio" value="skiftes" onchange="updateColorEl('radioBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="radio" value="defekt" onchange="updateColorEl('radioBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk og test knappekasse -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="knappekasseBox">
+                        <span class="font-bold">Sjekk og test knappekasse</span>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="knappekasse" value="ok" onchange="updateColorEl('knappekasseBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="knappekasse" value="skiftes" onchange="updateColorEl('knappekasseBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="knappekasse" value="defekt" onchange="updateColorSet('knappekasseBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="font-bold text-4xl mt-10">Trykk setninger</h2>
+                       
+                    </div>
+
+
+                    <!-- Trykk setninger -->
+
+                <div class="border p-2 grid grid-cols-4 gap-4 h-16 mt-10" id="trykksetningerBox">
+                        <span class="font-bold">Sjekk ledningsnett på vinsj</span>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="trykksetninger" value="ok" onchange="updateColorSet('trykksetningerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="trykksetninger" value="skiftes" onchange="updateColorSet('trykksetningerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="trykksetninger" value="defekt" onchange="updateColorSet('trykksetningerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="font-bold text-4xl mt-10">Funksjons test</h2>
+                        <button type="button" onclick="checkAllOkTest()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded center-left mt-5">Check OK på alt test</button>
+                    </div>
+
+
+                    <!-- Test vinsj og kjør alle funskjoner -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="funksjonerBox">
+                        <span class="font-bold">Test vinsj og kjør alle funksjoner</span>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="funksjoner" value="ok" onchange="updateColorTest('funksjonerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="funksjoner" value="skiftes" onchange="updateColorTest('funksjonerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="funksjoner" value="defekt" onchange="updateColorTest('funksjonerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Trekkraft KN -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="trekkraftBox">
+                        <span class="font-bold">Trekkraft KN</span>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="trekkraft" value="ok" onchange="updateColorTest('trekkraftBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="trekkraft" value="skiftes" onchange="updateColorTest('trekkraftBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="trekkraft" value="defekt" onchange="updateColorTest('trekkraftBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Bremse kraft KN -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="bremsekraftBox">
+                        <span class="font-bold">Bremse kraft KN</span>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="bremsekraft" value="ok" onchange="updateColorTest('bremsekraftBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="bremsekraft" value="skiftes" onchange="updateColorTest('bremsekraftBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input type="radio" name="bremsekraft" value="defekt" onchange="updateColorTest('bremsekraftBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded mt-20">
+                        Lagre
+                    </button>
+              </div>
+          </div>
+       </div>
+    </form>
+</body>
+</html>

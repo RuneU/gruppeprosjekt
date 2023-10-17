@@ -6,6 +6,7 @@ using bacit_dotnet.MVC.Models.KundeInformasjon;
 using bacit_dotnet.MVC.Views.FormsMain;
 using MySqlX.XDevAPI;
 using Newtonsoft.Json;
+using bacit_dotnet.MVC.Models.ServiceOrdre;
 
 namespace bacit_dotnet.MVC.Controllers
 {
@@ -21,14 +22,15 @@ namespace bacit_dotnet.MVC.Controllers
         [HttpPost]
         public IActionResult Save(KundeInformasjonViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var serializedModel = JsonConvert.SerializeObject(model);
-                HttpContext.Session.SetString("KundeInformasjonViewModel", serializedModel);
+           
+            
+                if (ModelState.IsValid)
+                {
+                    var s = "ineedabreakpoint";
 
-                return RedirectToAction("Index", "Home");
-            }
-            return View(model);
+                }
+                return View("KundeInformasjon", model);
+            
         }
         public ActionResult Display()
         { 
