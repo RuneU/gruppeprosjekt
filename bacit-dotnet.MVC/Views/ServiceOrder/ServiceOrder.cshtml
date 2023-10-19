@@ -4,8 +4,39 @@
 }
 @model bacit_dotnet.MVC.Models.ServiceOrdre.ServiceOrderViewModel
 
+
+<form asp-action="Save" asp-controller="ServiceOrder" method="post">
+    <div class="w-1/2">
+  
+    <!-- Service order/skjema -->
+      <div class="p-6 bg-white border rounded-lg w-80">
+         <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">KundeInformasjon</h2>
+                <button asp-controller="KundeInfo" asp-action="KundeInformasjon" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded-full">Rediger</button>
+         </div>
+      </div>
+
+        
+    <!-- Arbeidsordre -->
+        <div class="p-6 bg-white border rounded-lg w-80">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">Arbeids ordre</h2>
+                <button asp-controller="WorkOrder" asp-action="WorkOrder" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded-full">Rediger</button>
+            </div>
+        </div>
+
+    <!-- Sjekkliste for service på vinsj -->
+    <div class="p-6 bg-white border rounded-lg w-80">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">Sjekkliste for vinsj</h2>
+                <button asp-controller="Sjekkliste" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded-full">Rediger</button>
+        </div>
+    </div>
+    
+</div>
+
 <div>
-    <div class="absolute inset-x-0 top-5 h-16 left-1/3">
+    <div class="absolute inset-x-20 top-5 h-16 left-1/2">
         <div>
             <h1>
                 Service ordre 2/4
@@ -13,7 +44,6 @@
         </div>
         <br>
         <div>
-            <form asp-action="Save" asp-controller="ServiceOrder" method="post">
            @* @Html.ValidationSummary(); *@
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -76,27 +106,25 @@
                 </div>
            
             
-            <div class="grid  mb-6 md:grid-cols-2">
+            <div class="grid mb-6 md:grid-cols-2">
                 <div class="inline-flex gap-6">
-                    <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" >
+                    <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                         Tilbake
                     </button>
-                    <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                    <button asp-controller="WorkOrder" asp-action="WorkOrder" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                         Neste
                     </button>
                 </div>
                 <div>
                 <input type="submit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded"/>
-                  @*  <button class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
-                        Lagre
-                    </button>  *@
+                    
                 </div>
             </div>
-            </form>
+           
         </div>
     </div>
 </div>
-
+</form>
 <h2>
 @* <form asp-action="Save" asp-controller="FormsMain" method="post">
        @* @Html.ValidationSummary(); 

@@ -14,29 +14,43 @@ namespace bacit_dotnet.MVC.Controllers
     {
         static readonly List<KundeInformasjonViewModel> kunder = new();
 
-        public ActionResult KundeInformasjon()
+        public IActionResult KundeInformasjon()
         {
-            return View();  
+            var model = new KundeInformasjonViewModel
+            {
+                Fornavn = "rune",
+                Etternavn = "",
+                Email = "",
+                Adresse = "",
+                Postnummer = "",
+            }
+            ;
+            return View(model);
         }
         
+        
         [HttpPost]
+        [ValidateAntiForgeryToken] 
         public IActionResult Save(KundeInformasjonViewModel model)
         {
+            if (ModelState.IsValid) 
+            {
+               
+                var s = "ineedabreakpoint"; 
+
+                kunder.Add(model);
+
+                return RedirectToAction("Display"); 
+            }
 
            
-            
-                if (ModelState.IsValid)
-                {
-                    var s = "ineedabreakpoint";
-
-                }
-                return View("KundeInformasjon", model);
-            
+            return View("KundeInformasjon", model);
         }
+
         public ActionResult Display()
-        { 
-            return View(kunder); 
+        {
+           
+            return View(kunder);
         }
-
     }
 }
