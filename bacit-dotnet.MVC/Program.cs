@@ -36,5 +36,10 @@
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+    WebHost.CreateDefaultBuilder(args)
+    .ConfigureKestrel(c => c.AddServerHeader = false)
+    .UseStartup<Startup>()
+    .Build();
+
     app.Run();
   
