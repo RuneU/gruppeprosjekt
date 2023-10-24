@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using bacit_dotnet.MVC.Models.KundeInformasjon;
 
-namespace bacit_dotnet.MVC.Models.Home
-{
-    public class HomeIndexViewModel
+namespace bacit_dotnet.MVC.Models.DineSaker
+{ 
+
+    public class DineSakerViewModel
     {
+
         public string Saksnummer { get; set; }
         public string Navn { get; set; }
         public string Emne { get; set; }
@@ -14,4 +16,5 @@ namespace bacit_dotnet.MVC.Models.Home
         public string Status { get; set; }
 
     }
+    
 }

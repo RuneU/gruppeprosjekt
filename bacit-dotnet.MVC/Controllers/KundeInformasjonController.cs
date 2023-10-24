@@ -10,9 +10,9 @@ using bacit_dotnet.MVC.Models.ServiceOrdre;
 
 namespace bacit_dotnet.MVC.Controllers
 {
-    public class KundeInfoController : Controller
+    public class KundeInformasjonController : Controller
     {
-        static readonly List<KundeInformasjonViewModel> kunder = new();
+        
 
         public IActionResult KundeInformasjon()
         {
@@ -38,19 +38,10 @@ namespace bacit_dotnet.MVC.Controllers
                
                 var s = "ineedabreakpoint"; 
 
-                kunder.Add(model);
-
-                return RedirectToAction("Display"); 
+                
             }
 
-           
             return View("KundeInformasjon", model);
-        }
-
-        public ActionResult Display()
-        {
-           
-            return View(kunder);
         }
     }
 }
