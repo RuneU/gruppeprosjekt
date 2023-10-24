@@ -1,9 +1,10 @@
 ﻿using bacit_dotnet.MVC.DataAccess;
 using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Repositories;
-using Microsoft.AspNetCore.Authorization;
+using bacit_dotnet.MVC.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using bacit_dotnet.MVC.Models.DineSaker;
 
 namespace bacit_dotnet.MVC.Controllers
 {
@@ -17,15 +18,39 @@ namespace bacit_dotnet.MVC.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
-            _logger.LogInformation("Index method called");
-            var model = new RazorViewModel
+            var model = new HomeIndexViewModel
             {
-                Content = "En time til ørsta rådhus"
-            };
+                Saksnummer = "",
+                Navn = "",
+                Emne = "",
+                Dato = "",
+                Status = "",
+            }
+            ;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Save(HomeIndexViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var s = "ineedabreakpoint";
+
+
+            }
+
+
             return View("Index", model);
+        }
+        public IActionResult Search(string term)
+        {
+            ViewBag.Term = term;
+            return View("Index");
         }
     }
 }
