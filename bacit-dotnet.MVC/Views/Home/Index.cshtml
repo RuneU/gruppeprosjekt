@@ -1,3 +1,9 @@
+@*
+
+*@
+@{
+}
+@model bacit_dotnet.MVC.Models.Home.HomeIndexViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,21 +17,23 @@
 </head>
 <body>
     <header>
+      
         <div class="justify-center-left ml-40 mt-10 flex relative block">
             <span class="sr-only">Search</span>
             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                 <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"><!-- ... --></svg>
             </span>
-            <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-49 border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search" />
-            <button class="ml-2 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-4 rounded-md bg-ease-in duration-300">
-                Søk
-            </button>
+            <form asp-action="Search" asp-controller="Home" method="get" class="flex items-center">
+                <input type="text" class="placeholder:italic placeholder:text-slate-400 block bg-white w-49 border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." name="term" id="term" required />
+                <button type="submit" class="ml-2 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-4 rounded-md bg-ease-in duration-300" value="Search">
+                    Søk
+                </button>
+            </form>
+            <h3 class="ml-40 mt-4 text-gray-400 font-semibold text-lg">Søket etter: @ViewBag.Term</h3>
 
-            <a asp-area="" asp-controller="KundeInfo" asp-action="KundeInformasjon" class="absolute top-0 right-20 h-10 w-24 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-4 rounded-md bg-ease-in duration-300">
+            <a asp-area="" asp-controller="KundeInformasjon" asp-action="KundeInformasjon" class="absolute top-0 right-20 h-10 w-24 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-6 rounded-md bg-ease-in duration-300">
                 Ny sak
             </a>
-
-
         
         </div>
 

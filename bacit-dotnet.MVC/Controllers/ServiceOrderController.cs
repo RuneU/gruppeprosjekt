@@ -13,7 +13,7 @@ namespace bacit_dotnet.MVC.Controllers
         {
             var model = new ServiceOrderViewModel
             {
-                Mechanic = "rune",
+                Mechanic = "",
                 OpprettetAv = "",
                 Ordrenummer = 0,
                 MottaDato = "",
@@ -35,6 +35,7 @@ namespace bacit_dotnet.MVC.Controllers
             ;
             return View(model);
         }
+        
         [HttpPost]
         public IActionResult Save(ServiceOrderViewModel model) {
             if(ModelState.IsValid)
