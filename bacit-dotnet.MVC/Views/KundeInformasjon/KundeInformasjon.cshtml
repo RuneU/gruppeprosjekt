@@ -48,7 +48,7 @@
             @using (Html.BeginForm("Save", "KundeInformasjon", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-                <form asp-action="Save" asp-controller="KundeInfo" method="post">
+                <form asp-action="Save" asp-controller="KundeInformasjon" method="post">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>

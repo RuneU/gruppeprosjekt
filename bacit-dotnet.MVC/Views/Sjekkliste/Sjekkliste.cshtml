@@ -206,7 +206,9 @@
     @using (Html.BeginForm("Save", "Sjekkliste", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
+
         <form asp-action="Save" asp-controller="Sjekkliste" method="post">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="w-2/3 ml-auto p-8 space-y-6">
                 <!-- Sjekkliste for service på vinsj -->
                 <div>

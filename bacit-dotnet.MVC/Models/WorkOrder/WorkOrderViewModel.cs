@@ -12,6 +12,9 @@ public class WorkOrderViewModel
     public string CaseDone { get; set; }
     public string ReceivedDate { get; set; }
     public string ScheduledDelivery { get; set; }
+
+    [Required(ErrorMessage = "Årsmodell er nødvendig")]
+    [RegularExpression(@"^\d{4}$", ErrorMessage = "Ugyldig år. Må være 4 sifere.")]
     public string ModellYear { get; set; }
 
     [Required(ErrorMessage = "Produkt type er nødvendig")]

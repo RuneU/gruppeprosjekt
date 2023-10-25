@@ -46,15 +46,17 @@
             {
                 @Html.AntiForgeryToken()
                 <form asp-action="Save" asp-controller="WorkOrder" method="post">
-                    @* @Html.ValidationSummary(); *@
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>
                             <label asp-for="BookedService" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Booket service til uke</label>
                             <input asp-for="BookedService" type="text" id="BookedService" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
+                            <span asp-validation-for="BookedService" class="text-danger"></span>
                         </div>
                         <div>
                             <label asp-for="InquiryRegRec" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hendvendelse mottat og reg.ddmmåå</label>
                             <input asp-for="InquiryRegRec" type="date" id="InquiryRegRec" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="42069" required>
+                            <span asp-validation-for="InquiryRegRec" class="text-danger"></span>
                         </div>
                         <div>
                             <label asp-for="CaseDone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
@@ -70,10 +72,12 @@
                         <div>
                             <label asp-for="ModellYear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Årsmodell</label>
                             <input asp-for="ModellYear" type="text" id="Modellyear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Hva har du avtalt med kunden?" required>
+                            <span asp-validation-for="ModellYear" class="text-danger"></span>
                         </div>
                         <div>
                             <label asp-for="ProductType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Produkt type</label>
                             <input asp-for="ProductType" type="text" id="ProductType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Reprasjonsbeskrivelse" required>
+                            <span asp-validation-for="ProductType" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="grid gap-6 mb-6 md:grid-cols-1">
@@ -86,6 +90,7 @@
                         <div>
                             <label asp-for="HoursService" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Timer på service</label>
                             <input asp-for="HoursService" type="text" id="HoursService" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="20" required>
+                            <span asp-validation-for="HoursService" class="text-danger"></span>
                         </div>
                         <div>
                             <label asp-for="ServiceDone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service ferdig</label>
@@ -98,9 +103,11 @@
                     <div grid gap-6 mb-6 md:grid-cols-1>
                         <label asp-for="OrderDescriptionFromCustomer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bestillt/feilbeskrivelse fra kunde</label>
                         <textarea asp-for="OrderDescriptionFromCustomer" type="textarea" id="OrderDescriptionFromCustomer" rows="5" cols="50" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Utskiftet deler returnert" required> </textarea>
+                        <span asp-validation-for="OrderDescriptionFromCustomer" class="text-danger"></span>
                         <div grid gap-6 mb-6 md:grid-cols-1>
                             <label asp-for="CustomerInfo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kunde info</label>
                             <textarea asp-for="CustomerInfo" type="textarea" id="CustomerInfo" rows="5" cols="50" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Info om kunden" required></textarea>
+                            <span asp-validation-for="CustomerInfo" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -111,7 +118,7 @@
                             <button asp-controller="ServiceOrder" asp-action="ServiceOrder" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                                 Tilbake
                             </button>
-                            <button asp-controller="Sjekkliste" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                            <button asp-controller="Sjekkliste" asp-action="Sjekkliste" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                                 Neste
                             </button>
                         </div>
