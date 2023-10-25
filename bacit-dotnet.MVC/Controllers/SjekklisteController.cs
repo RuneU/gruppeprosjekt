@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using bacit_dotnet.MVC.Models.ServiceOrdre;
+using bacit_dotnet.MVC.Models.Sjekkliste;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bacit_dotnet.MVC.Controllers
@@ -8,7 +10,17 @@ namespace bacit_dotnet.MVC.Controllers
 
         public ActionResult Sjekkliste()
         {
-            return View();
+
+            var model = new SjekklisteViewModel
+            {
+                DokNr = "",
+                ServiceDato = "",
+                GodkjentAv = "",
+          
+
+            }
+           ;
+            return View(model);
         }
 
 

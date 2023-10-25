@@ -7,12 +7,12 @@ public class KundeInformasjonViewModel
 {
     [Required(ErrorMessage = "Fornavn er nødvendig")]
     [StringLength(30, ErrorMessage = "Fornavn kan ikke være mer enn 30 characters")]
-    [RegularExpression(@"^[a-åA-Å''-'\s]{1,40}$", ErrorMessage = "Ugyldig characters i Fornavn.")]
+    [RegularExpression(@"^[a-åA-Å''-'\s]{1,30}$", ErrorMessage = "Ugyldig characters i Fornavn.")]
     public string Fornavn { get; set; }
 
     [Required(ErrorMessage = "Etternavn er nødvendig")]
     [StringLength(30, ErrorMessage = "Etternavn kan ikke være mer enn 30 characters")]
-    [RegularExpression(@"^[a-åA-Å''-'\s]{1,40}$", ErrorMessage = "Ugyldig characters i Etternavn.")]
+    [RegularExpression(@"^[a-åA-Å''-'\s]{1,30}$", ErrorMessage = "Ugyldig characters i Etternavn.")]
     public string Etternavn { get; set; }
 
     [Required(ErrorMessage = "Email er nødvendig")]
@@ -20,12 +20,12 @@ public class KundeInformasjonViewModel
     public string Email { get; set; }
 
     [Required(ErrorMessage = "Adresse er nødvendig")]
-    [StringLength(30, ErrorMessage = "Adresse kan ikke være mer enn 30 characters")]
-    // If you want to be more specific about the characters allowed in Adresse, use a RegularExpression attribute
+    [StringLength(30, ErrorMessage = "Adresse kan ikke være mer enn 20 characters")]
+    [RegularExpression(@"^[a-åA-Å0-10000''-'\s]{1,30}$", ErrorMessage = "Ugyldig characters i Etternavn.")]
     public string Adresse { get; set; }
 
-    [Required(ErrorMessage = "Postnummer is required")]
-    [RegularExpression(@"^\d{4}$", ErrorMessage = "Invalid Postnummer. Must be 4 digits.")]
+    [Required(ErrorMessage = "Postnummer er nødvendig")]
+    [RegularExpression(@"^\d{4}$", ErrorMessage = "Ugyldig postnummer. Må være 4 sifere.")]
     public string Postnummer { get; set; }
 
 

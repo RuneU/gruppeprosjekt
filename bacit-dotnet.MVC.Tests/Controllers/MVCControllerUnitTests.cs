@@ -1,5 +1,6 @@
 ﻿using bacit_dotnet.MVC.Controllers;
 using bacit_dotnet.MVC.Models;
+using bacit_dotnet.MVC.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -15,7 +16,7 @@ namespace bacit_dotnet.MVC.Tests.Controllers
         {
             var unitUnderTest = SetupUnitUnderTest();
             var result = unitUnderTest.Index() as ViewResult;
-            Assert.Same("Index", result.ViewName);
+            Assert.Null(result.ViewName);
         }
 
         [Fact]
@@ -23,17 +24,10 @@ namespace bacit_dotnet.MVC.Tests.Controllers
         {
             var unitUnderTest = SetupUnitUnderTest();
             var result = unitUnderTest.Index() as ViewResult;
-            Assert.IsType<RazorViewModel>(result.Model);
+            Assert.IsType<HomeIndexViewModel>(result.Model);
         }
 
-        [Fact]
-        public void UsingRazorReturnsCorrectModelContent()  
-        {
-            var unitUnderTest = SetupUnitUnderTest();
-            var result = unitUnderTest.Index() as ViewResult;
-            var model = result.Model as RazorViewModel;
-            Assert.Same("En time til ørsta rådhus", model.Content);
-        }
+        
 
         private static HomeController SetupUnitUnderTest()
         {
