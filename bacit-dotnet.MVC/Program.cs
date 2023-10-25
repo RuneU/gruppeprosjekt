@@ -1,5 +1,8 @@
 
-    var builder = WebApplication.CreateBuilder(args);
+    using bacit_dotnet.MVC;
+using Microsoft.AspNetCore;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
     builder.Services.AddControllersWithViews();
@@ -35,6 +38,12 @@
     app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+WebHost.CreateDefaultBuilder(args)
+    .ConfigureKestrel(c => c.AddServerHeader = false)
+    .UseStartup<Startup>()
+    .Build();
 
     app.Run();
   
