@@ -50,7 +50,5 @@ Have fun and experiment :)
 Code can be copied freely
 
 
-<br>
-Andreas
-Simon = beta
-rune
+## Changes that we have done to the reposetory
+To get this mvc project to run you have to install Node.js. This is because we use Tailwind CSS to style our views and this requirs Node.js to be install to work.
