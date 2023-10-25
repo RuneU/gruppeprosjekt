@@ -39,18 +39,10 @@ namespace bacit_dotnet.MVC.Controllers
                 var s = "ineedabreakpoint"; 
 
                 kunder.Add(model);
-
-                return RedirectToAction("Display"); 
             }
 
            
             return View("KundeInformasjon", model);
-        }
-
-        public ActionResult Display()
-        {
-           
-            return View(kunder);
         }
     }
 }
