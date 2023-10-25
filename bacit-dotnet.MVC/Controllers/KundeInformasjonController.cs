@@ -10,9 +10,9 @@ using bacit_dotnet.MVC.Models.ServiceOrdre;
 
 namespace bacit_dotnet.MVC.Controllers
 {
-    public class KundeInfoController : Controller
+    public class KundeInformasjonController : Controller
     {
-        static readonly List<KundeInformasjonViewModel> kunder = new();
+        
 
         public IActionResult KundeInformasjon()
         {
@@ -41,7 +41,6 @@ namespace bacit_dotnet.MVC.Controllers
                 kunder.Add(model);
             }
 
-           
             return View("KundeInformasjon", model);
         }
     }

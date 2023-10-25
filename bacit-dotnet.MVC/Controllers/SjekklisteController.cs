@@ -6,7 +6,7 @@ namespace bacit_dotnet.MVC.Controllers
     public class SjekklisteController : Controller
     {
 
-        public ActionResult Index()
+        public ActionResult Sjekkliste()
         {
             return View();
         }
@@ -19,7 +19,7 @@ namespace bacit_dotnet.MVC.Controllers
         {
 
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Sjekkliste));
             }
         }
 
