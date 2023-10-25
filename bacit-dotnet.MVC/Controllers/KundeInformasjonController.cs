@@ -37,8 +37,6 @@ namespace bacit_dotnet.MVC.Controllers
             {
                
                 var s = "ineedabreakpoint"; 
-
-                kunder.Add(model);
             }
 
             return View("KundeInformasjon", model);
