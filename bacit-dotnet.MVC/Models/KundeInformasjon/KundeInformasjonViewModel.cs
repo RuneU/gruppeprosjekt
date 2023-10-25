@@ -21,7 +21,7 @@ public class KundeInformasjonViewModel
 
     [Required(ErrorMessage = "Adresse er nødvendig")]
     [StringLength(30, ErrorMessage = "Adresse kan ikke være mer enn 20 characters")]
-    [RegularExpression(@"^[a-åA-Å0-10000''-'\s]{1,30}$", ErrorMessage = "Ugyldig characters i Etternavn.")]
+    [RegularExpression(@"^[a-åA-Å0-9''-'\s]{1,30}$", ErrorMessage = "Ugyldig characters i Etternavn.")]
     public string Adresse { get; set; }
 
     [Required(ErrorMessage = "Postnummer er nødvendig")]

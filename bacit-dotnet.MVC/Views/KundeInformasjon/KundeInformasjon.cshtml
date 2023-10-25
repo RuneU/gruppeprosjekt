@@ -45,7 +45,7 @@
         </div>
         <br>
         <div>
-            @using (Html.BeginForm("Save", "KundeInfo", FormMethod.Post))
+            @using (Html.BeginForm("Save", "KundeInformasjon", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <form asp-action="Save" asp-controller="KundeInfo" method="post">
