@@ -20,16 +20,9 @@ namespace bacit_dotnet.MVC.Controllers
 
         public IActionResult Index()
         {
-            var model = new HomeIndexViewModel
-            {
-                Saksnummer = "",
-                Navn = "",
-                Emne = "",
-                Dato = "",
-                Status = "",
+            { 
+                return View();
             }
-            ;
-            return View(model);
         }
 
         [HttpPost]
