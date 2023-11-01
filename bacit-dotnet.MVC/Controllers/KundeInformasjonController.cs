@@ -14,7 +14,7 @@ namespace bacit_dotnet.MVC.Controllers
     {
         
 
-        public IActionResult KundeInformasjon()
+        public IActionResult KundeInformassjon()
         {
             var model = new KundeInformasjonViewModel
             {

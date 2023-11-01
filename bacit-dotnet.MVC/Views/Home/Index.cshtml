@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model bacit_dotnet.MVC.Models.Home.HomeIndexViewModel
+@model IEnumerable<bacit_dotnet.MVC.Models.Person>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +31,7 @@
             </form>
             <h3 class="ml-40 mt-4 text-gray-400 font-semibold text-lg">Søket etter: @ViewBag.Term</h3>
 
-            <a asp-area="" asp-controller="KundeInformasjon" asp-action="KundeInformasjon" class="absolute top-0 right-20 h-10 w-24 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-6 rounded-md bg-ease-in duration-300">
+            <a asp-area="" asp-action="KundeInformasjon" class="absolute top-0 right-20 h-10 w-24 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-6 rounded-md bg-ease-in duration-300">
                 Ny sak
             </a>
         
@@ -54,6 +54,17 @@
                 </thead>
                
                 <tbody>
+                <tbody>
+                        @foreach (var person in Model)
+                        {
+                        <tr>
+                            <td>@person.Id</td>
+                            <td>@person.FullName</td>
+                            <td>@person.</td>
+                           
+                        </tr>
+                        }
+                </tbody>
                 <tr class="mt-5 bg-gray-100">
                     <td class="px-4 py-2">#000001</td>
                     <td class="px-4 py-2">Lorem</td>
