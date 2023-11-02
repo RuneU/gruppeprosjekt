@@ -37,15 +37,15 @@
     <div class="absolute inset-x-20 top-5 h-16 left-1/2">
         <div>
             <h1>
-                Service ordre 2/4
+                ServiceOrdre 2/4
             </h1>
         </div>
         <br>
         <div>
-            @using (Html.BeginForm("Save", "ServiceOrder", FormMethod.Post))
+            @*@using (Html.BeginForm("Save", "ServiceOrder", FormMethod.Post))*@
             {
                 @Html.AntiForgeryToken()
-                <form asp-action="Save" asp-controller="ServiceOrder" method="post">
+                <form asp-action="CreateServiceOrder" method="post">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>
@@ -125,12 +125,14 @@
                             </button>
                         </div>
                         <div>
-                            <input type="submit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" />
+                            <input type="submit" value="Create" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" />
 
                         </div>
                     </div>
                 </form>
-            }
+
+
+
         </div>
     </div>
 </div>

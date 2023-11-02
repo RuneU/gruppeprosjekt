@@ -18,14 +18,14 @@ namespace bacit_dotnet.MVC.Models
         [Required(ErrorMessage = "Adress is required.")]
         public int ModelYear { get; set; }
 
-        [Required(ErrorMessage = "ZipCode is required.")]
-        public string ProductType { get; set; }
+       /* [Required(ErrorMessage = "ZipCode is required.")]
+        public string ProductType { get; set; }*/
 
-        [Required(ErrorMessage = "PhoneNumber is required.")]
-        public string SerialNumber { get; set; }
+       /* [Required(ErrorMessage = "PhoneNumber is required.")]
+        public string SerialNumber { get; set; }*/
 
-        [Required(ErrorMessage = "PhoneNumber is required.")]
-        public string ServiceType { get; set; }
+       /* [Required(ErrorMessage = "PhoneNumber is required.")]
+        public string ServiceType { get; set; }*/
 
         [Required(ErrorMessage = "PhoneNumber is required.")]
         public string WhatIsAgreedWithCustomer { get; set; }
