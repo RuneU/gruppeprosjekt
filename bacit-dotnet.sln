@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bacit-dotnet.MVC.Tests", "b
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{27E139B2-8EC1-401D-B8A4-DA17C59755B0}"
 	ProjectSection(SolutionItems) = preProject
+		bacit-dotnet.MVC\appsettings.json = bacit-dotnet.MVC\appsettings.json
+		appsettings.Environment.json = appsettings.Environment.json
 		build.cmd = build.cmd
 		build.sh = build.sh
 		CreateDb.sql = CreateDb.sql

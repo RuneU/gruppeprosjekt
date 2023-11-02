@@ -18,7 +18,7 @@ namespace bacit_dotnet.MVC.Controllers
         {
             var model = new KundeInformasjonViewModel
             {
-                Fornavn = "rune",
+                Fornavn = "",
                 Etternavn = "",
                 Email = "",
                 Adresse = "",
