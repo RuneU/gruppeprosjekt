@@ -23,6 +23,7 @@ namespace bacit_dotnet.MVC
 
             // Register your repository.
             builder.Services.AddTransient<PersonRepository>();
+            builder.Services.AddTransient<ServiceOrderRepository>();
 
             var app = builder.Build();
 

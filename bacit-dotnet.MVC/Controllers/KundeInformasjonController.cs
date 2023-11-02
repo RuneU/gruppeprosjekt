@@ -14,9 +14,9 @@ namespace bacit_dotnet.MVC.Controllers
     {
         
 
-        public IActionResult KundeInformassjon()
+        public IActionResult Index()
         {
-            var model = new KundeInformasjonViewModel
+            /*var model = new KundeInformasjonViewModel
             {
                 Fornavn = "rune",
                 Etternavn = "",
@@ -24,8 +24,8 @@ namespace bacit_dotnet.MVC.Controllers
                 Adresse = "",
                 Postnummer = "",
             }
-            ;
-            return View(model);
+            ;*/
+            return View("~/Views/Home/KundeInformasjon.cshtml");
         }
         
         

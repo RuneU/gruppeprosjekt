@@ -40,7 +40,7 @@
     <div class="absolute inset-x-0 right-20 top-5 h-16 left-1/2">
         <div>
             <h1>
-                Kunde informasjon 1/4
+                Kunde-Informasjon 1/4
             </h1>
         </div>
         <br>
@@ -61,8 +61,29 @@
                             <input asp-for="LastName" type="text" id="LastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Helgen" required>
                             <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
+                        <div>
+                        <label asp-for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Epost</label>
+                        <input asp-for="Email" type="text" id="¨Email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Epost" required>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div>
+                        <label asp-for="Adress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse</label>
+                        <input asp-for="Adress" type="text" id="¨Adress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Adresse" required>
+                        <span asp-validation-for="Adress" class="text-danger"></span>
+                        </div>
+                        <div>
+                        <label asp-for="ZipCode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PostNummer</label>
+                        <input asp-for="ZipCode" type="text" id="¨ZipCode" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1234" required>
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                        </div>
+                    <div>
+                        <label asp-for="PhoneNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">TelefonNummer</label>
+                        <input asp-for="PhoneNumber" type="text" id="¨PhoneNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="12345678" required>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
                         <div class="grid gap-6 mb-6 md:grid-cols-1">
                         
+                           
 
                         </div>
                         

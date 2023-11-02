@@ -9,9 +9,9 @@ namespace bacit_dotnet.MVC.Controllers
 {
     public class ServiceOrderController : Controller
     {
-        public IActionResult ServiceOrder()
+        public IActionResult Index()
         {
-            var model = new ServiceOrderViewModel
+            /*var model = new ServiceOrderViewModel
             {
                 Mechanic = "",
                 OpprettetAv = "",
@@ -27,18 +27,19 @@ namespace bacit_dotnet.MVC.Controllers
                 Forsendelsemåte = "",
                 SignaturKunde = "",
                 SignaturReperatoer = "",
-                
-                
-                
-                
+
+
+
+
             }
-            ;
-            return View(model);
+            ;*/
+            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
         }
-        
+
         [HttpPost]
-        public IActionResult Save(ServiceOrderViewModel model) {
-            if(ModelState.IsValid)
+        public IActionResult Save(ServiceOrder model)
+        {
+            if (ModelState.IsValid)
             {
                 var s = "ineedabreakpoint";
 
