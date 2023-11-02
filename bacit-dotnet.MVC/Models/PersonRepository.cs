@@ -39,5 +39,20 @@ namespace bacit_dotnet.MVC.Models
             dbConnection.Open();
             dbConnection.Execute("INSERT INTO People (FirstName, LastName) VALUES (@FirstName, @LastName)", person);
         }
+
+        public void CreateTable()
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                string createTableSql = @"
+                CREATE TABLE IF NOT EXISTS MyTable (
+                Id INT PRIMARY KEY,
+                FirstName VARCHAR(255),
+                LastName VARCHAR(255),
+                )";
+
+                dbConnection.Execute(createTableSql);
+            }
+        }
     }
 }
