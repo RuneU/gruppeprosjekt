@@ -10,6 +10,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Views\KundeInformasjon\**" />
+	  <Content Remove="Views\KundeInformasjon\**" />
+	  <EmbeddedResource Remove="Views\KundeInformasjon\**" />
+	  <None Remove="Views\KundeInformasjon\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="Views\ServiceOrder\CreateServiceOrder.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Dapper" Version="2.0.143" />
 		<PackageReference Include="Dapper.Contrib" Version="2.0.78" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />

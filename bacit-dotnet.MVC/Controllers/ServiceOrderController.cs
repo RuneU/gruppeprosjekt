@@ -4,46 +4,80 @@ using System.Diagnostics;
 using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Models.ServiceOrdre;
 using bacit_dotnet.MVC.Views.FormsMain;
+using NuGet.Protocol.Core.Types;
 
 namespace bacit_dotnet.MVC.Controllers
 {
     public class ServiceOrderController : Controller
     {
-        public IActionResult ServiceOrder()
+        private readonly ServiceOrderRepository _serviceOrderrepository;
+
+        public ServiceOrderController(ServiceOrderRepository serviceOrderrepository)
         {
-            var model = new ServiceOrderViewModel
-            {
-                Mechanic = "",
-                OpprettetAv = "",
-                Ordrenummer = 0,
-                MottaDato = "",
-                AArsmodell = 1939,
-                hvaErAvtaltMedKunde = "",
-                Reperasjonsbeskrivelse = "",
-                MedgåtteDeler = "",
-                Arbeidstimer = 0,
-                FerdigstiltDato = "",
-                UtskriftDelerRetunert = "",
-                Forsendelsemåte = "",
-                SignaturKunde = "",
-                SignaturReperatoer = "",
-                
-                
-                
-                
-            }
-            ;
-            return View(model);
+            _serviceOrderrepository = serviceOrderrepository;
+        }
+
+        public IActionResult Index()
+        {
+            var serviceOrder = _serviceOrderrepository.GetAll();
+            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
         }
         
-        [HttpPost]
-        public IActionResult Save(ServiceOrderViewModel model) {
-            if(ModelState.IsValid)
-            {
-                var s = "ineedabreakpoint";
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        /*public IActionResult Create(ServiceOrder serviceOrder)
+        {
+            if (ModelState.IsValid)
+            {
+                _repository.Insert(serviceOrder);
+                return RedirectToAction("Index");
             }
-            return View("ServiceOrder", model);
+            return View(serviceOrder);
+        }*/
+        /* public IActionResult CreateServiceOrder(ServiceOrder serviceOrder)
+         {
+             if (!ModelState.IsValid)
+             {
+
+                 foreach (var state in ModelState)
+                 {
+                     foreach (var error in state.Value.Errors)
+                     {
+
+                         Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
+                     }
+                 }
+
+
+                 return View(serviceOrder);
+             }
+
+             _serviceOrderrepository.Insert(serviceOrder);
+             return RedirectToAction("Index");
+         }*/
+        public IActionResult CreateServiceOrder(ServiceOrder serviceOrder)
+        {
+            if (!ModelState.IsValid)
+            {
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
+                    }
+                }
+
+                // Return a 400 Bad Request status code for invalid input
+                return BadRequest(ModelState);
+            }
+
+            _serviceOrderrepository.Insert(serviceOrder);
+
+            // Return a 200 OK status code for successful creation
+            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
         }
+
     }
 }
