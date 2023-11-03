@@ -22,47 +22,7 @@ namespace bacit_dotnet.MVC.Controllers
             var serviceOrder = _serviceOrderrepository.GetAll();
             return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
         }
-        /*public IActionResult ServiceOrder()
-        {
-            var model = new ServiceOrderViewModel
-            {
-                Mechanic = "",
-                OpprettetAv = "",
-                Ordrenummer = 0,
-                MottaDato = "",
-                AArsmodell = 1939,
-                hvaErAvtaltMedKunde = "",
-                Reperasjonsbeskrivelse = "",
-                MedgåtteDeler = "",
-                Arbeidstimer = 0,
-                FerdigstiltDato = "",
-                UtskriftDelerRetunert = "",
-                Forsendelsemåte = "",
-                SignaturKunde = "",
-                SignaturReperatoer = "",
-
-
-
-
-            }
-            ;
-            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
-        }*/
-
-        /*[HttpPost]
-        public IActionResult Save(ServiceOrder model)
-        {
-            if (ModelState.IsValid)
-            {
-                var s = "ineedabreakpoint";
-
-            }
-            return View("ServiceOrder", model);
-        }*/
-        public IActionResult Create()
-        {
-            return View();
-        }
+        
 
 
         [HttpPost]
