@@ -43,7 +43,7 @@
         <br>
         <div>
             @*@using (Html.BeginForm("Save", "ServiceOrder", FormMethod.Post))*@
-            {
+       
                 @Html.AntiForgeryToken()
                 <form asp-action="CreateServiceOrder" method="post">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -68,6 +68,21 @@
                             <input asp-for="ModelYear" type="number" min="1939" max="3000" id="ModelYear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1997" required>
                             <span asp-validation-for="ModelYear" class="text-danger"></span>
                         </div>
+                    <div>
+                        <label asp-for="ProductType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ProduktType</label>
+                        <input asp-for="ProductType" type="text" id="ProductType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ProduktType" required>
+                        <span asp-validation-for="ProductType" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="SerialNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SerieNummer</label>
+                        <input asp-for="SerialNumber" type="text" id="SerialNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="X1234567" required>
+                        <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="ServiceType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">TjenesteType</label>
+                        <input asp-for="ServiceType" type="text" id="ServiceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Service/Reperasjon/Garanti" required>
+                        <span asp-validation-for="ServiceType" class="text-danger"></span>
+                    </div>
                     </div>
                     <div class="grid gap-6 mb-6 md:grid-cols-1">
                         <div>

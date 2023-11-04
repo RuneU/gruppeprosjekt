@@ -8,10 +8,10 @@ namespace bacit_dotnet.MVC.Controllers
     public class SjekklisteController : Controller
     {
 
-        public ActionResult Sjekkliste()
+        public ActionResult Index()
         {
 
-            var model = new SjekklisteViewModel
+            /*var model = new SjekklisteViewModel
             {
                 DokNr = "",
                 ServiceDato = "",
@@ -19,13 +19,13 @@ namespace bacit_dotnet.MVC.Controllers
           
 
             }
-           ;
-            return View(model);
+           ;*/
+            return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
         }
 
 
 
-        [HttpPost]
+       /* [HttpPost]
 
         public ActionResult Save(IFormCollection collection)
         {
@@ -33,7 +33,7 @@ namespace bacit_dotnet.MVC.Controllers
             {
                 return RedirectToAction(nameof(Sjekkliste));
             }
-        }
+        }*/
 
     }
 }

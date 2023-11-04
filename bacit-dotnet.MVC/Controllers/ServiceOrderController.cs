@@ -27,36 +27,6 @@ namespace bacit_dotnet.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        /*public IActionResult Create(ServiceOrder serviceOrder)
-        {
-            if (ModelState.IsValid)
-            {
-                _repository.Insert(serviceOrder);
-                return RedirectToAction("Index");
-            }
-            return View(serviceOrder);
-        }*/
-        /* public IActionResult CreateServiceOrder(ServiceOrder serviceOrder)
-         {
-             if (!ModelState.IsValid)
-             {
-
-                 foreach (var state in ModelState)
-                 {
-                     foreach (var error in state.Value.Errors)
-                     {
-
-                         Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
-                     }
-                 }
-
-
-                 return View(serviceOrder);
-             }
-
-             _serviceOrderrepository.Insert(serviceOrder);
-             return RedirectToAction("Index");
-         }*/
         public IActionResult CreateServiceOrder(ServiceOrder serviceOrder)
         {
             if (!ModelState.IsValid)
@@ -75,7 +45,7 @@ namespace bacit_dotnet.MVC.Controllers
 
             _serviceOrderrepository.Insert(serviceOrder);
 
-            // Return a 200 OK status code for successful creation
+            // Return serviceOrder view
             return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
         }
 
