@@ -30,5 +30,7 @@ namespace bacit_dotnet.MVC
             app.UseHsts();
 
         }
+        
+        
     }
 }

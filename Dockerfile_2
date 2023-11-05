@@ -13,12 +13,11 @@ WORKDIR "/src/bacit-dotnet.MVC/"
 RUN ls "/src/bacit-dotnet.MVC/"
 RUN dotnet restore 
 RUN dotnet build -c Release  --no-restore
-
+<
 FROM build AS publish
 RUN dotnet publish -c Release -o /app/publish  --no-restore
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "bacit-dotnet.MVC.dll"]
-#ENTRYPOINT ["dotnet", "bacit-dotnet.MVC.dll", "--environment=Enviroment"]
+ENTRYPOINT ["dotnet", "bacit-dotnet.MVC.dll", "--environment=Environment"]
