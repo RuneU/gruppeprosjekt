@@ -30,14 +30,14 @@ namespace bacit_dotnet.MVC.Models
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
-            return dbConnection.Query<Person>("SELECT * FROM People");
+            return dbConnection.Query<Person>("SELECT * FROM Customer");
         }
 
         public void Insert(Person person)
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
-            dbConnection.Execute("INSERT INTO People (FirstName, LastName) VALUES (@FirstName, @LastName)", person);
+            dbConnection.Execute("INSERT INTO Customer (FirstName, LastName) VALUES (@FirstName, @LastName)", person);
         }
 
         public void CreateTable()
