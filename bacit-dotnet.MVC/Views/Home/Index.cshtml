@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model IEnumerable<bacit_dotnet.MVC.Models.Person>
+@model IEnumerable<bacit_dotnet.MVC.Models.Customer>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +36,7 @@
             </form>
             <div class="flex-items-center ml-96">
                 
-                <a asp-area="" asp-controller="Home" asp-action="KundeInformasjon" class="flex items-center text-gray-400 p-2 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                <a asp-area=""  asp-controller="Customer" asp-action="Customer" class="flex items-center text-gray-400 p-2 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
                     Opprett en ny sak
                     <i class="fas fa-plus ml-3"></i>
                 </a>
@@ -56,7 +56,7 @@
                 <thead>
                 <tr>
                    <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Sak.nr</th>
-                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Emne</th>
+                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Telefon</th>
                    <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center cursor-pointer">Name</th>
                    <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Dato</th>
                    <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Status</th>
@@ -64,7 +64,24 @@
                 </thead>
                
                 <tbody>
-                
+                    @if (Model != null)
+                    {
+                        foreach (var customer in Model)
+                        {
+                            <tr>
+                                <td class="text-center border p-2">@customer.CustomerId</td>
+                                <td class="text-center border p-2">@customer.PhoneNumber</td>
+                                <td class="text-center border p-2">@customer.FullName</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center border p-2">No customers available.</td>
+                        </tr>
+                    }
+
                 <tr class="mt-5 bg-gray-100">
                    <td class="px-4 py-2 text-center">#000001</td>
                    <td class="px-4 py-2 text-center">Lorem</td>

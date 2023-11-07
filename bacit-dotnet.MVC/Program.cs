@@ -22,7 +22,7 @@ namespace bacit_dotnet.MVC
             builder.Services.AddScoped<IDbConnection>(_ => new MySqlConnection(connectionString));
 
             // Register your repository.
-            builder.Services.AddTransient<PersonRepository>();
+            builder.Services.AddTransient<CustomerRepository>();
             builder.Services.AddTransient<ServiceOrderRepository>();
 
             var app = builder.Build();

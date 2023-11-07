@@ -2,9 +2,9 @@
 
 namespace bacit_dotnet.MVC.Models
 {
-    public class Person
+    public class Customer
     {
-        public int Id { get; set; }
+        public int CustomerId { get; set; }
 
         [Required(ErrorMessage = "First Name is required.")]
         public string FirstName { get; set; }
@@ -13,7 +13,7 @@ namespace bacit_dotnet.MVC.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Email is required.")]
-        public string Email { get; set; }
+        public string CustomerEmail { get; set; }
 
         [Required(ErrorMessage = "Adress is required.")]
         public string Adress { get; set; }
