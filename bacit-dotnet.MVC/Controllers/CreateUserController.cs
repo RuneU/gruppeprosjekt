@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using bacit_dotnet.MVC.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace bacit_dotnet.MVC.Controllers;
 
