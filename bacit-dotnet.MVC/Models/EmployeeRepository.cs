@@ -37,7 +37,7 @@ namespace bacit_dotnet.MVC.Models
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
-            dbConnection.Execute("INSERT INTO People (FirstName, LastName, Email, Adress, ZipCode, PhoneNumber, Role) VALUES (@FirstName, @LastName, @Email, @Adress, @ZipCode, @PhoneNumber, @Role)", employee);
+            dbConnection.Execute("INSERT INTO Employee (FirstName, LastName, Email, Adress, ZipCode, PhoneNumber, Role) VALUES (@FirstName, @LastName, @Email, @Adress, @ZipCode, @PhoneNumber, @Role)", employee);
         }
     }
 }

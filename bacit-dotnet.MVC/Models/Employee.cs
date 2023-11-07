@@ -28,3 +28,4 @@ namespace bacit_dotnet.MVC.Models
         public string Role { get; set; }
 
     }
+}

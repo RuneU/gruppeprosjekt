@@ -2,7 +2,7 @@
     ViewData["Title"] = "bacit_dotnet.MVC";
 }
 @model bacit_dotnet.MVC.Models.Employee
-<form asp-action="Save" asp-controller="CreateEmployee" method="post">
+<form asp-action="CreateEmployee" asp-controller="CreateEmployee" method="post">
 
 
 
@@ -48,10 +48,22 @@
                         </div>
                     </div>
                     <div>
+                    <select asp-for="Role" asp-items="@(ViewBag.RoleList != null ? new SelectList(ViewBag.RoleList, "Value", "Text") : new SelectList(new List<SelectListItem>(), "Value", "Text"))" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Velg rolle</option>
+                    </select>
+                    </div>
+                    @*<div>
+                        <label asp-for="Role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rolle</label>
+                        <select asp-for="Role" asp-items="@(new SelectList(ViewBag.RoleList, "Value", "Text"))" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <option value="">Velg rolle</option>
+                        </select>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                    </div>*@
+                    @*< <div>
                         <label asp-for="Role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rolle</label>
                         <input asp-for="Role" type="text" id="Role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rolle" required>
                         <span asp-validation-for="Role" class="text-danger"></span>
-                    </div>
+                    </div>*@
                     <div>
                         <label asp-for="PhoneNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefon Nummer</label>
                         <input asp-for="PhoneNumber" type="text" id="PhoneNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="12345678" required>

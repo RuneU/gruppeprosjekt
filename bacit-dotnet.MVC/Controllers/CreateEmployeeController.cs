@@ -19,25 +19,24 @@ namespace bacit_dotnet.MVC.Controllers
 
         public IActionResult Index()
         {
-            //YourAction();
+            RoleList();
             var employee = _employeerepository.GetAll();
             return View("~/Views/CreateEmployee/CreateEmployee.cshtml");
 
         }
 
-        /*public IActionResult YourAction()
+        public IActionResult RoleList()
         {
-            ViewBag.StatusList = new List<SelectListItem>
+            ViewBag.RoleList = new List<SelectListItem>
     {
-        new SelectListItem { Value = "Ikke tildelt", Text = "Ikke tildelt" },
-        new SelectListItem { Value = "Vent internt", Text = "På vent internt" },
-        new SelectListItem { Value = "Vent eksternt", Text = "På vent eksternt" },
-        new SelectListItem { Value = "UnderArbeid", Text = "Under arbeid" },
-        new SelectListItem { Value = "Lukket", Text = "Lukket" },
+        new SelectListItem { Value = "Saksbehandler", Text = "Saksbehandler" },
+         new SelectListItem { Value = "Mekaniker", Text = "Mekaniker" },
+        new SelectListItem { Value = "Administrator", Text = "Administrator" },
+
         // Legg til flere statusalternativer om nødvendig
     };
-            return PartialView("~/Views/ServiceOrder/StatusDropdown.cshtml");
-        }*/
+            return PartialView("~/Views/CreateEmployee/RoleDropdown.cshtml");
+        }
 
 
 
