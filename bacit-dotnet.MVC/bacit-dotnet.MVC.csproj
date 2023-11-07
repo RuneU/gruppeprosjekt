@@ -10,13 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Views\KundeInformasjon\**" />
-	  <Content Remove="Views\KundeInformasjon\**" />
-	  <EmbeddedResource Remove="Views\KundeInformasjon\**" />
-	  <None Remove="Views\KundeInformasjon\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Content Remove="Views\ServiceOrder\CreateServiceOrder.cshtml" />
 	</ItemGroup>
 
