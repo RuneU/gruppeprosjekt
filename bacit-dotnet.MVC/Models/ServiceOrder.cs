@@ -9,9 +9,6 @@ namespace bacit_dotnet.MVC.Models
         [Required(ErrorMessage = "Name is required.")]
         public string CreatedBy { get; set; }
 
-        [Required(ErrorMessage = "OrderNumber is required.")]
-        public string OrderNumber { get; set; }
-
         [Required(ErrorMessage = "DateReceived is required.")]
         public DateTime DateReceived { get; set; }
 
@@ -48,7 +45,15 @@ namespace bacit_dotnet.MVC.Models
         [Required(ErrorMessage = "ShippingMethod is required.")]
         public string ShippingMethod { get; set; }
 
-        
+        [Required(ErrorMessage = "Status is required.")]
+        public string Status { get; set; }
+
+        [Required(ErrorMessage = "Subject is required.")]
+        public string Subject { get; set; }
+
+
+
+
 
 
 

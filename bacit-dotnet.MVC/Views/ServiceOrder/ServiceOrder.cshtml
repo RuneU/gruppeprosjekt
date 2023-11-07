@@ -54,15 +54,22 @@
                             <span asp-validation-for="CreatedBy" class="text-danger"></span>
                         </div>
                         <div>
-                            <label asp-for="OrderNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ordrenummer</label>
-                            <input asp-for="OrderNumber" type="text" id="OrderNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="42069" required>
-                            <span asp-validation-for="OrderNumber" class="text-danger"></span>
-                        </div>
-                        <div>
                             <label asp-for="DateReceived" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mottatt dato</label>
                             <input asp-for="DateReceived" type="date" id="DateReceived" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="01/01/2000" required>
                             <span asp-validation-for="DateReceived" class="text-danger"></span>
                         </div>
+                    <div>
+                        <label asp-for="Status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                        <select asp-for="Status" asp-items="@(new SelectList(ViewBag.StatusList, "Value", "Text"))" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <option value="">Velg status</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Emne</label>
+                        <input asp-for="Subject" type="text" id="Subject" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Emne" required>
+                        <span asp-validation-for="Subject" class="text-danger"></span>
+                    </div>
                         <div>
                             <label asp-for="ModelYear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Årsmodell</label>
                             <input asp-for="ModelYear" type="number" min="1939" max="3000" id="ModelYear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1997" required>
