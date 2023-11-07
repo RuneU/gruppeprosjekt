@@ -17,16 +17,16 @@ namespace bacit_dotnet.MVC.Controllers
                 _customerRepository = customerrepository;
             }
             
-            public IActionResult Customer()
+            public IActionResult Index()
             {
                 var customers = _customerRepository.GetAll();
-                return View();
+                return View("~/Views/Customer/Customer.cshtml");
             }
 
 
             [HttpPost]
             [ValidateAntiForgeryToken]
-            public IActionResult CreateCustomerPerson(Customer customer)
+            public IActionResult CreateCustomer(Customer customer)
             {
                 if (!ModelState.IsValid)
                 {
