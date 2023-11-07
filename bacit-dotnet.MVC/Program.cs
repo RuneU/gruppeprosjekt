@@ -1,5 +1,6 @@
 using bacit_dotnet.MVC;
 using bacit_dotnet.MVC.Models;
+using bacit_dotnet.MVC.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +26,7 @@ namespace bacit_dotnet.MVC
             builder.Services.AddTransient<CustomerRepository>();
             builder.Services.AddTransient<ServiceOrderRepository>();
             builder.Services.AddTransient<EmployeeRepository>();
+            builder.Services.AddTransient<CheckListRepository>();
 
             var app = builder.Build();
 

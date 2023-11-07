@@ -1,15 +1,30 @@
-﻿using bacit_dotnet.MVC.Models.KundeInformasjon;
-using bacit_dotnet.MVC.Models.ServiceOrdre;
+﻿using bacit_dotnet.MVC.Models.ServiceOrdre;
 using bacit_dotnet.MVC.Models.Sjekkliste;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using bacit_dotnet.MVC.Repositories;
+using bacit_dotnet.MVC.Models;
 
 namespace bacit_dotnet.MVC.Controllers
 {
     public class SjekklisteController : Controller
     {
+        private readonly CheckListRepository _checkListrepository;
 
+        public SjekklisteController(CheckListRepository checkListrepository)
+        {
+            _checkListrepository = checkListrepository;
+        }
+
+        public IActionResult Index()
+        {
+            YourAction();
+            var checkList = _checkListrepository.GetAll();
+            return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
+
+        }
         public ActionResult Sjekkliste()
         {
 
@@ -64,7 +79,7 @@ namespace bacit_dotnet.MVC.Controllers
                 return BadRequest(ModelState);
             }
 
-            _CheckListRepository.Insert(Sjekkliste sjekkliste);
+            _checkListrepository.Insert(Sjekkliste sjekkliste);
 
             // Return SJekkliste view
             return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
