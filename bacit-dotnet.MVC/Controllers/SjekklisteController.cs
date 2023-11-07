@@ -14,9 +14,28 @@ namespace bacit_dotnet.MVC.Controllers
             var model = new SjekklisteViewModel
             {
                 DokNr = "",
-                ServiceDato = "",
-                GodkjentAv = "",
-          
+                Date = "",
+                ApprovedBy = "",
+                CheckClutch = "",
+               // CheckStorage = "",
+                CheckPto = "",
+                CheckChainTensioner = "",
+                CheckWire = "",
+                CheckPinionStorage = "",
+                CheckSprocket = "",
+                //CheckHydraulic = "",
+                CheckHose = "",
+                CheckHydraulicBlock = "",
+                CheckOilTank = "",
+                CheckOilBox = "",
+                CheckRingCylinder = "",
+                //CheckBrakeCylinder = "",
+                CheckWiring = "",
+                CheckRadio = "",
+                CheckButtonBox = "",
+                CheckFunctions = "",
+                PullingPower = "",
+                BrakePower = "",
 
             }
            ;
