@@ -5,6 +5,7 @@ using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Models.ServiceOrdre;
 using bacit_dotnet.MVC.Views.FormsMain;
 using NuGet.Protocol.Core.Types;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace bacit_dotnet.MVC.Controllers
 {
@@ -17,12 +18,29 @@ namespace bacit_dotnet.MVC.Controllers
             _serviceOrderrepository = serviceOrderrepository;
         }
 
-        public IActionResult Index()
-        {
+         public IActionResult Index()
+         {
+            YourAction();
             var serviceOrder = _serviceOrderrepository.GetAll();
             return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
-        }
+
+         }
         
+        public IActionResult YourAction()
+        {
+            ViewBag.StatusList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Ikke tildelt", Text = "Ikke tildelt" },
+        new SelectListItem { Value = "Vent internt", Text = "På vent internt" },
+        new SelectListItem { Value = "Vent eksternt", Text = "På vent eksternt" },
+        new SelectListItem { Value = "UnderArbeid", Text = "Under arbeid" },
+        new SelectListItem { Value = "Lukket", Text = "Lukket" },
+        // Legg til flere statusalternativer om nødvendig
+    };
+            return PartialView("~/Views/ServiceOrder/StatusDropdown.cshtml");
+        }
+
+
 
 
         [HttpPost]
@@ -48,6 +66,6 @@ namespace bacit_dotnet.MVC.Controllers
             // Return serviceOrder view
             return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
         }
+    }
 
     }
-}
