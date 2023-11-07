@@ -9,11 +9,11 @@ using System.Linq;
 namespace bacit_dotnet.MVC.Models
 
 {
-    public class PersonRepository
+    public class CustomerRepository
     {
         private readonly IConfiguration _config;
 
-        public PersonRepository(IConfiguration config)
+        public CustomerRepository(IConfiguration config)
         {
             _config = config;
         }
@@ -26,18 +26,18 @@ namespace bacit_dotnet.MVC.Models
             }
         }
 
-        public IEnumerable<Person> GetAll()
+        public IEnumerable<Customer> GetAll()
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
-            return dbConnection.Query<Person>("SELECT * FROM Customer");
+            return dbConnection.Query<Customer>("SELECT * FROM Customer");
         }
 
-        public void Insert(Person person)
+        public void Insert(Customer customer)
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
-            dbConnection.Execute("INSERT INTO Customer (FirstName, LastName) VALUES (@FirstName, @LastName)", person);
+            dbConnection.Execute("INSERT INTO Customer (FirstName, LastName, CustomerEmail, Adress, ZipCode, PhoneNumber) VALUES (@FirstName, @LastName, @CustomerEmail, @Adress, @ZipCode, @PhoneNumber)", customer);
         }
 
         public void CreateTable()

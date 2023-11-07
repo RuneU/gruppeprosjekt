@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using bacit_dotnet.MVC.Models.KundeInformasjon;
+using bacit_dotnet.MVC.Models;
 
 namespace bacit_dotnet.MVC.Models.DineSaker
 { 

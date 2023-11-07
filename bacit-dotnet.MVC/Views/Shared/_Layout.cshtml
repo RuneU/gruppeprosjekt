@@ -7,29 +7,45 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <img src="~/images/NøstedLogo.png" class="hidden" alt="Description of the Image">
+
+
 
 </head>
 <body>
     <header>
-        <div id="menu" class="fixed left-0 top-0 h-screen w-40 m-0 rounded-none flex-column flex-column bg-gray-800 z-50">
-            <ul class="flex-items center">
-                <p class="text-gray-500 font-mono text-3xl hover:text-sky-400 px-5 py-3">nøsted&</p>
-                <li class="flex h-16 py-0 first:pt-0 last:pb-0">
-                    <a class="bg-gray-800 text-gray-500 hover:text-yellow-500 px-10 py-6" asp-area="" asp-controller="Home" asp-action="Index">Alle saker</a>
-                </li>
-                <li class="flex h-16 py-0 first:pt-0 last:pb-0">
-                    <a class="bg-gray-800 text-gray-500 hover:text-yellow-500 px-9 py-6" asp-area="" asp-controller="DineSaker" asp-action="DineSaker">Mine saker</a>
-                </li>
-                <li class="flex h-16 py-0 first:pt-0 last:pb-0">
-                    <a class="bg-gray-800 text-gray-500 hover:text-yellow-500 px-6 py-3" asp-area="" asp-controller="AdminPage" asp-action="AdminPage">Administrering av Ansatte</a>
-                </li>
-                <li class="flex h-16 py-0 first:pt-0 last:pb-0">
-                    <a class="bg-gray-800 text-gray-500 hover:text-yellow-500 px-12 py-6" asp-area="" asp-controller="Login" asp-action="Index">Logg ut</a>
-                </li>
-            </ul>
+        <div class="absolute top-0 bottom-0 left-0 bg-gray-800 w-64 fixed p-6">
+            <div class="text-white font-bold text-xl mb-6">
+                <img src="~/images/NøstedLogo.png" alt="NoostedLogo" class="h-30 w-60 rounded-full">
+                
+            </div>
+
+            <div class="text-white mt-6">
+                <input type="search" id="searchInput" placeholder="Søk i meny" class="bg-white bg-opacity-10 rounded-md p-3 w-full text-base">
+            </div>
+
+            <nav id="menuItems" class="mt-6">
+                <a asp-controller="Home" asp-action="Index" id="menuItem_AlleSaker" class="flex items-center text-gray-400 p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                    <i class="fas fa-home"></i>
+                    <span class="ml-3">Alle saker</span>
+                </a>
+                <a asp-controller="DineSaker" asp-action="DineSaker" id="menuItem_DineSaker" class="flex items-center text-gray-400 p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                    <i class="fas fa-user"></i>
+                    <span class="ml-3">Dine saker</span>
+                </a>
+                <a asp-controller="AdminPage" asp-action="AdminPage" id="menuItem_Admin" class="flex items-center text-gray-400 text-white p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                    <i class="fas fa-crown"></i>
+                    <span class="ml-3">Admin</span>
+                </a>
+                
+                <a asp-controller="Login" asp-action="Index" id="menuItem_Logout" onclick="confirmLogout()" class="flex items-center text-gray-400 p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="ml-3">Logout</span>
+                </a>
+            </nav>
         </div>
-  
-        
+
              
     </header>
     <div class="ml-40 container mx-auto">
@@ -44,6 +60,33 @@
             var menu = document.getElementById("menu");
             menu.classList.toggle("hidden");
         }
+
+        function confirmLogout() {
+            const userConfirmed = window.confirm("Er du sikker på at du vil logge deg ut?");
+            if (userConfirmed) {
+                document.location = '/Login/Index';
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const query = this.value.toLowerCase();
+            const items = [
+                document.getElementById('menuItem_AlleSaker'),
+                document.getElementById('menuItem_DineSaker'),
+                document.getElementById('menuItem_Admin'),
+                document.getElementById('menuItem_Logout')
+            ];
+
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
     </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

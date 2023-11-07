@@ -4,46 +4,68 @@ using System.Diagnostics;
 using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Models.ServiceOrdre;
 using bacit_dotnet.MVC.Views.FormsMain;
+using NuGet.Protocol.Core.Types;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace bacit_dotnet.MVC.Controllers
 {
     public class ServiceOrderController : Controller
     {
-        public IActionResult ServiceOrder()
-        {
-            var model = new ServiceOrderViewModel
-            {
-                Mechanic = "",
-                OpprettetAv = "",
-                Ordrenummer = 0,
-                MottaDato = "",
-                AArsmodell = 1939,
-                hvaErAvtaltMedKunde = "",
-                Reperasjonsbeskrivelse = "",
-                MedgåtteDeler = "",
-                Arbeidstimer = 0,
-                FerdigstiltDato = "",
-                UtskriftDelerRetunert = "",
-                Forsendelsemåte = "",
-                SignaturKunde = "",
-                SignaturReperatoer = "",
-                
-                
-                
-                
-            }
-            ;
-            return View(model);
-        }
-        
-        [HttpPost]
-        public IActionResult Save(ServiceOrderViewModel model) {
-            if(ModelState.IsValid)
-            {
-                var s = "ineedabreakpoint";
+        private readonly ServiceOrderRepository _serviceOrderrepository;
 
+        public ServiceOrderController(ServiceOrderRepository serviceOrderrepository)
+        {
+            _serviceOrderrepository = serviceOrderrepository;
+        }
+
+         public IActionResult Index()
+         {
+            YourAction();
+            var serviceOrder = _serviceOrderrepository.GetAll();
+            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
+
+         }
+        
+        public IActionResult YourAction()
+        {
+            ViewBag.StatusList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Ikke tildelt", Text = "Ikke tildelt" },
+        new SelectListItem { Value = "Vent internt", Text = "På vent internt" },
+        new SelectListItem { Value = "Vent eksternt", Text = "På vent eksternt" },
+        new SelectListItem { Value = "UnderArbeid", Text = "Under arbeid" },
+        new SelectListItem { Value = "Lukket", Text = "Lukket" },
+        // Legg til flere statusalternativer om nødvendig
+    };
+            return PartialView("~/Views/ServiceOrder/StatusDropdown.cshtml");
+        }
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateServiceOrder(ServiceOrder serviceOrder)
+        {
+            if (!ModelState.IsValid)
+            {
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
+                    }
+                }
+
+                // Return a 400 Bad Request status code for invalid input
+                return BadRequest(ModelState);
             }
-            return View("ServiceOrder", model);
+
+            _serviceOrderrepository.Insert(serviceOrder);
+
+            // Return serviceOrder view
+            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
         }
     }
-}
+
+    }
