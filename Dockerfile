@@ -21,3 +21,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "bacit-dotnet.MVC.dll"]
+#ENTRYPOINT ["dotnet", "bacit-dotnet.MVC.dll", "--environment=Enviroment"]
