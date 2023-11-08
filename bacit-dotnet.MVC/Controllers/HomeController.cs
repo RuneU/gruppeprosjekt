@@ -12,17 +12,12 @@ namespace bacit_dotnet.MVC.Controllers
 
     public class HomeController : Controller
     {
-        private readonly PersonRepository _personRepository;
-
-        public HomeController(PersonRepository personRepository)
-        {
-            _personRepository = personRepository;
-        }
+        
 
         public IActionResult Index()
         {
-            var people = _personRepository.GetAll();
-            return View(people);
+            
+            return View();
         }
 
         public IActionResult Create()
@@ -30,11 +25,7 @@ namespace bacit_dotnet.MVC.Controllers
             return View();
         }
 
-        public IActionResult KundeInformasjon()
-        {
-            
-            return View();
-        }
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -52,27 +43,7 @@ namespace bacit_dotnet.MVC.Controllers
             return View("Index", model);
         }
 
-        public IActionResult CreatePerson(Person person)
-        {
-            if (!ModelState.IsValid)
-            {
-                
-                foreach (var state in ModelState)
-                {
-                    foreach (var error in state.Value.Errors)
-                    {
-                        
-                        Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
-                    }
-                }
-
-                
-                return View(person);
-            }
-
-            _personRepository.Insert(person);
-            return RedirectToAction("Index");
-        }
+        
 
         
 
