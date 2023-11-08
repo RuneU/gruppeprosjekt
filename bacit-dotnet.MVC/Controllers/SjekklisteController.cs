@@ -17,14 +17,6 @@ namespace bacit_dotnet.MVC.Controllers
         {
             _checkListrepository = checkListrepository;
         }
-
-        public IActionResult Index()
-        {
-            YourAction();
-            var checkList = _checkListrepository.GetAll();
-            return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
-
-        }
         public ActionResult Sjekkliste()
         {
 
@@ -63,7 +55,7 @@ namespace bacit_dotnet.MVC.Controllers
 
         [HttpPost]
 
-        public IActionResult CreateCheckList(Sjekkliste sjekkliste)
+        public IActionResult CreateCheckList(SjekklisteViewModel sjekkliste)
         {
             if (!ModelState.IsValid)
             {
@@ -79,7 +71,7 @@ namespace bacit_dotnet.MVC.Controllers
                 return BadRequest(ModelState);
             }
 
-            _checkListrepository.Insert(Sjekkliste sjekkliste);
+            _checkListrepository.Insert(sjekkliste);
 
             // Return SJekkliste view
             return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
