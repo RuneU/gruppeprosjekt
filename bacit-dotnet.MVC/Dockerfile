@@ -20,4 +20,4 @@ RUN dotnet publish -c Release -o /app/publish  --no-restore
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "bacit-dotnet.MVC.dll", "--environment=Environment"]
+ENTRYPOINT ["dotnet", "bacit-dotnet.MVC.dll"]
