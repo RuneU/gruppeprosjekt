@@ -6,23 +6,23 @@ namespace bacit_dotnet.MVC.Models.Sjekkliste
 {
     public class SjekklisteViewModel
     {
-        [Required(ErrorMessage = "Dokument nummeret er nødvendig")]
-        [RegularExpression(@"^\d{10}$", ErrorMessage = "Ugyldig nummer. Må våre 10 sifere.")]
+        
+        
         public string DokNr { get; set; }
         public string Date { get; set; }
 
-        [Required(ErrorMessage = "Medgåtte deler er nødvendig")]
-        [RegularExpression(@"^[a-åA-Å''-'\s]{1,30}$", ErrorMessage = "Ugyldig characters.")]
+        
+        
         public string ApprovedBy {  get; set; }
 
 
         public string CheckClutch { get; set; }
-        public string Bremser { get; set; }
-        public string trommel { get; set; }
+        public string WearBrakes { get; set; }
+        public string CheckDrums { get; set; }
         public string CheckPto { get; set; }
         public string CheckChainTensioner { get; set; }
         public string CheckWire {  get; set; }
-        public string CheckPinionStorage { get; set; }
+        public string CheckPinionBearing { get; set; }
         public string CheckSprocket {  get; set; }
         public string sylinder { get; set; }
         public string CheckHose { get; set; }

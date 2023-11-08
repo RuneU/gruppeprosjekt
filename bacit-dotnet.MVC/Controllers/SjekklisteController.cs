@@ -11,50 +11,20 @@ namespace bacit_dotnet.MVC.Controllers
 {
     public class SjekklisteController : Controller
     {
-        private readonly CheckListRepository _checkListrepository;
+        private readonly CheckListRepository _checkListRepository;
 
-        public SjekklisteController(CheckListRepository checkListrepository)
+        public SjekklisteController(CheckListRepository checkListRepository)
         {
-            _checkListrepository = checkListrepository;
+            _checkListRepository = checkListRepository;
         }
+
         public ActionResult Sjekkliste()
         {
-
-            var model = new SjekklisteViewModel
-            {
-                DokNr = "",
-                Date = "",
-                ApprovedBy = "",
-                CheckClutch = "",
-               // CheckStorage = "",
-                CheckPto = "",
-                CheckChainTensioner = "",
-                CheckWire = "",
-                CheckPinionStorage = "",
-                CheckSprocket = "",
-                //CheckHydraulic = "",
-                CheckHose = "",
-                CheckHydraulicBlock = "",
-                CheckOilTank = "",
-                CheckOilBox = "",
-                CheckRingCylinder = "",
-                //CheckBrakeCylinder = "",
-                CheckWiring = "",
-                CheckRadio = "",
-                CheckButtonBox = "",
-                CheckFunctions = "",
-                PullingPower = "",
-                BrakePower = "",
-
-            }
-           ;
-            return View(model);
+            var sjekklisteViewModel = new SjekklisteViewModel();
+            return View(sjekklisteViewModel);
         }
 
-
-
         [HttpPost]
-
         public IActionResult CreateCheckList(SjekklisteViewModel sjekkliste)
         {
             if (!ModelState.IsValid)
@@ -71,10 +41,11 @@ namespace bacit_dotnet.MVC.Controllers
                 return BadRequest(ModelState);
             }
 
-            _checkListrepository.Insert(sjekkliste);
+            // Assuming you have a CheckListRepository that can save the sjekkliste to the database
+            _checkListRepository.Insert(sjekkliste);
 
-            // Return SJekkliste view
-            return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
+            // Redirect to a success or result view
+            return RedirectToAction("Sjekkliste"); // Or, you can redirect to a different view as needed
         }
     }
 }

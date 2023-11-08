@@ -208,7 +208,7 @@
         @Html.AntiForgeryToken()
 
         <form asp-action="CreateCheckList" asp-controller="Sjekkliste" method="post">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" }) 
             <div class="w-2/3 ml-auto p-8 space-y-6">
                 <!-- Sjekkliste for service på vinsj -->
                 <div>
@@ -237,13 +237,13 @@
                         <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckClutchBox">
                             <span class="font-bold">Sjekk clutch lameller for slitasje</span>
                             <div class="flex justify-center items-center">
-                                <input type="radio" name="lameller" value="ok" onchange="updateColorMek('CheckClutchBox', this.value)" style="width: 24px; height: 24px;">
+                                <input type="radio" name="lameller" value="ok" id="1" onchange="updateColorMek('CheckClutchBox', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input type="radio" name="lameller" value="skiftes" onchange="updateColorMek('CheckClutchBox', this.value)" style="width: 24px; height: 24px;">
+                                <input type="radio" name="lameller" value="skiftes" id="2" onchange="updateColorMek('CheckClutchBox', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckClutch" type="radio" name="lameller" value="defekt" onchange="updateColorMek('CheckClutchBox', this.value)" style="width: 24px; height: 24px;">
+                                <input type="radio" name="lameller" value="defekt" id="3" onchange="updateColorMek('CheckClutchBox', this.value)" style="width: 24px; height: 24px;">
                             </div>
                         </div>
 

@@ -1,75 +1,69 @@
-create table People
-(
-    Id        int auto_increment
-        primary key,
-    FirstName varchar(255) null,
-    LastName  varchar(255) null
-);
-
-create table ServiceOrder
+create table if not exists ServiceOrder
 (
     ServiceOrderID      bigint auto_increment
-        primary key,
+    primary key,
     CreatedBy           varchar(255) null,
     OrderNumber         varchar(255) not null,
     RecievedDate        datetime     not null,
     ModelYear           varchar(255) not null,
     SerialNumber        varchar(255) not null,
     ServiceRepGuarantee varchar(255) not null,
-    CustomerAgreement   varchar(255) not null
-);
+    CustomerAgreement   varchar(255) not null,
+    Status              varchar(255) not null,
+    Title               varchar(255) not null
+    );
 
-create table CheckList
+create table if not exists CheckList
 (
     CheckListID         bigint auto_increment
-        primary key,
+    primary key,
     ServiceOrderID      bigint       not null,
     DokNr               varchar(255) not null,
     Date                datetime     not null,
     ApprovedBy          varchar(255) not null,
-    CheckClutch         varchar(255) not null,
-    CheckStorage        varchar(255) not null,
-    CheckPto            varchar(255) not null,
-    CheckChainTensioner varchar(255) not null,
-    CheckWire           varchar(255) not null,
-    CheckPinionStorage  varchar(255) not null,
-    CheckSprocket       varchar(255) not null,
-    CheckHydraulic      varchar(255) not null,
-    CheckHose           varchar(255) not null,
-    CheckHydraulicBlock varchar(255) not null,
-    CheckOilTank        varchar(255) not null,
-    CheckOilBox         varchar(255) not null,
-    CheckRingCylinder   varchar(255) not null,
-    CheckBrakeCylinder  varchar(255) not null,
-    CheckWiring         varchar(255) not null,
-    CheckRadio          varchar(255) not null,
-    CheckButtonBox      varchar(255) not null,
-    CheckFunctions      varchar(255) not null,
-    PullingPower        varchar(255) not null,
-    BrakePower          varchar(255) not null,
+    CheckClutch         varchar(255) null,
+    CheckStorage        varchar(255) null,
+    CheckPto            varchar(255) null,
+    CheckChainTensioner varchar(255) null,
+    CheckWire           varchar(255) null,
+    CheckPinionStorage  varchar(255) null,
+    CheckSprocket       varchar(255) null,
+    CheckHydraulic      varchar(255) null,
+    CheckHose           varchar(255) null,
+    CheckHydraulicBlock varchar(255) null,
+    CheckOilTank        varchar(255) null,
+    CheckOilBox         varchar(255) null,
+    CheckRingCylinder   varchar(255) null,
+    CheckBrakeCylinder  varchar(255) null,
+    CheckWiring         varchar(255) null,
+    CheckRadio          varchar(255) null,
+    CheckButtonBox      varchar(255) null,
+    CheckFunctions      varchar(255) null,
+    PullingPower        varchar(255) null,
+    BrakePower          varchar(255) null,
     constraint CheckList_ServiceOrder_ServiceOrderID_fk
-        foreign key (ServiceOrderID) references ServiceOrder (ServiceOrderID)
-);
+    foreign key (ServiceOrderID) references ServiceOrder (ServiceOrderID)
+    );
 
-create table Customer
+create table if not exists Customer
 (
     CustomerID     bigint auto_increment
-        primary key,
+    primary key,
     ServiceOrderID bigint       not null,
     FirstName      varchar(255) not null,
     LastName       varchar(255) not null,
     CustomerEmail  varchar(255) not null,
-    Adress         varchar(255) not null,
-    ZipCode        varchar(255) not null,
+    Address        varchar(255) null,
+    ZipCode        varchar(255) null,
     PhoneNumber    varchar(255) not null,
     constraint Customer_ServiceOrder_ServiceOrderID_fk
-        foreign key (ServiceOrderID) references ServiceOrder (ServiceOrderID)
-);
+    foreign key (ServiceOrderID) references ServiceOrder (ServiceOrderID)
+    );
 
-create table Employees
+create table if not exists Employees
 (
     EmployeeID     bigint auto_increment
-        primary key,
+    primary key,
     ServiceOrderID bigint       not null,
     FirstName      varchar(255) not null,
     LastName       varchar(255) not null,
@@ -80,13 +74,13 @@ create table Employees
     Role           varchar(255) not null,
     Password       varchar(255) not null,
     constraint ServiceOrderID
-        foreign key (ServiceOrderID) references ServiceOrder (ServiceOrderID)
-);
+    foreign key (ServiceOrderID) references ServiceOrder (ServiceOrderID)
+    );
 
-create table WorkForm
+create table if not exists WorkForm
 (
     WorkFormID                   bigint auto_increment
-        primary key,
+    primary key,
     ServiceOrderID               bigint       not null,
     BookedService                varchar(255) not null,
     InquiryRegRec                varchar(255) not null,
@@ -102,6 +96,6 @@ create table WorkForm
     OrderNumber                  varchar(255) not null,
     ServiceForm                  varchar(255) not null,
     constraint WorkForm_ServiceOrder_ServiceOrderID_fk
-        foreign key (ServiceOrderID) references ServiceOrder (ServiceOrderID)
-);
+    foreign key (ServiceOrderID) references ServiceOrder (ServiceOrderID)
+    );
 
