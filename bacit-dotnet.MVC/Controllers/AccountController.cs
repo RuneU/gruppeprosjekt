@@ -132,7 +132,7 @@ namespace bacit_dotnet.MVC.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        //
+        /*
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -549,6 +549,6 @@ namespace bacit_dotnet.MVC.Controllers
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
-        }
+        } */
     }
 }
