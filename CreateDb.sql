@@ -1,3 +1,9 @@
+docker run --rm --name NoostedDatabase -p 3306:3306/tcp -v "%cd%\database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Gruppe4! -d mariadb:10.5.11
+
+CREATE DATABASE IF NOT EXISTS billingdb;
+
+USE billingdb;
+
 create table People
 (
     Id        int auto_increment
