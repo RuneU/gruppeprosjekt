@@ -42,7 +42,7 @@ namespace bacit_dotnet.MVC.Models
              dbConnection.Open();
              dbConnection.Execute("INSERT INTO ServiceOrder (ServiceOrderID, CustomerID, CreatedBy, DateReceived, ModelYear, ProductType, SerialNumber, ServiceType, WhatIsAgreedWithCustomer, RepairDescription, IncludedParts, DateCompleted, WorkingHours, ReplacedPartsReturned, ShippingMethod, Status, Subject, BookedServiceToWeek, AgreedDeliveryDateWithCustomer) VALUES (@ServiceOrderID, @CustomerID, @CreatedBy, @DateReceived, @ModelYear, @ProductType, @SerialNumber, @ServiceType, @WhatIsAgreedWithCustomer, @RepairDescription, @IncludedParts, @DateCompleted, @WorkingHours, @ReplacedPartsReturned, @ShippingMethod, @Status, @Subject, @BookedServiceToWeek, @AgreedDeliveryDateWithCustomer)", serviceOrder);
 
-         }*/
+         }
        /* public void Insert(ServiceOrder serviceOrder)
         {
             using (IDbConnection dbConnection = Connection)
