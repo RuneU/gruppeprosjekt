@@ -17,6 +17,7 @@ namespace bacit_dotnet.MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
 
             // Configure the database connection.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -48,6 +49,7 @@ namespace bacit_dotnet.MVC
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Login}/{action=Index}/{id?}");
+            app.MapRazorPages();
 
             app.Run();
         }

@@ -1,4 +1,10 @@
-﻿@{
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@{
 
     ViewData["Title"] = "bacit_dotnet.MVC";
 
@@ -89,11 +95,10 @@
 
 
             @Html.AntiForgeryToken()
-
-            <form asp-action="Create" method="post">
-
+            <form asp-action="Edit" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <input type="hidden" asp-for="CustomerId" />
                     <div>
                         <label asp-for="FirstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fornavn</label>
                         <input asp-for="FirstName" type="text" id="FirstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon" required>
@@ -136,11 +141,11 @@
                                 <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                                     Tilbake
                                 </button>
-                                <button asp-controller="ServiceOrder" asp-action="ServiceOrder" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                                <button asp-controller="ServiceOrder" asp-action="Edit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                                     Neste
                                 </button>
                                 <div>
-                                    <input type="submit" value="Create" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" />
+                                    <input type="submit" value="Edit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" />
                                 </div>
                             </div>
 
@@ -149,7 +154,21 @@
                 </div>
             </form>
 
-        
+            @*@<form asp-action="CreatePerson">
+            <div class="form-group">
+            <label asp-for="FirstName" class="control-label">First Name:</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="LastName" class="control-label">Last Name:</label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            </form>@**@
         </div>
     </div>
 
