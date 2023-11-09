@@ -19,11 +19,11 @@
             let lamellerRadios = document.querySelectorAll('input[name="CheckClutch"]');
             let BremserRadios = document.querySelectorAll('input[name="WearBrakes"]');
             let trommelRadios = document.querySelectorAll('input[name="CheckDrums"]');
-            let PTORadios = document.querySelectorAll('input[name="PTO"]');
-            let kjedestrammerRadios = document.querySelectorAll('input[name="kjedestrammer"]');
-            let wireRadios = document.querySelectorAll('input[name="wire"]');
-            let pinionRadios = document.querySelectorAll('input[name="pinion"]');
-            let kjedehjulRadios = document.querySelectorAll('input[name="kjedehjul"]');
+            let PTORadios = document.querySelectorAll('input[name="CheckPto"]');
+            let kjedestrammerRadios = document.querySelectorAll('input[name="CheckChainTensioner"]');
+            let wireRadios = document.querySelectorAll('input[name="CheckWire"]');
+            let pinionRadios = document.querySelectorAll('input[name="CheckPinionBearing"]');
+            let kjedehjulRadios = document.querySelectorAll('input[name="CheckSprocket"]');
 
 
             lamellerRadios[0].checked = true;
@@ -36,14 +36,14 @@
             kjedehjulRadios[0].checked = true;
 
 
-            updateColorMek('lamellerBox', 'ok');
-            updateColorMek('BremserBox', 'ok');
-            updateColorMek('trommelBox', 'ok');
-            updateColorMek('PTOBox', 'ok');
-            updateColorMek('kjedestrammerBox', 'ok');
-            updateColorMek('wireBox', 'ok');
-            updateColorMek('pinionBox', 'ok');
-            updateColorMek('kjedehjulBox', 'ok');
+            updateColorMek('CheckClutch', 'ok');
+            updateColorMek('WearBrakes', 'ok');
+            updateColorMek('CheckDrums', 'ok');
+            updateColorMek('CheckPto', 'ok');
+            updateColorMek('CheckChainTensioner', 'ok');
+            updateColorMek('CheckWire', 'ok');
+            updateColorMek('CheckPinionBearing', 'ok');
+            updateColorMek('CheckSprocket', 'ok');
 
         }
 
@@ -67,13 +67,13 @@
         }
 
         function checkAllOkHyd() {
-            let sylinderRadios = document.querySelectorAll('input[name="sylinder"]');
-            let slangerRadios = document.querySelectorAll('input[name="slanger"]');
-            let hydraulikkblokkRadios = document.querySelectorAll('input[name="hydraulikkblokk"]');
-            let tankRadios = document.querySelectorAll('input[name="tank"]');
-            let boksRadios = document.querySelectorAll('input[name="boks"]');
-            let ringsylinderRadios = document.querySelectorAll('input[name="ringsylinder"]');
-            let tetningerRadios = document.querySelectorAll('input[name="tetninger"]');
+            let sylinderRadios = document.querySelectorAll('input[name="CheckHydraulicSylinder"]');
+            let slangerRadios = document.querySelectorAll('input[name="CheckHose"]');
+            let hydraulikkblokkRadios = document.querySelectorAll('input[name="CheckHydraulicBlock"]');
+            let tankRadios = document.querySelectorAll('input[name="CheckOilTank"]');
+            let boksRadios = document.querySelectorAll('input[name="CheckOilBox"]');
+            let ringsylinderRadios = document.querySelectorAll('input[name="CheckRingCylinder"]');
+            let tetningerRadios = document.querySelectorAll('input[name="CheckBrakeCylinder"]');
 
             sylinderRadios[0].checked = true;
             slangerRadios[0].checked = true;
@@ -111,9 +111,9 @@
         }
 
         function checkAllOkEl() {
-            let ledningsnettRadios = document.querySelectorAll('input[name="ledningsnett"]');
-            let radioRadios = document.querySelectorAll('input[name="radio"]');
-            let knappekasseRadios = document.querySelectorAll('input[name="knappekasse"]');
+            let ledningsnettRadios = document.querySelectorAll('input[name="CheckWiring"]');
+            let radioRadios = document.querySelectorAll('input[name="CheckRadio"]');
+            let knappekasseRadios = document.querySelectorAll('input[name="CheckButtonBox"]');
 
 
             ledningsnettRadios[0].checked = true;
@@ -234,126 +234,126 @@
                     <div>
                         <!-- Sjekk clutch lameller for slitasje -->
 
-                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckClutchBox">
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckClutch">
                             <span class="font-bold">Sjekk clutch lameller for slitasje</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckClutch" type="radio"  value="ok" id="1" onchange="updateColorMek('CheckClutchBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckClutch" type="radio" value="ok" id="1" onchange="updateColorMek('CheckClutch', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckClutch" type="radio"  value="skiftes" id="2" onchange="updateColorMek('CheckClutchBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckClutch" type="radio" value="skiftes" id="2" onchange="updateColorMek('CheckClutch', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckClutch" type="radio"  value="defekt" id="3" onchange="updateColorMek('CheckClutchBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckClutch" type="radio" value="defekt" id="3" onchange="updateColorMek('CheckClutch', this.value)" style="width: 24px; height: 24px;">
                             </div>
                         </div>
 
                         <!-- Sjekk bremser. Bånd/pedal -->
 
-                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="BremserBox">
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="WearBrakes">
                             <span class="font-bold">Sjekk bremser. Bånd/pedal</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="WearBrakes" type="radio"  value="ok" onchange="updateColorMek('BremserBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="WearBrakes" type="radio" value="ok" onchange="updateColorMek('WearBrakes', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="WearBrakes" type="radio"  value="skiftes" onchange="updateColorMek('BremserBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="WearBrakes" type="radio" value="skiftes" onchange="updateColorMek('WearBrakes', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="WearBrakes" type="radio"  value="defekt" onchange="updateColorMek('BremserBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="WearBrakes" type="radio" value="defekt" onchange="updateColorMek('WearBrakes', this.value)" style="width: 24px; height: 24px;">
                             </div>
                         </div>
 
 
                         <!-- Sjekk lager for trommel -->
 
-                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="trommelBox">
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckDrums">
                             <span class="font-bold">Sjekk lager for trommel</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckDrums" type="radio"  value="ok" onchange="updateColorMek('trommelBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckDrums" type="radio" value="ok" onchange="updateColorMek('CheckDrums', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckDrums" type="radio"  value="skiftes" onchange="updateColorMek('trommelBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckDrums" type="radio"  value="skiftes" onchange="updateColorMek('CheckDrums', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckDrums" type="radio"  value="defekt" onchange="updateColorMek('trommelBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckDrums" type="radio" value="defekt" onchange="updateColorMek('CheckDrums', this.value)" style="width: 24px; height: 24px;">
                             </div>
                         </div>
 
 
                         <!-- Sjekk PTO og opplagring -->
 
-                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="PTOBox">
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckPto">
                             <span class="font-bold">Sjekk PTO og opplagring</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckPto" type="radio" value="ok" onchange="updateColorMek('PTOBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckPto" type="radio" value="ok" onchange="updateColorMek('CheckPto', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckPto" type="radio"  value="skiftes" onchange="updateColorMek('PTOBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckPto" type="radio"  value="skiftes" onchange="updateColorMek('CheckPto', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckPto" type="radio"  value="defekt" onchange="updateColorMek('PTOBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckPto" type="radio" value="defekt" onchange="updateColorMek('CheckPto', this.value)" style="width: 24px; height: 24px;">
                             </div>
                         </div>
 
 
                         <!-- Sjekk kjedestrammer -->
 
-                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="kjedestrammerBox">
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckChainTensioner">
                             <span class="font-bold">Sjekk kjedestrammer</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckChainTensioner" type="radio"  value="ok" onchange="updateColorMek('kjedestrammerBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckChainTensioner" type="radio"  value="ok" onchange="updateColorMek('CheckChainTensioner', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckChainTensioner" type="radio"  value="skiftes" onchange="updateColorMek('kjedestrammerBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckChainTensioner" type="radio"  value="skiftes" onchange="updateColorMek('CheckChainTensioner', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckChainTensioner" type="radio"  value="defekt" onchange="updateColorMek('kjedestrammerBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckChainTensioner" type="radio" value="defekt" onchange="updateColorMek('CheckChainTensioner', this.value)" style="width: 24px; height: 24px;">
                             </div>
                         </div>
 
 
                         <!-- Sjekk wire -->
 
-                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="wireBox">
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckWire">
                             <span class="font-bold">Sjekk wire</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckWire" type="radio"  value="ok" onchange="updateColorMek('wireBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckWire" type="radio"  value="ok" onchange="updateColorMek('CheckWire', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckWire" type="radio"  value="skiftes" onchange="updateColorMek('wireBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckWire" type="radio"  value="skiftes" onchange="updateColorMek('CheckWire', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckWire" type="radio"  value="defekt" onchange="updateColorMek('wireBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckWire" type="radio" value="defekt" onchange="updateColorMek('CheckWire', this.value)" style="width: 24px; height: 24px;">
                             </div>
                         </div>
 
 
                         <!-- Sjekk pinion lager -->
 
-                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="pinionBox">
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckPinionBearing">
                             <span class="font-bold">Sjekk pinion lager</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckPinionBearing" type="radio"  value="ok" onchange="updateColorMek('pinionBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckPinionBearing" type="radio"  value="ok" onchange="updateColorMek('CheckPinionBearing', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckPinionBearing" type="radio"  value="skiftes" onchange="updateColorMek('pinionBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckPinionBearing" type="radio"  value="skiftes" onchange="updateColorMek('CheckPinionBearing', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckPinionBearing" type="radio"  value="defekt" onchange="updateColorMek('pinionBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckPinionBearing" type="radio" value="defekt" onchange="updateColorMek('CheckPinionBearing', this.value)" style="width: 24px; height: 24px;">
                             </div>
                         </div>
 
                         <!-- Sjekk kile på kjedehjul -->
 
-                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="kjedehjulBox">
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckSprocket">
                             <span class="font-bold">Sjekk kile på kjedehjul</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckSprocket" type="radio"  value="ok" onchange="updateColorMek('kjedehjulBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckSprocket" type="radio" value="ok" onchange="updateColorMek('CheckSprocket', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckSprocket" type="radio"  value="skiftes" onchange="updateColorMek('kjedehjulBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckSprocket" type="radio" value="skiftes" onchange="updateColorMek('CheckSprocket', this.value)" style="width: 24px; height: 24px;">
                             </div>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckSprocket" type="radio"  value="defekt" onchange="updateColorMek('kjedehjulBox', this.value)" style="width: 24px; height: 24px;">
+                                <input asp-for="CheckSprocket" type="radio" value="defekt" onchange="updateColorMek('CheckSprocket', this.value)" style="width: 24px; height: 24px;">
                             </div>
                         </div>
 
@@ -551,14 +551,13 @@
 
                         <div>
                             <h2 class="font-bold text-4xl mt-10">Funksjons test</h2>
-                            <button type="button" onclick="checkAllOkTest()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded center-left mt-5">Check OK på alt test</button>
                         </div>
 
 
                         <!-- Test vinsj og kjør alle funskjoner -->
 
 
-                        <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="funksjonerBox">
+                        <div class="border p-2 grid grid-cols-4 gap-4 h-16 mt-10" id="funksjonerBox">
                             <span class="font-bold">Test vinsj og kjør alle funksjoner</span>
                             <div class="flex justify-center items-center">
                                 <input asp-for="CheckFunctions" type="text" placeholder="Bar" class="p-2 w-full border rounded">
