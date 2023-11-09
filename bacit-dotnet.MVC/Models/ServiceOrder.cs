@@ -45,7 +45,7 @@ namespace bacit_dotnet.MVC.Models
         [Required(ErrorMessage = "ShippingMethod is required.")]
         public string ShippingMethod { get; set; }
 
-        [Required(ErrorMessage = "Status is required.")]
+        [Required(ErrorMessage = "Status is required.")] 
         public string Status { get; set; }
 
         [Required(ErrorMessage = "Subject is required.")]

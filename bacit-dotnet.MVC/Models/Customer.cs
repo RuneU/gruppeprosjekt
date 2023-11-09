@@ -6,6 +6,8 @@ namespace bacit_dotnet.MVC.Models
     {
         public int CustomerId { get; set; }
 
+        public int ServiceOrderID { get; set; }
+
         [Required(ErrorMessage = "First Name is required.")]
         public string FirstName { get; set; }
 
