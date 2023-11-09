@@ -6,7 +6,7 @@ CREATE DATABASE IF NOT EXISTS NoestedDatabase;
 
 USE NoestedDatabase;
 
-create table People
+create table Customer
 (
     CustomerID     int auto_increment
         primary key,
