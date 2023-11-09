@@ -34,7 +34,7 @@ namespace bacit_dotnet.MVC.Repositories
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
-            dbConnection.Execute("INSERT INTO CheckList (DokNr, Date, ApprovedBy, CheckClutch, CheckStorage, CheckPto, CheckChainTensioner, CheckWire, CheckPinionStorage, CheckSprocket, CheckHydraulic, CheckHose, CheckHydraulicBlock, CheckOilTank, CheckOilBox, CheckRingCylinder, CheckBrakeCylinder, CheckWiring, CheckRadio, CheckButtonBox, CheckFunctions, PullingPower, BrakePower) ( @DokNr, @Date, @ApprovedBy, @CheckClutch, @CheckStorage, @CheckPto, @CheckChainTensioner, @CheckWire, @CheckPinionStorage, @CheckSprocket, @CheckHydraulic, @CheckHose, @CheckHydraulicBlock, @CheckOilTank, @CheckOilBox, @CheckRingCylinder, @CheckBrakeCylinder, @CheckWiring, @CheckRadio, @CheckButtonBox, @CheckFunctions, @PullingPower, @BrakePower)", sjekkliste);
+            dbConnection.Execute("INSERT INTO CheckList (DokNr, Date, ApprovedBy, CheckClutch, WearBrakes, CheckDrums, CheckPto, CheckChainTensioner, CheckWire, CheckPinionBearing, CheckSprocket, CheckHydraulicSylinder, CheckHose, CheckHydraulicBlock, CheckOilTank, CheckOilBox, CheckRingCylinder, CheckBrakeCylinder, CheckWiring, CheckRadio, CheckButtonBox, PullingPower, BrakePower) ( @DokNr, @Date, @ApprovedBy, @CheckClutch, @WearBrakes, @CheckDrums, @CheckPto, @CheckChainTensioner, @CheckWire, @CheckPinionBearing, @CheckSprocket, @CheckHydraulicSylinder, @CheckHose, @CheckHydraulicBlock, @CheckOilTank, @CheckOilBox, @CheckRingCylinder, @CheckBrakeCylinder, @CheckWiring, @CheckRadio, @CheckButtonBox, @PullingPower, @BrakePower)", sjekkliste);
         }
     }
 }
