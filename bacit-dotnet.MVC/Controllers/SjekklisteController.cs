@@ -1,5 +1,4 @@
-﻿using bacit_dotnet.MVC.Models.ServiceOrdre;
-using bacit_dotnet.MVC.Models.Sjekkliste;
+﻿using bacit_dotnet.MVC.Models.Sjekkliste;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
@@ -11,20 +10,23 @@ namespace bacit_dotnet.MVC.Controllers
 {
     public class SjekklisteController : Controller
     {
-        private readonly CheckListRepository _checkListRepository;
+        private readonly CheckListRepository _checkListrepository;
 
-        public SjekklisteController(CheckListRepository checkListRepository)
+        public SjekklisteController(CheckListRepository checkListrepository)
         {
-            _checkListRepository = checkListRepository;
+            _checkListrepository = checkListrepository;
         }
-
         public ActionResult Sjekkliste()
         {
-            var sjekklisteViewModel = new SjekklisteViewModel();
-            return View(sjekklisteViewModel);
+
+            var CheckListViewModel = new SjekklisteViewModel();
+            return View(CheckListViewModel);
         }
 
+
+
         [HttpPost]
+
         public IActionResult CreateCheckList(SjekklisteViewModel sjekkliste)
         {
             if (!ModelState.IsValid)
@@ -41,11 +43,10 @@ namespace bacit_dotnet.MVC.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Assuming you have a CheckListRepository that can save the sjekkliste to the database
-            _checkListRepository.Insert(sjekkliste);
+            _checkListrepository.Insert(sjekkliste);
 
-            // Redirect to a success or result view
-            return RedirectToAction("Sjekkliste"); // Or, you can redirect to a different view as needed
+            // Return SJekkliste view
+            return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
         }
     }
 }

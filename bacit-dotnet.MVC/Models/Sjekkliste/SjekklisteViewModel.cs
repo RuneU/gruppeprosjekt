@@ -34,8 +34,8 @@ namespace bacit_dotnet.MVC.Models.Sjekkliste
         public string CheckWiring { get; set; }
         public string CheckRadio {  get; set; }
         public string CheckButtonBox { get; set; }
-       // public string PressureTest { get; set; }
-        //public string CheckFunctions { get; set; }
+        public string PressureTest { get; set; }
+        public string CheckFunctions { get; set; }
         public string PullingPower { get; set; }
         public string BrakePower { get; set; }
 

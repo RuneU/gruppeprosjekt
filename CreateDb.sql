@@ -13,39 +13,36 @@ create table if not exists ServiceOrder
     Title               varchar(255) not null
     );
 
-create table CheckList
+create table if not exists CheckList
 (
-    CheckListID             bigint auto_increment
-        primary key,
-    ServiceOrderID          bigint       not null,
-    DokNr                   varchar(255) not null,
-    Date                    datetime     not null,
-    ApprovedBy              varchar(255) null,
-    CheckClutch             varchar(255) null,
-    WearBrakes              varchar(255) null,
-    CheckDrums              varchar(255) null,
-    CheckPto                varchar(255) null,
-    CheckChainTensioner     varchar(255) null,
-    CheckWire               varchar(255) null,
-    CheckPinionBearing      varchar(255) null,
-    CheckSprocket           varchar(255) null,
-    CheckHydraulicSylinder  varchar(255) null,
-    CheckHose               varchar(255) null,
-    CheckHydraulicBlock     varchar(255) null,
-    CheckOilTank            varchar(255) null,
-    CheckOilBox             varchar(255) null,
-    CheckRingCylinder       varchar(255) null,
-    CheckBrakeCylinder      varchar(255) null,
-    CheckWiring             varchar(255) null,
-    CheckRadio              varchar(255) null,
-    CheckButtonBox          varchar(255) null,
-    PressureTest            varchar(255) null,
-    CheckFunctions          varchar(255) null,
-    PullingPower            varchar(255) null,
-    BrakePower              varchar(255) null,
-    constraint CheckList_ServiceOrder_ServiceOrderID_fk
-        foreign key (ServiceOrderID) references ServiceOrder (ServiceOrderID)
-);
+    CheckListID            int auto_increment
+    primary key,
+    DokNr                  varchar(255) not null,
+    Date                   varchar(255) not null,
+    ApprovedBy             varchar(255) null,
+    CheckClutch            varchar(255) null,
+    WearBrakes             varchar(255) null,
+    CheckDrums             varchar(255) null,
+    CheckPto               varchar(255) null,
+    CheckChainTensioner    varchar(255) null,
+    CheckWire              varchar(255) null,
+    CheckPinionBearing     varchar(255) null,
+    CheckSprocket          varchar(255) null,
+    CheckHydraulicSylinder varchar(255) null,
+    CheckHose              varchar(255) null,
+    CheckHydraulicBlock    varchar(255) null,
+    CheckOilTank           varchar(255) null,
+    CheckOilBox            varchar(255) null,
+    CheckRingCylinder      varchar(255) null,
+    CheckBrakeCylinder     varchar(255) null,
+    CheckWiring            varchar(255) null,
+    CheckRadio             varchar(255) null,
+    CheckButtonBox         varchar(255) null,
+    PressureTest           varchar(255) null,
+    CheckFunctions         varchar(255) null,
+    PullingPower           varchar(255) null,
+    BrakePower             varchar(255) null
+    );
 
 
 
