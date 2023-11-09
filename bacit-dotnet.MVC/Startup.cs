@@ -50,7 +50,7 @@ namespace bacit_dotnet.MVC
         {
             // Configure the DbContext for Identity and your application
             services.AddDbContext<DataContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(10, 5, 11)));
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(10, 5, 11))));
 
             // Configure Identity
             services.AddIdentity<Employee, IdentityRole>()

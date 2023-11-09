@@ -137,6 +137,16 @@
                             <input asp-for="ShippingMethod" type="text" id="ShippingMethod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Forsendelsesmetode" required>
                             <span asp-validation-for="ShippingMethod" class="text-danger"></span>
                         </div>
+                    <div>
+                        <label asp-for="BookedServiceToWeek" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Booket service til uke</label>
+                        <input asp-for="BookedServiceToWeek" type="text" id="BookedServiceToWeek" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Booket service til uke" required>
+                        <span asp-validation-for="BookedServiceToWeek" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="AgreedDeliveryDateWithCustomer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Avtalt leveranse til kunde</label>
+                        <input asp-for="AgreedDeliveryDateWithCustomer" type="date" id="AgreedDeliveryDateWithCustomer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Avtalt leveranse til kunde" required>
+                        <span asp-validation-for="AgreedDeliveryDateWithCustomer" class="text-danger"></span>
+                    </div>
         
                         
 

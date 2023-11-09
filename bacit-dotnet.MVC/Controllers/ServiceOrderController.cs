@@ -21,7 +21,7 @@ namespace bacit_dotnet.MVC.Controllers
         {
             YourAction();
             var serviceOrder = _serviceOrderrepository.GetAll();
-            return View();
+            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
 
         }
 
