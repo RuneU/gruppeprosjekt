@@ -1,7 +1,7 @@
 
 
 docker run --rm --name NoostedDatabase -p 3306:3306/tcp -v "%cd%\database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Gruppe4! -d mariadb:10.5.11
-docker exec -it NoestedDatabase mysql -p
+docker exec -it NoostedDatabase mysql -p
 
 
 CREATE DATABASE IF NOT EXISTS NoestedDatabase;
