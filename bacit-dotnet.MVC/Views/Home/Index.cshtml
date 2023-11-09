@@ -64,24 +64,17 @@
                 </thead>
                
                 <tbody>
-                    @if (Model != null)
+
+
+                    @foreach (var customer in Model)
                     {
-                        foreach (var customer in Model)
-                        {
-                            <tr>
-                                <td class="text-center border p-2">@customer.CustomerId</td>
-                                <td class="text-center border p-2">@customer.PhoneNumber</td>
-                                <td class="text-center border p-2">@customer.FullName</td>
-                            </tr>
-                        }
-                    }
-                    else
-                    {
-                        <tr>
-                            <td colspan="3" class="text-center border p-2">No customers available.</td>
+                        <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerId })'">
+                            <td class="text-center border p-2">@customer.CustomerId</td>
+                            <td class="text-center border p-2">@customer.PhoneNumber</td>
+                            <td class="text-center border p-2">@customer.FullName</td>
                         </tr>
                     }
-
+                    
                 <tr class="mt-5 bg-gray-100">
                    <td class="px-4 py-2 text-center">#000001</td>
                    <td class="px-4 py-2 text-center">Lorem</td>

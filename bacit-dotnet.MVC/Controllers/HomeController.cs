@@ -12,12 +12,19 @@ namespace bacit_dotnet.MVC.Controllers
 
     public class HomeController : Controller
     {
-        
+        private readonly CustomerRepository _customerRepository;
+        private readonly ServiceOrderRepository _serviceOrderRepository;
+
+        public HomeController(CustomerRepository customerRepository, ServiceOrderRepository serviceOrderRepository)
+        {
+            _customerRepository = customerRepository;
+            _serviceOrderRepository = serviceOrderRepository;
+        }
 
         public IActionResult Index()
         {
-            
-            return View();
+            var customers = _customerRepository.GetAll();
+            return View(customers);
         }
 
         public IActionResult Create()

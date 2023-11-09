@@ -1,5 +1,4 @@
-﻿using bacit_dotnet.MVC.Models.ServiceOrdre;
-using bacit_dotnet.MVC.Models.Sjekkliste;
+﻿using bacit_dotnet.MVC.Models.Sjekkliste;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
