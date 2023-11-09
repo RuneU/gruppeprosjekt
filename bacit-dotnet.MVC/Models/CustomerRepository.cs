@@ -37,6 +37,7 @@ namespace bacit_dotnet.MVC.Models
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
+
             // Start a transaction in case you need to roll back if something goes wrong
             using var transaction = dbConnection.BeginTransaction();
 
@@ -64,6 +65,7 @@ namespace bacit_dotnet.MVC.Models
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
             return dbConnection.Query<Customer>("SELECT * FROM Customer WHERE CustomerId = @CustomerId", new { CustomerId = id }).FirstOrDefault();
+
         }
 
         public bool Update(Customer customer)

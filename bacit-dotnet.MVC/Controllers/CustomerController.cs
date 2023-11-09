@@ -1,4 +1,4 @@
-﻿using bacit_dotnet;
+using bacit_dotnet;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using bacit_dotnet.MVC.Models;
@@ -19,6 +19,7 @@ namespace bacit_dotnet.MVC.Controllers
         {
             _customerRepository = customerRepository;
             
+
         }
 
      
@@ -32,6 +33,7 @@ namespace bacit_dotnet.MVC.Controllers
             }
             return View(customer);
         }
+
 
 
         [HttpPost]
