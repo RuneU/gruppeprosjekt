@@ -6,6 +6,8 @@ namespace bacit_dotnet.MVC.Models
     {
         public int ServiceOrderID { get; set; }
 
+        public int CustomerID { get; set; }
+
         [Required(ErrorMessage = "Name is required.")]
         public string CreatedBy { get; set; }
 
@@ -13,7 +15,7 @@ namespace bacit_dotnet.MVC.Models
         public DateTime DateReceived { get; set; }
 
         [Required(ErrorMessage = "ModelYear is required.")]
-        public int ModelYear { get; set; }
+        public string ModelYear { get; set; }
 
         [Required(ErrorMessage = "ProductType is required.")]
          public string ProductType { get; set; }
@@ -37,7 +39,7 @@ namespace bacit_dotnet.MVC.Models
         public DateTime DateCompleted { get; set; }
 
         [Required(ErrorMessage = "WorkingHours is required.")]
-        public string WorkingHours { get; set; }
+        public int WorkingHours { get; set; }
 
         [Required(ErrorMessage = "ReplacedPartsReturned is required.")]
         public string ReplacedPartsReturned { get; set; }
@@ -50,6 +52,14 @@ namespace bacit_dotnet.MVC.Models
 
         [Required(ErrorMessage = "Subject is required.")]
         public string Subject { get; set; }
+
+        [Required(ErrorMessage = "BookedServiceToWeek is required.")]
+        public string BookedServiceToWeek { get; set; }
+
+        [Required(ErrorMessage = "AgreedDeliveryDateWithCustomer is required.")]
+        public DateTime AgreedDeliveryDateWithCustomer { get; set; }
+
+
 
 
 

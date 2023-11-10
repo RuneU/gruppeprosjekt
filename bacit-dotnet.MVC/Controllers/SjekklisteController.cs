@@ -12,10 +12,12 @@ namespace bacit_dotnet.MVC.Controllers
     {
         private readonly CheckListRepository _checkListrepository;
 
+
         public SjekklisteController(CheckListRepository checkListrepository)
         {
             _checkListrepository = checkListrepository;
         }
+        
         public ActionResult Sjekkliste()
         {
 
