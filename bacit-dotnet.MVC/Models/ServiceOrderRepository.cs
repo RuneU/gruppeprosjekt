@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 //using MySql.Data.MySqlClient;
 using MySqlConnector;
@@ -36,7 +37,22 @@ namespace bacit_dotnet.MVC.Models
            
         }
 
-         public void Insert(ServiceOrder serviceOrder)
+        public int GetLastCustomerID()
+        {
+            using IDbConnection dbConnection = Connection;
+            dbConnection.Open();
+
+            string sqlQuery = "SELECT CustomerID FROM Customer ORDER BY CustomerID DESC LIMIT 1";
+            int lastCustomerID = dbConnection.Query<int>(sqlQuery).FirstOrDefault();
+            return lastCustomerID;
+        }
+
+        
+
+       
+
+
+        public void Insert(ServiceOrder serviceOrder)
          {
              using IDbConnection dbConnection = Connection;
              dbConnection.Open();

@@ -68,8 +68,8 @@
 
                     @foreach (var customer in Model)
                     {
-                        <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerId })'">
-                            <td class="text-center border p-2">@customer.CustomerId</td>
+                        <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerID })'">
+                            <td class="text-center border p-2">@customer.CustomerID</td>
                             <td class="text-center border p-2">@customer.PhoneNumber</td>
                             <td class="text-center border p-2">@customer.FullName</td>
                         </tr>

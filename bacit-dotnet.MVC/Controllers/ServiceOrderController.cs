@@ -20,10 +20,16 @@ namespace bacit_dotnet.MVC.Controllers
         public IActionResult ServiceOrder()
         {
             YourAction();
-            var serviceOrder = _serviceOrderrepository.GetAll();
-            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
+            int lastCustomerID = _serviceOrderrepository.GetLastCustomerID();
+            var serviceOrder = new ServiceOrder { CustomerID = lastCustomerID };
+           
+            var serviceOrders = _serviceOrderrepository.GetAll();
 
+            return View("~/Views/ServiceOrder/ServiceOrder.cshtml", serviceOrder);
         }
+
+        
+
 
         public IActionResult YourAction()
         {
@@ -39,29 +45,26 @@ namespace bacit_dotnet.MVC.Controllers
             return PartialView("~/Views/ServiceOrder/StatusDropdown.cshtml");
         }
 
-
+        public ActionResult Create(int customerId)
+        {
+            var serviceOrder = new ServiceOrder { CustomerID = customerId };
+            return View(serviceOrder);
+        }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateServiceOrder(ServiceOrder serviceOrder)
+        public ActionResult Create(ServiceOrder serviceOrder)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                foreach (var state in ModelState)
-                {
-                    foreach (var error in state.Value.Errors)
-                    {
-                        Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
-                    }
-                }
-
-                // Return a 400 Bad Request status code for invalid input
-                return BadRequest(ModelState);
+                _serviceOrderrepository.Insert(serviceOrder);
+                // Redirect to an appropriate action, such as the details view of the newly created service order
+                return RedirectToAction("Details", new { id = serviceOrder.ServiceOrderID });
             }
 
-            _serviceOrderrepository.Insert(serviceOrder);
-            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
+            // If model state is not valid, return to the view with the current data
+            return View(serviceOrder);
         }
     }
 

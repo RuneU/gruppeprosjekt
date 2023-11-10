@@ -1,7 +1,6 @@
 ﻿using bacit_dotnet.MVC.DataAccess;
 using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Repositories;
-using bacit_dotnet.MVC.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using bacit_dotnet.MVC.Models.DineSaker;
@@ -36,7 +35,7 @@ namespace bacit_dotnet.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Save(HomeIndexViewModel model)
+        public IActionResult Save(HomeViewModel model)
         {
             if (ModelState.IsValid)
             {

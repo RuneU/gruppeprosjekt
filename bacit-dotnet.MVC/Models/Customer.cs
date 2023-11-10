@@ -4,7 +4,7 @@ namespace bacit_dotnet.MVC.Models
 {
     public class Customer
     {
-        public int CustomerId { get; set; }
+        public int CustomerID { get; set; }
 
         public int ServiceOrderID { get; set; }
 

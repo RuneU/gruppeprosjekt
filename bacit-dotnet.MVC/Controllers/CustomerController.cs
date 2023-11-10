@@ -42,22 +42,18 @@ namespace bacit_dotnet.MVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-
                 foreach (var state in ModelState)
                 {
                     foreach (var error in state.Value.Errors)
                     {
-
                         Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
                     }
                 }
-
-
                 return View(customer);
             }
 
             _customerRepository.Insert(customer);
-            return RedirectToAction("Customer");
+            return RedirectToAction("ServiceOrder", "ServiceOrder", new { CustomerID = customer.CustomerID });
         }
 
         public IActionResult Edit(int id, Customer customer)

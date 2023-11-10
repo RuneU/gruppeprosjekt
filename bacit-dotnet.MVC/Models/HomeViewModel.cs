@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using bacit_dotnet.MVC.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace bacit_dotnet.MVC.Models.Home
+namespace bacit_dotnet.MVC.Models
 {
-    public class HomeIndexViewModel
+    public class HomeViewModel
     {
+
+        public required IEnumerable<Customer> Customers { get; set; }
         public string Saksnummer { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; } 

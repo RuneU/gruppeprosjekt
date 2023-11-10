@@ -47,7 +47,7 @@
             @*@using (Html.BeginForm("Save", "ServiceOrder", FormMethod.Post))*@
        
                 @Html.AntiForgeryToken()
-                <form asp-action="CreateServiceOrder" method="post">
+                <form asp-action="Create" method="post">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>

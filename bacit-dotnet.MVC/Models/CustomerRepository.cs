@@ -44,7 +44,7 @@ namespace bacit_dotnet.MVC.Models
             try
             {
                 // Insert the Customer and get back the ID (if your table is set up to auto-increment the ID)
-                var sql = "INSERT INTO Customer (FirstName, LastName, CustomerEmail, Adress, ZipCode, PhoneNumber, CustomerId) VALUES (@FirstName, @LastName, @CustomerEmail, @Adress, @ZipCode, @PhoneNumber, @CustomerId); SELECT LAST_INSERT_ID();";
+                var sql = "INSERT INTO Customer (FirstName, LastName, CustomerEmail, Adress, ZipCode, PhoneNumber, CustomerID) VALUES (@FirstName, @LastName, @CustomerEmail, @Adress, @ZipCode, @PhoneNumber, @CustomerID); SELECT LAST_INSERT_ID();";
                 var customerId = dbConnection.Query<int>(sql, customer, transaction).Single();
 
                 // Now you have the CustomerId and ServiceOrderId, you can handle additional logic as needed
@@ -64,7 +64,7 @@ namespace bacit_dotnet.MVC.Models
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
-            return dbConnection.Query<Customer>("SELECT * FROM Customer WHERE CustomerId = @CustomerId", new { CustomerId = id }).FirstOrDefault();
+            return dbConnection.Query<Customer>("SELECT * FROM Customer WHERE CustomerID = @CustomerID", new { CustomerID = id }).FirstOrDefault();
 
         }
 
@@ -73,7 +73,7 @@ namespace bacit_dotnet.MVC.Models
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                var affectedRows = dbConnection.Execute("UPDATE Customer SET FirstName = @FirstName, LastName = @LastName, CustomerEmail = @CustomerEmail, Adress = @Adress, ZipCode = @ZipCode, PhoneNumber = @PhoneNumber WHERE CustomerId = @CustomerId", customer);
+                var affectedRows = dbConnection.Execute("UPDATE Customer SET FirstName = @FirstName, LastName = @LastName, CustomerEmail = @CustomerEmail, Adress = @Adress, ZipCode = @ZipCode, PhoneNumber = @PhoneNumber WHERE CustomerID = @CustomerID", customer);
                 return affectedRows > 0;
             }
         }
