@@ -54,7 +54,9 @@ namespace bacit_dotnet.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ServiceOrder serviceOrder)
+
+
+        /*public ActionResult Create(ServiceOrder serviceOrder)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +67,27 @@ namespace bacit_dotnet.MVC.Controllers
 
             // If model state is not valid, return to the view with the current data
             return View(serviceOrder);
+        }  */
+
+        public IActionResult Create(ServiceOrder serviceOrder)
+        {
+            if (!ModelState.IsValid)
+            {
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
+                    }
+                }
+
+                // Return a 400 Bad Request status code for invalid input
+                return BadRequest(ModelState);
+            }
+
+            _serviceOrderrepository.Insert(serviceOrder);
+            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
         }
     }
-
 }
+

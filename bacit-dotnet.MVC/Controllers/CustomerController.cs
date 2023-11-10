@@ -52,8 +52,8 @@ namespace bacit_dotnet.MVC.Controllers
                 return View(customer);
             }
 
-            _customerRepository.Insert(customer);
-            return RedirectToAction("ServiceOrder", "ServiceOrder", new { CustomerID = customer.CustomerID });
+            int newCustomerId = _customerRepository.Insert(customer);
+            return RedirectToAction("ServiceOrder", "ServiceOrder", new { CustomerID = newCustomerId });
         }
 
         public IActionResult Edit(int id, Customer customer)

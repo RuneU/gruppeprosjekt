@@ -33,31 +33,17 @@ namespace bacit_dotnet.MVC.Models
         }
 
 
-        public void Insert(Customer customer)
+        public int Insert(Customer customer)
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
+            string insertQuery = @"
+            INSERT INTO Customer (FirstName, LastName, CustomerEmail, Adress, ZipCode, PhoneNumber) 
+            VALUES (@FirstName, @LastName, @CustomerEmail, @Adress, @ZipCode, @PhoneNumber);
+            SELECT LAST_INSERT_ID();";
 
-            // Start a transaction in case you need to roll back if something goes wrong
-            using var transaction = dbConnection.BeginTransaction();
-
-            try
-            {
-                // Insert the Customer and get back the ID (if your table is set up to auto-increment the ID)
-                var sql = "INSERT INTO Customer (FirstName, LastName, CustomerEmail, Adress, ZipCode, PhoneNumber, CustomerID) VALUES (@FirstName, @LastName, @CustomerEmail, @Adress, @ZipCode, @PhoneNumber, @CustomerID); SELECT LAST_INSERT_ID();";
-                var customerId = dbConnection.Query<int>(sql, customer, transaction).Single();
-
-                // Now you have the CustomerId and ServiceOrderId, you can handle additional logic as needed
-
-                // If everything is fine, commit the transaction
-                transaction.Commit();
-            }
-            catch
-            {
-                // Something went wrong, rollback
-                transaction.Rollback();
-                throw;
-            }
+            int newCustomerId = dbConnection.Query<int>(insertQuery, customer).Single();
+            return newCustomerId;
         }
 
         public Customer GetById(int id)
