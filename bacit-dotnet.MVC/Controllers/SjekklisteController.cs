@@ -7,7 +7,7 @@ namespace bacit_dotnet.MVC.Controllers
     public class SjekklisteController : Controller
     {
 
-        public ActionResult Index()
+        public ActionResult Sjekkliste()
         {
 
             /*var model = new SjekklisteViewModel
