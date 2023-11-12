@@ -60,11 +60,11 @@ namespace bacit_dotnet.MVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // The model is not valid, return the same view with the current model to show validation errors
+                
                 return View(customer);
             }
 
-            // If we got this far, everything is valid and we can update the customer
+           
             _customerRepository.Update(customer);
             return RedirectToAction("Index", "Home");
         }

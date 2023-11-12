@@ -29,6 +29,7 @@ namespace bacit_dotnet.MVC.Controllers
         }
 
         
+          
 
 
         public IActionResult YourAction()
@@ -51,23 +52,27 @@ namespace bacit_dotnet.MVC.Controllers
             return View(serviceOrder);
         }
 
+        [HttpGet]
+        public ActionResult Edit(int customerId)
+        {
+            var serviceOrder = _serviceOrderrepository.GetServiceOrderByCustomerID(customerId);
+
+            if (serviceOrder == null)
+            {
+                serviceOrder = new ServiceOrder
+                {                 
+                    CustomerID = customerId
+                };
+            }
+           
+            return View(serviceOrder);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
 
 
-        /*public ActionResult Create(ServiceOrder serviceOrder)
-        {
-            if (ModelState.IsValid)
-            {
-                _serviceOrderrepository.Insert(serviceOrder);
-                // Redirect to an appropriate action, such as the details view of the newly created service order
-                return RedirectToAction("Details", new { id = serviceOrder.ServiceOrderID });
-            }
-
-            // If model state is not valid, return to the view with the current data
-            return View(serviceOrder);
-        }  */
+        
 
         public IActionResult Create(ServiceOrder serviceOrder)
         {

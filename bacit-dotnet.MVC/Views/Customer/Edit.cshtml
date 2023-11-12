@@ -141,9 +141,10 @@
                                 <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                                     Tilbake
                                 </button>
-                                <button asp-controller="ServiceOrder" asp-action="Edit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                                <a asp-controller="ServiceOrder" asp-action="Edit" asp-route-CustomerID="@Model.CustomerID" class="bg-gray-800 text-white hover:bg-gray-700 font-bold py-2 px-4 rounded inline-block">
                                     Neste
-                                </button>
+                                </a>
+
                                 <div>
                                     <input type="submit" value="Edit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" />
                                 </div>

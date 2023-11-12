@@ -48,9 +48,26 @@ namespace bacit_dotnet.MVC.Models
         }
 
 
+        public ServiceOrder GetServiceOrderByCustomerID(int customerId)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                var query = @"
+                SELECT * 
+                FROM ServiceOrder 
+                WHERE CustomerID = @CustomerID";
+                return dbConnection.Query<ServiceOrder>(query, new { CustomerID = customerId }).FirstOrDefault();
+            }
+        }
 
+        public Customer GetById(int id)
+        {
+            using IDbConnection dbConnection = Connection;
+            dbConnection.Open();
+            return dbConnection.Query<Customer>("SELECT * FROM ServiceOrder WHERE CustomerID = @CustomerID", new { CustomerID = id }).FirstOrDefault();
 
-
+        }
 
         public void Insert(ServiceOrder serviceOrder)
         {
