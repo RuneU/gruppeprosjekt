@@ -72,8 +72,6 @@ namespace bacit_dotnet.MVC.Models
         public void Insert(ServiceOrder serviceOrder)
         {
             int lastCustomerID = GetLastCustomerID();
-
-            
             serviceOrder.CustomerID = lastCustomerID;
 
             using IDbConnection dbConnection = Connection;

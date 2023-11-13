@@ -87,8 +87,10 @@ namespace bacit_dotnet.MVC.Controllers
                 return BadRequest(ModelState);
             }
 
+
             _serviceOrderrepository.Insert(serviceOrder);
-            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
+            int customerId = serviceOrder.CustomerID;
+            return RedirectToAction("Sjekkliste", "Sjekkliste", new { CustomerID = customerId });
         }
 
         public IActionResult Edit(ServiceOrder serviceOrder)

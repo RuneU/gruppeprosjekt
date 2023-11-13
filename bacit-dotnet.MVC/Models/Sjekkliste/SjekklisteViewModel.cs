@@ -7,7 +7,7 @@ namespace bacit_dotnet.MVC.Models.Sjekkliste
     public class SjekklisteViewModel
     {
         
-        
+        public int CustomerID { get; set; }
         public string DokNr { get; set; }
         public string Date { get; set; }
 

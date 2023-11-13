@@ -17,19 +17,27 @@ namespace bacit_dotnet.MVC.Controllers
         {
             _checkListrepository = checkListrepository;
         }
-        
-        public ActionResult Sjekkliste()
-        {
 
-            var CheckListViewModel = new SjekklisteViewModel();
-            return View(CheckListViewModel);
+        public IActionResult Create(int customerId)
+        {
+            var checklist = new SjekklisteViewModel { CustomerID = customerId };
+            return View(checklist);
         }
 
+        [HttpGet]
+        public ActionResult Sjekkliste(int customerId)
+        {
+            // Now, Sjekkliste should accept an int parameter for the customerId.
+            var sjekklisteViewModel = new SjekklisteViewModel { CustomerID = customerId };
+
+            
+            return View(sjekklisteViewModel);
+        }
 
 
         [HttpPost]
 
-        public IActionResult CreateCheckList(SjekklisteViewModel sjekkliste)
+        public IActionResult Create(SjekklisteViewModel sjekkliste)
         {
             if (!ModelState.IsValid)
             {
