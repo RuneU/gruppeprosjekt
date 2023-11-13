@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using bacit_dotnet.MVC.Models.DineSaker;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.EntityFrameworkCore;
+using bacit_dotnet.MVC.Views.FormsMain;
 
 namespace bacit_dotnet.MVC.Controllers
 {
@@ -22,8 +24,20 @@ namespace bacit_dotnet.MVC.Controllers
 
         public IActionResult Index()
         {
-            var customers = _customerRepository.GetAll();
-            return View(customers);
+            var viewModel = new HomeViewModel
+            {
+                
+                Customers = _customerRepository.GetAll(),
+                ServiceOrders = _serviceOrderRepository.GetAll()
+            };
+            if (viewModel.Customers == null || viewModel.ServiceOrders == null)
+            {
+                
+                viewModel.Customers = new List<Customer>();
+                viewModel.ServiceOrders = new List<ServiceOrder>();
+            }
+
+            return View(viewModel);
         }
 
         public IActionResult Create()

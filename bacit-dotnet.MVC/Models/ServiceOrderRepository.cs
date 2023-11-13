@@ -92,38 +92,37 @@ namespace bacit_dotnet.MVC.Models
 
             dbConnection.Execute(insertQuery, serviceOrder);
         }
-        /* public void Insert(ServiceOrder serviceOrder)
+
+        public bool Update(ServiceOrder serviceOrder)
+        {
+            using (IDbConnection dbConnection = Connection)
          {
-             using (IDbConnection dbConnection = Connection)
-             {
-                 dbConnection.Open();
+           dbConnection.Open();
+           var affectedRows = dbConnection.Execute(@"
+            UPDATE ServiceOrder 
+            SET CustomerID = @CustomerID, 
+                CreatedBy = @CreatedBy, 
+                DateReceived = @DateReceived, 
+                ModelYear = @ModelYear, 
+                ProductType = @ProductType, 
+                SerialNumber = @SerialNumber, 
+                ServiceType = @ServiceType, 
+                WhatIsAgreedWithCustomer = @WhatIsAgreedWithCustomer, 
+                RepairDescription = @RepairDescription, 
+                IncludedParts = @IncludedParts, 
+                DateCompleted = @DateCompleted, 
+                WorkingHours = @WorkingHours, 
+                ReplacedPartsReturned = @ReplacedPartsReturned, 
+                ShippingMethod = @ShippingMethod, 
+                Status = @Status, 
+                Subject = @Subject, 
+                BookedServiceToWeek = @BookedServiceToWeek, 
+                AgreedDeliveryDateWithCustomer = @AgreedDeliveryDateWithCustomer
+            WHERE ServiceOrderID = @ServiceOrderID", serviceOrder);
 
-                 using (var transaction = dbConnection.BeginTransaction())
-                 {
-                     try
-                     {
-                         // Sjekk om CustomerID eksisterer i Customer-tabellen
-                         var customer = dbConnection.QueryFirstOrDefault<Customer>("SELECT * FROM Customer WHERE CustomerID = @CustomerID", new { serviceOrder.CustomerID });
-
-                         // Hvis CustomerID ikke eksisterer, kan du kaste en feil eller behandle den på en annen måte
-                         if (customer == null)
-                         {
-                             throw new Exception("Ugyldig CustomerID. Kunden eksisterer ikke.");
-                         }
-
-                         // Legg til rad i ServiceOrder-tabellen
-                         dbConnection.Execute("INSERT INTO ServiceOrder (CustomerID, CreatedBy, DateReceived, ModelYear, ProductType, SerialNumber, ServiceType, WhatIsAgreedWithCustomer, RepairDescription, IncludedParts, DateCompleted, WorkingHours, ReplacedPartsReturned, ShippingMethod, Status, Subject, BookedServiceToWeek, AgreedDeliveryDateWithCustomer) VALUES (@CustomerID, @CreatedBy, @DateReceived, @ModelYear, @ProductType, @SerialNumber, @ServiceType, @WhatIsAgreedWithCustomer, @RepairDescription, @IncludedParts, @DateCompleted, @WorkingHours, @ReplacedPartsReturned, @ShippingMethod, @Status, @Subject, @BookedServiceToWeek, @AgreedDeliveryDateWithCustomer)", serviceOrder);
-
-                         transaction.Commit();
-                     }
-                     catch (Exception ex)
-                     {
-                         transaction.Rollback();
-                         Console.WriteLine("Feil ved innsetting av ServiceOrder: " + ex.Message);
-                     }
-                 }
-             }
-         }*/
+        return affectedRows > 0;
+       }
+      }
 
     }
 }

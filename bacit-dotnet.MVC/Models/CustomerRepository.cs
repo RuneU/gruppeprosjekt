@@ -56,6 +56,7 @@ namespace bacit_dotnet.MVC.Models
 
         public bool Update(Customer customer)
         {
+
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();

@@ -1,10 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@{
+﻿@{
     ViewData["Title"] = "bacit_dotnet.MVC";
+    var statusList = ViewBag.StatusList as List<SelectListItem>;
+
 }
 @model bacit_dotnet.MVC.Models.ServiceOrder
 
@@ -50,8 +47,9 @@
             @*@using (Html.BeginForm("Save", "ServiceOrder", FormMethod.Post))*@
 
             @Html.AntiForgeryToken()
-            <form asp-action="Edit" method="post">
+            <form asp-action="Edit" asp-controller="ServiceOrder" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <input type="hidden" asp-for="CustomerID" />
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label asp-for="CreatedBy" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opprettet av</label>
