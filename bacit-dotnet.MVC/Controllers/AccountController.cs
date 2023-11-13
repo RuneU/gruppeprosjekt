@@ -8,7 +8,7 @@ using bacit_dotnet.MVC.Models.Account;
 using bacit_dotnet.MVC.Entities;
 using bacit_dotnet.MVC.Repositories;
 
-namespace bacit_dotnet.MVC.Controllers
+/*namespace bacit_dotnet.MVC.Controllers
 {
     public class AccountController : Controller
     {
@@ -132,7 +132,7 @@ namespace bacit_dotnet.MVC.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        //
+        /*
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -549,6 +549,7 @@ namespace bacit_dotnet.MVC.Controllers
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
-        }
+        } 
     }
 }
+*/

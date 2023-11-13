@@ -3,7 +3,8 @@
 *@
 @{
 }
-@model bacit_dotnet.MVC.Models.Home.HomeIndexViewModel
+@model bacit_dotnet.MVC.Models.HomeViewModel
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,74 +15,99 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
       
-        <div class="justify-center-left ml-40 mt-10 flex relative block">
+        
+        <div class="w-full fixed top-0 left-64 flex items-center bg-gray-800 p-5">
             <span class="sr-only">Search</span>
             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                 <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"><!-- ... --></svg>
             </span>
-            <form asp-action="Search" asp-controller="Home" method="get" class="flex items-center">
-                <input type="text" class="placeholder:italic placeholder:text-slate-400 block bg-white w-49 border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." name="term" id="term" required />
-                <button type="submit" class="ml-2 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-4 rounded-md bg-ease-in duration-300" value="Search">
-                    Søk
+            <form asp-action="Search" asp-controller="Home" method="get" class="flex items-center relative w-full max-w-xs">
+                <input type="text" class="w-full pr-10 pl-3 py-2 border rounded-full text-sm focus:outline-none focus:border-gray-500" placeholder="Søk i tabellen..." name="term" id="term" required>
+                <button type="submit" class="absolute inset-y-0 right-0 flex items-center pr-3" value="Search">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-6a8 8 0 11-16 0 8 8 0 0116 0z"></path>
+                    </svg>
                 </button>
-            </form>
-            <h3 class="ml-40 mt-4 text-gray-400 font-semibold text-lg">Søket etter: @ViewBag.Term</h3>
 
-            <a asp-area="" asp-controller="KundeInformasjon" asp-action="KundeInformasjon" class="absolute top-0 right-20 h-10 w-24 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-6 rounded-md bg-ease-in duration-300">
-                Ny sak
-            </a>
-        
+            </form>
+            <div class="flex-items-center ml-96">
+                
+                <a asp-area=""  asp-controller="Customer" asp-action="Customer" class="flex items-center text-gray-400 p-2 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                    Opprett en ny sak
+                    <i class="fas fa-plus ml-3"></i>
+                </a>
+                
+            </div>
+
+            
+
         </div>
 
-        
-        <div class="justify-center mt-10 max-w-4xl mx-auto">
+
+        <div class="justify-center table-fixed mt-40 max-w-5xl mx-auto">
 
             <table class="min-w-full table-auto">
 
 
                 <thead>
                 <tr>
-                    <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100">Sak.nr</th>
-                    <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100">Emne</th>
-                    <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100">Name</th>
-                    <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100">Dato</th>
-                    <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100">Status</th>
+                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Sak.nr</th>
+                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Telefon</th>
+                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center cursor-pointer">Name</th>
+                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Dato</th>
+                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Status</th>
                 </tr>
                 </thead>
                
                 <tbody>
-                <tr class="mt-5 bg-gray-100">
-                    <td class="px-4 py-2">#000001</td>
-                    <td class="px-4 py-2">Lorem</td>
-                    <td class="px-4 py-2">Ola</td>
-                    <td class="px-4 py-2">03/10/2023</td>
-                    <td class="px-4 py-2">Ferdig</td>
-                </tr>
-                <tr class="mt-5 bg-gray-200">
-                    <td class="px-4 py-2">#000002</td>
-                    <td class="px-4 py-2">Lorem</td>
-                    <td class="px-4 py-2">Ola nordmann</td>
-                    <td class="px-4 py-2">23/10/2023</td>
-                    <td class="px-4 py-2">Under arbeid</td>
+                    
 
-                </tr>
-                <tr class="mt-5 bg-gray-100">
-                    <td class="px-4 py-2">#000003</td>
-                    <td class="px-4 py-2">Lorem</td>
-                    <td class="px-4 py-2">Ola vestmann</td>
-                    <td class="px-4 py-2">23/10/2023</td>
-                    <td class="px-4 py-2">Under arbeid</td>
+                        @foreach (var customer in Model.Customers)
+                        {
+                            <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerID })'">
+                                <td class="text-center border p-2">@customer.CustomerID</td>
+                                <td class="text-center border p-2">@customer.PhoneNumber</td>
+                                <td class="text-center border p-2">@customer.FullName</td>
 
-                </tr>
+                            </tr>
+
+                        @foreach (var serviceorder in Model.ServiceOrders.Where(o => o.CustomerID == customer.CustomerID))
+                        {
+                            <tr>
+                                <td class="text-center border p-2">@serviceorder.Status</td>
+                            </tr>
+                        }
+                        }
+                    
+
 
                 </tbody>
             </table>
 
         </div>
     </header>
+    <script>
+        document.getElementById("sortName").addEventListener("click", function () {
+            const table = document.querySelector("tbody");
+            const rows = Array.from(table.rows);
+
+            rows.sort((a, b) => {
+                const nameA = a.cells[2].innerText.toUpperCase();  
+                const nameB = b.cells[2].innerText.toUpperCase();
+
+                if (nameA < nameB) return -1;
+                if (nameA > nameB) return 1;
+                return 0;
+            });
+
+            
+            rows.forEach(row => table.appendChild(row));
+        });
+    </script>
 </body>
 </html>

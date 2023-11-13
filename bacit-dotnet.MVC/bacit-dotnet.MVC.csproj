@@ -2,12 +2,16 @@
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
-		<Nullable>enable</Nullable>
+		<Nullable>disable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>bacit_dotnet.MVC</RootNamespace>
 		<UserSecretsId>52d02d82-6a5b-4ba1-8b2c-e266a15b5756</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Remove="Views\ServiceOrder\CreateServiceOrder.cshtml" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Dapper" Version="2.0.143" />
@@ -30,6 +34,8 @@
 
 	<ItemGroup>
 	  <Folder Include="Migrations\" />
+	  <Folder Include="Models\Home\" />
+	  <Folder Include="wwwroot\images\" />
 	</ItemGroup>
 
 	<ItemGroup>

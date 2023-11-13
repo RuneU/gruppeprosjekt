@@ -1,40 +1,55 @@
 ﻿using bacit_dotnet.MVC.DataAccess;
 using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Repositories;
-using bacit_dotnet.MVC.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using bacit_dotnet.MVC.Models.DineSaker;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.EntityFrameworkCore;
+using bacit_dotnet.MVC.Views.FormsMain;
 
 namespace bacit_dotnet.MVC.Controllers
 {
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly CustomerRepository _customerRepository;
+        private readonly ServiceOrderRepository _serviceOrderRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(CustomerRepository customerRepository, ServiceOrderRepository serviceOrderRepository)
         {
-            _logger = logger;
+            _customerRepository = customerRepository;
+            _serviceOrderRepository = serviceOrderRepository;
         }
 
         public IActionResult Index()
         {
-            var model = new HomeIndexViewModel
+            var viewModel = new HomeViewModel
             {
-                Saksnummer = "",
-                Navn = "",
-                Emne = "",
-                Dato = "",
-                Status = "",
+                
+                Customers = _customerRepository.GetAll(),
+                ServiceOrders = _serviceOrderRepository.GetAll()
+            };
+            if (viewModel.Customers == null || viewModel.ServiceOrders == null)
+            {
+                
+                viewModel.Customers = new List<Customer>();
+                viewModel.ServiceOrders = new List<ServiceOrder>();
             }
-            ;
-            return View(model);
+
+            return View(viewModel);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Save(HomeIndexViewModel model)
+        public IActionResult Save(HomeViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -47,6 +62,11 @@ namespace bacit_dotnet.MVC.Controllers
 
             return View("Index", model);
         }
+
+        
+
+        
+
         public IActionResult Search(string term)
         {
             ViewBag.Term = term;
