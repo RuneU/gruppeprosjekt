@@ -3,7 +3,8 @@
 *@
 @{
 }
-@model IEnumerable<bacit_dotnet.MVC.Models.Customer>
+@model bacit_dotnet.MVC.Models.HomeViewModel
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,40 +65,26 @@
                 </thead>
                
                 <tbody>
-
-
-                    @foreach (var customer in Model)
-                    {
-                        <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerId })'">
-                            <td class="text-center border p-2">@customer.CustomerId</td>
-                            <td class="text-center border p-2">@customer.PhoneNumber</td>
-                            <td class="text-center border p-2">@customer.FullName</td>
-                        </tr>
-                    }
                     
-                <tr class="mt-5 bg-gray-100">
-                   <td class="px-4 py-2 text-center">#000001</td>
-                   <td class="px-4 py-2 text-center">Lorem</td>
-                   <td class="px-4 py-2 text-center">Arnold</td>
-                   <td class="px-4 py-2 text-center">03/10/2023</td>
-                   <td class="px-4 py-2 text-center">Ferdig</td>
-                </tr>
-                <tr class="mt-5 bg-gray-200">
-                   <td class="px-4 py-2 text-center">#000002</td>
-                   <td class="px-4 py-2 text-center">Lorem</td>
-                   <td class="px-4 py-2 text-center">Ola nordmann</td>
-                   <td class="px-4 py-2 text-center">23/10/2023</td>
-                   <td class="px-4 py-2 text-center">Under arbeid</td>
 
-                </tr>
-                <tr class="mt-5 bg-gray-100">
-                   <td class="px-4 py-2 text-center">#000003</td>
-                   <td class="px-4 py-2 text-center">Lorem</td>
-                   <td class="px-4 py-2 text-center">Benjamin</td>
-                   <td class="px-4 py-2 text-center">23/10/2023</td>
-                   <td class="px-4 py-2 text-center">Under arbeid</td>
+                        @foreach (var customer in Model.Customers)
+                        {
+                            <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerID })'">
+                                <td class="text-center border p-2">@customer.CustomerID</td>
+                                <td class="text-center border p-2">@customer.PhoneNumber</td>
+                                <td class="text-center border p-2">@customer.FullName</td>
 
-                </tr>
+                            </tr>
+
+                        @foreach (var serviceorder in Model.ServiceOrders.Where(o => o.CustomerID == customer.CustomerID))
+                        {
+                            <tr>
+                                <td class="text-center border p-2">@serviceorder.Status</td>
+                            </tr>
+                        }
+                        }
+                    
+
 
                 </tbody>
             </table>

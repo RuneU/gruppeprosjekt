@@ -82,7 +82,7 @@
 
             @Html.AntiForgeryToken()
 
-            <form asp-action="Create" method="post">
+            <form asp-action="Create" asp-controller="Customer" method="post">
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="grid gap-6 mb-6 md:grid-cols-2">

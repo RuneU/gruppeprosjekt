@@ -16,14 +16,21 @@ namespace bacit_dotnet.MVC.Controllers
         {
             _serviceOrderrepository = serviceOrderrepository;
         }
-      
+
         public IActionResult ServiceOrder()
         {
             YourAction();
-            var serviceOrder = _serviceOrderrepository.GetAll();
-            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
+            int lastCustomerID = _serviceOrderrepository.GetLastCustomerID();
+            var serviceOrder = new ServiceOrder { CustomerID = lastCustomerID };
 
+            var serviceOrders = _serviceOrderrepository.GetAll();
+
+            return View("~/Views/ServiceOrder/ServiceOrder.cshtml", serviceOrder);
         }
+
+
+
+
 
         public IActionResult YourAction()
         {
@@ -34,17 +41,37 @@ namespace bacit_dotnet.MVC.Controllers
         new SelectListItem { Value = "Vent eksternt", Text = "På vent eksternt" },
         new SelectListItem { Value = "UnderArbeid", Text = "Under arbeid" },
         new SelectListItem { Value = "Lukket", Text = "Lukket" },
-        // Legg til flere statusalternativer om nødvendig
         };
             return PartialView("~/Views/ServiceOrder/StatusDropdown.cshtml");
         }
 
+        public ActionResult Create(int customerId)
+        {
+            var serviceOrder = new ServiceOrder { CustomerID = customerId };
+            return View(serviceOrder);
+        }
 
+        [HttpGet]
+        public ActionResult Edit(int customerId)
+        {
+            YourAction();
+            var serviceOrder = _serviceOrderrepository.GetServiceOrderByCustomerID(customerId);
 
+            if (serviceOrder == null)
+            {
+                serviceOrder = new ServiceOrder
+                {
+                    CustomerID = customerId
+                };
+            }
+
+            return View(serviceOrder);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateServiceOrder(ServiceOrder serviceOrder)
+
+        public IActionResult Create(ServiceOrder serviceOrder)
         {
             if (!ModelState.IsValid)
             {
@@ -63,6 +90,38 @@ namespace bacit_dotnet.MVC.Controllers
             _serviceOrderrepository.Insert(serviceOrder);
             return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
         }
-    }
 
+        public IActionResult Edit(ServiceOrder serviceOrder)
+        {
+            if (!ModelState.IsValid)
+            {
+                foreach (var key in ModelState.Keys)
+                {
+                    var state = ModelState[key];
+                    if (state.Errors.Any())
+                    {
+                        foreach (var error in state.Errors)
+                        {
+                            
+                            Debug.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
+                        }
+                    }
+                }
+
+                
+                return View(serviceOrder);
+            }
+            bool updateSuccess = _serviceOrderrepository.Update(serviceOrder);
+            if (updateSuccess)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                return View(serviceOrder);
+            }
+        }
+    }
 }
+
