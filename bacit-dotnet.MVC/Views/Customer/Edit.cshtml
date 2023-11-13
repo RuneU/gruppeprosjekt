@@ -98,7 +98,7 @@
             <form asp-action="Edit" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
-                    <input type="hidden" asp-for="CustomerId" />
+                    <input type="hidden" asp-for="CustomerID" />
                     <div>
                         <label asp-for="FirstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fornavn</label>
                         <input asp-for="FirstName" type="text" id="FirstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon" required>
@@ -141,9 +141,10 @@
                                 <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                                     Tilbake
                                 </button>
-                                <button asp-controller="ServiceOrder" asp-action="Edit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                                <a asp-controller="ServiceOrder" asp-action="Edit" asp-route-CustomerID="@Model.CustomerID" class="bg-gray-800 text-white hover:bg-gray-700 font-bold py-2 px-4 rounded inline-block">
                                     Neste
-                                </button>
+                                </a>
+
                                 <div>
                                     <input type="submit" value="Edit" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" />
                                 </div>

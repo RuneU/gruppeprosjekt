@@ -58,14 +58,6 @@
 
 
 
-    <!-- Arbeidsordre -->
-    <div class="absolute top-48 left-32 p-6 bg-white border rounded-lg w-80">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">Arbeids ordre</h2>
-            <button asp-controller="WorkOrder" asp-action="WorkOrder" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded-full">Rediger</button>
-        </div>
-    </div>
-
     <!-- Sjekkliste for service på vinsj -->
     <div class="absolute top-80 left-32 p-6 bg-white border rounded-lg w-80">
         <div class="flex justify-between items-center mb-4">
@@ -90,7 +82,7 @@
 
             @Html.AntiForgeryToken()
 
-            <form asp-action="Create" method="post">
+            <form asp-action="Create" asp-controller="Customer" method="post">
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
