@@ -6,6 +6,7 @@ using MySqlConnector;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
 
 namespace bacit_dotnet.MVC.Models
@@ -47,6 +48,13 @@ namespace bacit_dotnet.MVC.Models
             return lastCustomerID;
         }
 
+        public ServiceOrder GetServiceOrderByID(int serviceOrderId)
+        {
+            using IDbConnection dbConnection = Connection;
+            dbConnection.Open();
+            string query = "SELECT * FROM ServiceOrder WHERE ServiceOrderID = @ServiceOrderID";
+            return dbConnection.Query<ServiceOrder>(query, new { ServiceOrderID = serviceOrderId }).FirstOrDefault();
+        }
 
         public ServiceOrder GetServiceOrderByCustomerID(int customerId)
         {
@@ -65,7 +73,7 @@ namespace bacit_dotnet.MVC.Models
         {
             using IDbConnection dbConnection = Connection;
             dbConnection.Open();
-            return dbConnection.Query<Customer>("SELECT * FROM ServiceOrder WHERE CustomerID = @CustomerID", new { CustomerID = id }).FirstOrDefault();
+            return dbConnection.Query<Customer>("SELECT * FROM ServiceOrder WHERE ServiceOrderID = @ServiceOrderID", new { ServiceOrderID = id }).FirstOrDefault();
 
         }
 
@@ -93,8 +101,9 @@ namespace bacit_dotnet.MVC.Models
 
         public bool Update(ServiceOrder serviceOrder)
         {
-            using (IDbConnection dbConnection = Connection)
-         {
+           
+        using (IDbConnection dbConnection = Connection)
+        {
            dbConnection.Open();
            var affectedRows = dbConnection.Execute(@"
             UPDATE ServiceOrder 
@@ -118,9 +127,13 @@ namespace bacit_dotnet.MVC.Models
                 AgreedDeliveryDateWithCustomer = @AgreedDeliveryDateWithCustomer
             WHERE ServiceOrderID = @ServiceOrderID", serviceOrder);
 
-        return affectedRows > 0;
-       }
-      }
+                return affectedRows > 0;
+               }
+
+            }
+            
+
+
+        }
 
     }
-}
