@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bacit_dotnet.MVC.Controllers
@@ -7,6 +8,7 @@ namespace bacit_dotnet.MVC.Controllers
     [ApiController]
     public class RESTController : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         public IActionResult  Get()
         {

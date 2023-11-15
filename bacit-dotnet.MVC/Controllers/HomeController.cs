@@ -7,9 +7,11 @@ using bacit_dotnet.MVC.Models.DineSaker;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.EntityFrameworkCore;
 using bacit_dotnet.MVC.Views.FormsMain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace bacit_dotnet.MVC.Controllers
 {
+    [Authorize]
 
     public class HomeController : Controller
     {

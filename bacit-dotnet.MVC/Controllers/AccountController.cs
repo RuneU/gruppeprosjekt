@@ -8,14 +8,16 @@ using bacit_dotnet.MVC.Models.Account;
 using bacit_dotnet.MVC.Entities;
 using bacit_dotnet.MVC.Repositories;
 
-/*namespace bacit_dotnet.MVC.Controllers
+namespace bacit_dotnet.MVC.Controllers
 {
+    [Authorize]
+
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailSender _emailSender;
-        private readonly IUserRepository userRepository;
+        //private readonly IUserRepository userRepository;
         private readonly ILogger _logger;
 
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender emailSender, ILoggerFactory loggerFactory, IUserRepository userRepository)
@@ -23,7 +25,7 @@ using bacit_dotnet.MVC.Repositories;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
-            this.userRepository = userRepository;
+            //this.userRepository = userRepository;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
@@ -92,17 +94,17 @@ using bacit_dotnet.MVC.Repositories;
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            ViewData["ReturnUrl"] = "Log in";
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true, LockoutEnabled = false,LockoutEnd = null };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    userRepository.Add(new UserEntity
-                    {
-                        Email = model.Email
-                    });
+                    //userRepository.Add(new UserEntity
+                    //{
+                    //    Email = model.Email
+                    //});
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                     // Send an email with this link
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -115,7 +117,7 @@ using bacit_dotnet.MVC.Repositories;
                     _logger.LogInformation(3, "User created a new account with password.");
 
 
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal("Log in");
                 }
                 AddErrors(result);
             }
@@ -129,10 +131,10 @@ using bacit_dotnet.MVC.Repositories;
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(AccountController.Login), "Account");
         }
 
-        /*
+        //
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -549,7 +551,6 @@ using bacit_dotnet.MVC.Repositories;
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
-        } 
+        }
     }
 }
-*/

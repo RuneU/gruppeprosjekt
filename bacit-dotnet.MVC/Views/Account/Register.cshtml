@@ -2,42 +2,53 @@
 @model RegisterViewModel
 @{
     ViewData["Title"] = "Register";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - NøstedWeb</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true"/>
+</head>
+<body>
+<div class="absolute inset-y-0 right-0 left-1/2 text-center bg-gray-100">
+    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            Opprett ny bruker
+        </h1>
+        <form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal" role="form">
+            <div>
+                <div asp-validation-summary="ModelOnly" class="text-red-500">Email</div>
+                <label asp-for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                <input asp-for="Email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                <span asp-validation-for="Email" class="text-red-500"></span>
+            </div>
+            <div>
+                <label asp-for="Password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Passord</label>
+                <input asp-for="Password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                <span asp-validation-for="Password" class="text-red-500"></span>
+            </div>
+            <div>
+                <label asp-for="ConfirmPassword" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                <input asp-for="ConfirmPassword"placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                <span asp-validation-for="ConfirmPassword" class="text-red-500"></span>
+            </div>
 
-<h1>@ViewData["Title"].</h1>
+            <button type="submit" asp-route-returnurl="@ViewData["ReturnUrl"]" class="w-full text-gray-500 bg-gray-800 hover:text-yellow-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" >Request Access</button>
 
-<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
-    <h4>Create a new account.</h4>
-    <hr />
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Email" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Register</button>
-        </div>
-    </div>
-</form>
+</div>
+<div class="flex items-center justify-center h-screen absolute inset-y-0 left-0 right-1/2 bg-gray-800">
+    <h1 class="text-gray-500 font-mono text-6xl">
+        Nøsted&
+    </h1>
+</div>
+</body>
+</html>
 
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
+

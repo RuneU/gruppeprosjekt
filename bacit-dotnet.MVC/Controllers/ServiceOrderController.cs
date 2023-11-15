@@ -3,13 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Views.FormsMain;
+using Microsoft.AspNetCore.Authorization;
 using NuGet.Protocol.Core.Types;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace bacit_dotnet.MVC.Controllers
 {
+    [Authorize]
+
     public class ServiceOrderController : Controller
     {
+
         private readonly ServiceOrderRepository _serviceOrderrepository;
 
         public ServiceOrderController(ServiceOrderRepository serviceOrderrepository)
