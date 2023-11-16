@@ -6,16 +6,11 @@ namespace bacit_dotnet.MVC.Models.Sjekkliste
 {
     public class SjekklisteViewModel
     {
-        
+        public int CheckListID { get; set; }
         public int CustomerID { get; set; }
         public string DokNr { get; set; }
         public string Date { get; set; }
-
-        
-        
         public string ApprovedBy {  get; set; }
-
-
         public string CheckClutch { get; set; }
         public string WearBrakes { get; set; }
         public string CheckDrums { get; set; }

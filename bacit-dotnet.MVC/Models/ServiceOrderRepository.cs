@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-//using MySql.Data.MySqlClient;
 using MySqlConnector;
 using System.Collections.Generic;
 using System.Data;
@@ -131,8 +130,6 @@ namespace bacit_dotnet.MVC.Models
                }
 
             }
-            
-
 
         }
 

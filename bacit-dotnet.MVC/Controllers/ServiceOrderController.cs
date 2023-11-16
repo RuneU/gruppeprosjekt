@@ -28,9 +28,11 @@ namespace bacit_dotnet.MVC.Controllers
             return View("~/Views/ServiceOrder/ServiceOrder.cshtml", serviceOrder);
         }
 
-
-
-
+        public IActionResult RedirectToChecklist(int customerId)
+        {
+            
+            return RedirectToAction("Edit", "Sjekkliste", new { CustomerID = customerId });
+        }
 
         public IActionResult YourAction()
         {

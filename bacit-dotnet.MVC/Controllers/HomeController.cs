@@ -1,12 +1,18 @@
-﻿using bacit_dotnet.MVC.DataAccess;
+﻿
 using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
 using System.Diagnostics;
 using bacit_dotnet.MVC.Models.DineSaker;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.EntityFrameworkCore;
 using bacit_dotnet.MVC.Views.FormsMain;
+using System.Data;
+using Dapper;
+using System.Linq;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace bacit_dotnet.MVC.Controllers
 {
@@ -15,18 +21,30 @@ namespace bacit_dotnet.MVC.Controllers
     {
         private readonly CustomerRepository _customerRepository;
         private readonly ServiceOrderRepository _serviceOrderRepository;
+        private readonly IConfiguration _config;
 
-        public HomeController(CustomerRepository customerRepository, ServiceOrderRepository serviceOrderRepository)
+        
+        public HomeController(CustomerRepository customerRepository, ServiceOrderRepository serviceOrderRepository, IConfiguration config)
         {
             _customerRepository = customerRepository;
             _serviceOrderRepository = serviceOrderRepository;
+            _config = config;
+
+        }
+
+        public IDbConnection Connection
+        {
+            get
+            {
+                return new MySqlConnection(_config.GetConnectionString("DefaultConnection"));
+            }
         }
 
         public IActionResult Index()
         {
             var viewModel = new HomeViewModel
             {
-                
+    
                 Customers = _customerRepository.GetAll(),
                 ServiceOrders = _serviceOrderRepository.GetAll()
             };
@@ -39,38 +57,61 @@ namespace bacit_dotnet.MVC.Controllers
 
             return View(viewModel);
         }
-
+        
         public IActionResult Create()
         {
             return View();
         }
 
-        
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Save(HomeViewModel model)
+        public IActionResult Search(string searchBy, string searchValue)
         {
-            if (ModelState.IsValid)
+            using (IDbConnection dbConnection = Connection)
             {
+                dbConnection.Open();
 
-                var s = "ineedabreakpoint";
+                // Initialize the base query
+                var query = "SELECT * FROM Customer WHERE ";
 
+                // Adjust the query based on the search criteria selected
+                switch (searchBy)
+                {
+                    case "Navn":
+                        query += "FirstName LIKE @SearchValue";
+                        break;
+                    case "Telefon":
+                        query += "PhoneNumber LIKE @SearchValue";
+                        break;
+                    case "Status":
+                        // Assuming you have a status column in your Customers table
+                        query += "Status LIKE @SearchValue";
+                        break;
+                    default:
+                        // If no search type is selected, default to Name
+                        query += "FirstName LIKE @SearchValue";
+                        break;
+                }
+               
+                var customers = dbConnection.Query<Customer>(query, new { SearchValue = $"%{searchValue}%" }).ToList();
 
+                dbConnection.Close();
+
+                var viewModel = new HomeViewModel
+                {
+                    Customers = customers,
+                    
+                };
+
+                return View("Index", viewModel);
             }
-
-
-            return View("Index", model);
         }
 
-        
-
-        
-
-        public IActionResult Search(string term)
-        {
-            ViewBag.Term = term;
-            return View("Index");
-        }
+        // Your other actions...
     }
+
+
 }
+
+
+
+
+    
