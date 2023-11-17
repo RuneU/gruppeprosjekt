@@ -17,7 +17,7 @@ namespace bacit_dotnet.MVC.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailSender _emailSender;
-        //private readonly IUserRepository userRepository;
+        private readonly IUserRepository userRepository;
         private readonly ILogger _logger;
 
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender emailSender, ILoggerFactory loggerFactory, IUserRepository userRepository)
@@ -25,7 +25,7 @@ namespace bacit_dotnet.MVC.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
-            //this.userRepository = userRepository;
+            this.userRepository = userRepository;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
@@ -79,8 +79,8 @@ namespace bacit_dotnet.MVC.Controllers
 
         //
         // GET: /Account/Register
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -89,8 +89,8 @@ namespace bacit_dotnet.MVC.Controllers
 
         //
         // POST: /Account/Register
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
@@ -101,24 +101,20 @@ namespace bacit_dotnet.MVC.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    
                     if (model.IsAdmin)
                     {
-                        await _userManager.AddToRoleAsync(user, "Admininistrator");
+                        await _userManager.AddToRoleAsync(user, "Administrator");
                     }
 
-                    if (model.IsMechanic)
+                    
+                    userRepository.Add(new UserEntity
                     {
-                        await _userManager.AddToRoleAsync(user, "Mechanic");
-                    }
-                    
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    
-
-                    
-                    _logger.LogInformation(3, "User created a new account with password.");
-
-
-                    return RedirectToLocal("Log in");
+                        Email = model.Email
+                        
+                    });
+                    // Send an email with this link
+                   
                 }
                 AddErrors(result);
             }

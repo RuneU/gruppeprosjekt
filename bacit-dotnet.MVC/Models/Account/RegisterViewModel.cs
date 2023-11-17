@@ -25,5 +25,4 @@ public class RegisterViewModel
     
     public bool IsAdmin { get; set; }
     
-    public bool IsMechanic{ get; set; }
 }
