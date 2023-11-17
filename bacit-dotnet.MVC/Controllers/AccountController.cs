@@ -113,8 +113,10 @@ namespace bacit_dotnet.MVC.Controllers
                         Email = model.Email
                         
                     });
-                    // Send an email with this link
-                   
+                    
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    return RedirectToLocal("Log in");
                 }
                 AddErrors(result);
             }
