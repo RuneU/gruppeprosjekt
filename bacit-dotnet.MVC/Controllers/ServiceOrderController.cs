@@ -106,25 +106,21 @@ namespace bacit_dotnet.MVC.Controllers
                 return View(serviceOrder);
             }
 
-            // Assuming 'serviceOrder' already contains the correct CustomerID
-            // and the unique identifier ServiceOrderID for the record to be updated.
-
-            // Fetch the existing service order from the database
+           
             var existingServiceOrder = _serviceOrderrepository.GetServiceOrderByID(serviceOrder.ServiceOrderID);
 
             if (existingServiceOrder == null)
             {
-                ModelState.AddModelError("", "Service Order not found.");
+                ModelState.AddModelError("", "Service Order ikke funnet.");
                 return View(serviceOrder);
             }
 
-            // Update the existing service order with the new values from the form
             UpdateServiceOrderFromForm(existingServiceOrder, serviceOrder);
 
             bool updateSuccess = _serviceOrderrepository.Update(existingServiceOrder);
             if (updateSuccess)
             {
-                return RedirectToAction("Index", "Home"); // Use the action and controller names
+                return RedirectToAction("Index", "Home"); 
             }
             else
             {

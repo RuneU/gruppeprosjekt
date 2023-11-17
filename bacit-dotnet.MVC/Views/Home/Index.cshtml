@@ -28,14 +28,14 @@
             </span>
             
             @using (Html.BeginForm("Search", "Home", FormMethod.Get))
-{
+{   // Dette er ikke beskyttet for Xss beskyttelse, det kommer snart
     <table>
         <tr>
             <td>
                 <span><b>Search By: </b></span>
-                @Html.RadioButton("searchBy", "Navn", true) <text> Product Name </text>
-                @Html.RadioButton("searchBy", "Telefon") <text> Price </text>
-                @Html.RadioButton("searchBy", "Status") <text> Qty </text>
+                @Html.RadioButton("searchBy", "Navn", true) <text> navn </text>
+                @Html.RadioButton("searchBy", "Telefon") <text> Telefon </text>
+                @Html.RadioButton("searchBy", "Status") <text> Status </text>
             </td>
         </tr>
         <tr>
