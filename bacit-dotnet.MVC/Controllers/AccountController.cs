@@ -89,7 +89,7 @@ namespace bacit_dotnet.MVC.Controllers
 
         //
         // POST: /Account/Register
-        [Authorize(Roles = "Administrator")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
