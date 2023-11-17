@@ -4,10 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using bacit_dotnet.MVC.Models;
-using bacit_dotnet.MVC.Repositories;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using MySqlConnector;
 using System.Data;
 
@@ -27,8 +23,7 @@ namespace bacit_dotnet.MVC
 
             SetupDataConnections(builder);
 
-
-
+            
             // Configure the database connection.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddScoped<IDbConnection>(_ => new MySqlConnection(connectionString));
@@ -56,6 +51,7 @@ namespace bacit_dotnet.MVC
             app.UseStaticFiles();
 
             app.UseRouting();
+            
             UseAuthentication(app);
             app.UseAuthorization();
 

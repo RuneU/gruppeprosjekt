@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace bacit_dotnet.MVC.Controllers
 {
-        [Authorize]
+    [Authorize("Administrator")]
 
     public class CustomerController : Controller
     {

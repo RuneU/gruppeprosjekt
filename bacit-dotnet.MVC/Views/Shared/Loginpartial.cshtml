@@ -1,0 +1,16 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form>
+        @Html.AntiForgeryToken()
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <span class="navbar-text">@UserManager.GetUserName(User) </span>
+            </li>
+            
+        </ul>
+    </form>
+}
