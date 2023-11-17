@@ -28,9 +28,11 @@ namespace bacit_dotnet.MVC.Controllers
             return View("~/Views/ServiceOrder/ServiceOrder.cshtml", serviceOrder);
         }
 
-
-
-
+        public IActionResult RedirectToChecklist(int customerId)
+        {
+            
+            return RedirectToAction("Edit", "Sjekkliste", new { CustomerID = customerId });
+        }
 
         public IActionResult YourAction()
         {
@@ -83,45 +85,71 @@ namespace bacit_dotnet.MVC.Controllers
                     }
                 }
 
-                // Return a 400 Bad Request status code for invalid input
+                
                 return BadRequest(ModelState);
             }
 
+
             _serviceOrderrepository.Insert(serviceOrder);
-            return View("~/Views/ServiceOrder/ServiceOrder.cshtml");
+            int customerId = serviceOrder.CustomerID;
+            return RedirectToAction("Sjekkliste", "Sjekkliste", new { CustomerID = customerId });
         }
 
-        public IActionResult Edit(ServiceOrder serviceOrder)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+
+        public ActionResult Edit(ServiceOrder serviceOrder)
         {
             if (!ModelState.IsValid)
             {
-                foreach (var key in ModelState.Keys)
-                {
-                    var state = ModelState[key];
-                    if (state.Errors.Any())
-                    {
-                        foreach (var error in state.Errors)
-                        {
-                            
-                            Debug.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
-                        }
-                    }
-                }
-
-                
                 return View(serviceOrder);
             }
-            bool updateSuccess = _serviceOrderrepository.Update(serviceOrder);
+
+           
+            var existingServiceOrder = _serviceOrderrepository.GetServiceOrderByID(serviceOrder.ServiceOrderID);
+
+            if (existingServiceOrder == null)
+            {
+                ModelState.AddModelError("", "Service Order ikke funnet.");
+                return View(serviceOrder);
+            }
+
+            UpdateServiceOrderFromForm(existingServiceOrder, serviceOrder);
+
+            bool updateSuccess = _serviceOrderrepository.Update(existingServiceOrder);
             if (updateSuccess)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home"); 
             }
             else
             {
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                ModelState.AddModelError("", "Unable to save changes.");
                 return View(serviceOrder);
             }
         }
+
+        private void UpdateServiceOrderFromForm(ServiceOrder toUpdate, ServiceOrder form)
+        {
+            toUpdate.CreatedBy = form.CreatedBy;
+            toUpdate.DateReceived = form.DateReceived;
+            toUpdate.ModelYear = form.ModelYear;
+            toUpdate.ProductType = form.ProductType;
+            toUpdate.SerialNumber = form.SerialNumber;
+            toUpdate.ServiceType = form.ServiceType;
+            toUpdate.WhatIsAgreedWithCustomer = form.WhatIsAgreedWithCustomer;
+            toUpdate.RepairDescription = form.RepairDescription;
+            toUpdate.IncludedParts = form.IncludedParts;
+            toUpdate.DateCompleted = form.DateCompleted;
+            toUpdate.WorkingHours = form.WorkingHours;
+            toUpdate.ReplacedPartsReturned = form.ReplacedPartsReturned;
+            toUpdate.ShippingMethod = form.ShippingMethod;
+            toUpdate.Status = form.Status;
+            toUpdate.Subject = form.Subject;
+            toUpdate.BookedServiceToWeek = form.BookedServiceToWeek;
+            toUpdate.AgreedDeliveryDateWithCustomer = form.AgreedDeliveryDateWithCustomer;
+        }
+
     }
 }
 

@@ -26,15 +26,33 @@
             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                 <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"><!-- ... --></svg>
             </span>
-            <form asp-action="Search" asp-controller="Home" method="get" class="flex items-center relative w-full max-w-xs">
-                <input type="text" class="w-full pr-10 pl-3 py-2 border rounded-full text-sm focus:outline-none focus:border-gray-500" placeholder="Søk i tabellen..." name="term" id="term" required>
-                <button type="submit" class="absolute inset-y-0 right-0 flex items-center pr-3" value="Search">
-                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-6a8 8 0 11-16 0 8 8 0 0116 0z"></path>
-                    </svg>
-                </button>
+            
+            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+{   // Dette er ikke beskyttet for Xss beskyttelse, det kommer snart
+    <table>
+        <tr>
+            <td>
+                <span><b>Search By: </b></span>
+                @Html.RadioButton("searchBy", "Navn", true) <text> navn </text>
+                @Html.RadioButton("searchBy", "Telefon") <text> Telefon </text>
+                @Html.RadioButton("searchBy", "Status") <text> Status </text>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBox("searchValue", null, new { @class = "form-control", placeholder = "Enter Product Name or..." })
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                <input type="submit" value="Search" class="btn btn-success" />
+            </td>
+        </tr>
+    </table>
+}
 
-            </form>
+            
             <div class="flex-items-center ml-96">
                 
                 <a asp-area=""  asp-controller="Customer" asp-action="Customer" class="flex items-center text-gray-400 p-2 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
@@ -55,59 +73,60 @@
 
 
                 <thead>
-                <tr>
-                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Sak.nr</th>
-                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Telefon</th>
-                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center cursor-pointer">Name</th>
-                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Dato</th>
-                   <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center">Status</th>
-                </tr>
+                    <tr>
+                        <th class="px-4 py-2 ...">Sak.nr</th>
+                        <th class="px-4 py-2 ...">Telefon</th>
+                        <th class="px-4 py-2 ...">Name</th>
+                        <th class="px-4 py-2 ...">Dato</th>
+                        <th class="px-4 py-2 ...">Status</th>
+                    </tr>
                 </thead>
-               
                 <tbody>
-                    
 
-                        @foreach (var customer in Model.Customers)
-                        {
-                            <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerID })'">
-                                <td class="text-center border p-2">@customer.CustomerID</td>
-                                <td class="text-center border p-2">@customer.PhoneNumber</td>
-                                <td class="text-center border p-2">@customer.FullName</td>
-
-                            </tr>
-
-                        @foreach (var serviceorder in Model.ServiceOrders.Where(o => o.CustomerID == customer.CustomerID))
-                        {
-                            <tr>
-                                <td class="text-center border p-2">@serviceorder.Status</td>
-                            </tr>
-                        }
-                        }
-                    
-
-
+                    @foreach (var customer in Model.Customers)
+                    {
+                        <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerID })'">
+                            <td class="text-center border p-2">@customer.CustomerID</td>
+                            <td class="text-center border p-2">@customer.PhoneNumber</td>
+                            <td class="text-center border p-2">@customer.FirstName</td>
+                            @if (Model.ServiceOrders.Any(o => o.CustomerID == customer.CustomerID))
+                            {
+                                var serviceOrder = Model.ServiceOrders.First(o => o.CustomerID == customer.CustomerID);
+                                <td class="text-center border p-2">@serviceOrder.DateReceived.ToString("dd-MM-yyyy")</td>
+                                <td class="text-center border p-2">@serviceOrder.Status</td>
+                            }
+                            else
+                            {                               
+                                <td class="text-center border p-2"></td>
+                                <td class="text-center border p-2"></td>
+                            }
+                        </tr>
+                    }
                 </tbody>
             </table>
-
         </div>
     </header>
     <script>
-        document.getElementById("sortName").addEventListener("click", function () {
-            const table = document.querySelector("tbody");
-            const rows = Array.from(table.rows);
+        function searchFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchBox");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("yourTableId");
+        tr = table.getElementsByTagName("tr");
 
-            rows.sort((a, b) => {
-                const nameA = a.cells[2].innerText.toUpperCase();  
-                const nameB = b.cells[2].innerText.toUpperCase();
+        for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[2]; -
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
 
-                if (nameA < nameB) return -1;
-                if (nameA > nameB) return 1;
-                return 0;
-            });
-
-            
-            rows.forEach(row => table.appendChild(row));
-        });
     </script>
 </body>
 </html>
