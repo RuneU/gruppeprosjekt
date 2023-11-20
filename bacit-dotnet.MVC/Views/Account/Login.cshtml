@@ -43,24 +43,16 @@
                         <span asp-validation-for="Password" class="text-red-500"></span>
                     </div>
 
-                    <div class="">
+                    <div>
                         <div class="col-md-offset-2 col-md-10">
-                            <div class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            
                                 <label asp-for="RememberMe">
                                     <input asp-for="RememberMe"/>
                                     @Html.DisplayNameFor(m => m.RememberMe)
                                 </label>
-                            </div>
                         </div>
                     </div>
                     <button type="submit" class="w-full text-gray-500 bg-gray-800 hover:text-yellow-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Log in</button>
-                   
-                    <p>
-                        <a asp-action="Register" class="text-gray-500" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
-                    </p>
-                    <p>
-                        <a asp-action="ForgotPassword" class="text-gray-500">Forgot your password?</a>
-                    </p>
                 </form>
             </div>
         </div>
