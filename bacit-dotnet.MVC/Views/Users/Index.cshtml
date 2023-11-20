@@ -1,51 +1,85 @@
 ﻿@using bacit_dotnet.MVC.Models.Users
-@model UserViewModel
-<h3>Rediger registrerte brukere</h3>
-@if(Model.Email!=null)
-{
-    <form asp-action="save" asp-controller="users" method="post">
-        <ul>
-            <li>
-                <label for="Name">Navn</label>
-                <input type="text" name="Name" value="@Model.Name" />
-            </li>
-         
-            <li>
-                <label for="Email">Email</label>
-                <input type="email" name="Email" value="@Model.Email" />
-            </li>
-        <li>
-            <label for="Role">Sett som administrator</label>
-                <input asp-for="@Model.IsAdmin"/>
-        </li>
-            <li>
-                <input type="submit" value="Lagre" />
-            </li>
-        </ul>
-    </form>
+
+@{
+    ViewData["Title"] = "bacit_dotnet.MVC";
+
 }
-<table>
-    <tr>
-        <td>Name</td>
-        <td>Email</td>
-    </tr>
-    @foreach (var user in Model.Users)
-    {
-        <tr>
-            <td>@user.Name</td>
-            <td>@user.Email</td>
-            <td>
-                <form asp-action="delete" asp-controller="users" method="post">
-                    <input type="hidden" name="Email" value="@user.Email" />
-                    <input type="submit" value="Slett" />
-                </form>
-            </td>
-            <td>
-                <form asp-action="index" asp-controller="users" method="get">
-                    <input type="hidden" name="Email" value="@user.Email" />
-                    <input type="submit" value="Endre" />
-                </form>
-            </td>
-        </tr>
+@model UserViewModel
+<div class="">
+    <div class="justify-center-left ml-40 mt-10 flex relative block">
+        <span class="sr-only">Search</span>
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+            <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"><!-- ... --></svg>
+        </span>
+        <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-49 border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search"/>
+        <button class="ml-2 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-4 rounded-md bg-ease-in duration-300">Søk</button>
+
+        <button onClick='redirectOnClick()' class="absolute top-0 right-20 h-10 w-30 bg-gray-800 text-gray-500 hover:text-yellow-500 py-2 px-5 rounded-md bg-ease-in duration-300">
+            Ny Ansatt
+        </button>
+
+    </div>
+    <div class="text-center flex-items-center max-w-4xl mx-auto ">
+        <h3 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Administrer brukere</h3>
+
+        <form asp-action="save" asp-controller="users" method="post" class=form asp-action="save" asp-controller="users" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xs mx-auto">
+            <ul>
+                <li>
+                    <label for="Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Navn</label>
+                    <input type="text" name="Name" value="@Model.Name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="navn"/>
+
+                </li>
+
+                <li>
+                    <label for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <input type="email" name="Email" value="@Model.Email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-5" placeholder="email"/>
+                </li>
+                <li>
+                    <label for="Role">Sett som administrator</label>
+                    <input asp-for="@Model.IsAdmin"/>
+                </li>
+                <li>
+                    <input type="submit" value="Lagre" class="w-full text-gray-500 bg-gray-800 hover:text-yellow-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mt-5"/>
+                </li>
+            </ul>
+        </form>
+
+        <div class="justify-center mt-10 max-w-4xl mx-auto">
+            <table class="min-w-full table-auto">
+
+                <thead>
+                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100">Navn</th>
+                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100">Epost</th>
+                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100">Slett</th>
+                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100">Endre</th>
+                </thead>
+
+                @foreach (var user in Model.Users)
+                {
+                    <tr class="mt-5 bg-gray-100">
+                        <td class="px-4 py-2">@user.Name</td>
+                        <td class="px-4 py-2">@user.Email</td>
+                        <td>
+                            <form asp-action="delete" asp-controller="users" method="post">
+                                <input type="hidden" name="Email" value="@user.Email"/>
+                                <input type="submit" value="Slett"/>
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-action="index" asp-controller="users" method="get">
+                                <input type="hidden" name="Email" value="@user.Email"/>
+                                <input type="submit" value="Endre"/>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function redirectOnClick() {
+        document.location = 'Account/Register';
     }
-</table>
+</script>

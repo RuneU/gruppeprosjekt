@@ -7,10 +7,13 @@ using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 using NuGet.Protocol.Core.Types;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace bacit_dotnet.MVC.Controllers
 {
+    [Authorize]
+
     public class CustomerController : Controller
     {
         private readonly CustomerRepository _customerRepository;

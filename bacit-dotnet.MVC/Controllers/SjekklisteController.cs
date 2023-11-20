@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using bacit_dotnet.MVC.Repositories;
 using bacit_dotnet.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace bacit_dotnet.MVC.Controllers
 {
+    [Authorize]
+
     public class SjekklisteController : Controller
     {
         private readonly CheckListRepository _checkListrepository;

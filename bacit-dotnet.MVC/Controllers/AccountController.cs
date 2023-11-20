@@ -8,8 +8,9 @@ using bacit_dotnet.MVC.Models.Account;
 using bacit_dotnet.MVC.Entities;
 using bacit_dotnet.MVC.Repositories;
 
-/*namespace bacit_dotnet.MVC.Controllers
+namespace bacit_dotnet.MVC.Controllers
 {
+    [Authorize] //- Krever at brukeren er autentisert for å få tilgang til denne kontrolleren.
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -18,7 +19,9 @@ using bacit_dotnet.MVC.Repositories;
         private readonly IUserRepository userRepository;
         private readonly ILogger _logger;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender emailSender, ILoggerFactory loggerFactory, IUserRepository userRepository)
+        // Konstruktør for AccountController med dependency injection av nødvendige tjenester og repository.
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
+            IEmailSender emailSender, ILoggerFactory loggerFactory, IUserRepository userRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -28,114 +31,124 @@ using bacit_dotnet.MVC.Repositories;
         }
 
         // GET: /Account/Login
-        [HttpGet]
-        [AllowAnonymous]
+        [HttpGet] //- Håndterer HTTP GET-forespørsler for visning av påloggingsvisningen.
+        [AllowAnonymous] //- Tillater tilgang selv for uautentiserte brukere.
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
-        //
         // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        [HttpPost] //- Håndterer HTTP POST-forespørsler for brukerpålogging.
+        [AllowAnonymous] //-Tillater tilgang selv for uautentiserte brukere.
+        [ValidateAntiForgeryToken] //- Beskytter mot CSRF-angrep ved å validere en antiforgery-token.
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            
+
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                // Valider brukerens påloggingsinformasjon ved hjelp av SignInManager.
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
+                    lockoutOnFailure: true);
+                
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation(1, "User logged in.");
+                    _logger.LogInformation(1, "Bruker logget inn.");
                     return RedirectToLocal(returnUrl);
                 }
+
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction(nameof(SendCode),
+                        new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 }
+
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning(2, "User account locked out.");
+                    _logger.LogWarning(2, "Brukerkonto låst ute.");
                     return View("Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Ugyldig påloggingsforsøk.");
                     return View(model);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // Hvis vi kommer hit, har noe feilet. Vis skjemaet på nytt.
             return View(model);
         }
 
-        //
         // GET: /Account/Register
+        [Authorize(Roles = "Administrator")] //- Krever at brukeren har rollen "Administrator" for å få tilgang.
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
-        //
         // POST: /Account/Register
+        [Authorize(Roles = "Administrator")] //- Krever at brukeren har rollen "Administrator" for å få tilgang.
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            ViewData["ReturnUrl"] = "Log in";
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true, LockoutEnabled = false,LockoutEnd = null };
+                // Opprett en ny IdentityUser basert på registreringsinformasjonen.
+                var user = new IdentityUser
+                {
+                    UserName = model.Email, Email = model.Email, EmailConfirmed = true, LockoutEnabled = false,
+                    LockoutEnd = null
+                };
+
+                // Opprett brukeren i Identity-databasen.
                 var result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    // Legg til brukeren i rollen "Administrator" hvis det er angitt i registreringsskjemaet.
+                    if (model.IsAdmin)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Administrator");
+                    }
+
+                    // Legg til brukeren i applikasjonens egendefinerte brukerrepository.
                     userRepository.Add(new UserEntity
                     {
                         Email = model.Email
                     });
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                    // Send an email with this link
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    //    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+
+                    // Logg brukeren inn automatisk etter vellykket registrering.
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    
-                    _logger.LogInformation(3, "User created a new account with password.");
-
-
-                    return RedirectToLocal(returnUrl);
+                    // Omdiriger til påloggingssiden.
+                    return RedirectToLocal("Log in");
                 }
+
+                // Hvis registreringen mislyktes, legg til feilmeldinger i ModelState.
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
+            // Hvis vi kommer hit, har noe feilet. Vis skjemaet på nytt.
             return View(model);
         }
 
-   
+        // LogOff - Logger brukeren ut og omdirigerer til påloggingsvisningen.
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            _logger.LogInformation(4, "Bruker logget ut.");
+            return RedirectToAction(nameof(AccountController.Login), "Account");
         }
 
-        /*
+        //
         // POST: /Account/ExternalLogin
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
@@ -148,7 +161,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // GET: /Account/ExternalLoginCallback
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
             if (remoteError != null)
@@ -193,7 +205,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl = null)
         {
@@ -230,7 +241,6 @@ using bacit_dotnet.MVC.Repositories;
 
         // GET: /Account/ConfirmEmail
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -249,7 +259,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // GET: /Account/ForgotPassword
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
             return View();
@@ -258,7 +267,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -287,7 +295,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // GET: /Account/ForgotPasswordConfirmation
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult ForgotPasswordConfirmation()
         {
             return View();
@@ -296,7 +303,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // GET: /Account/ResetPassword
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult ResetPassword(string code = null)
         {
             return code == null ? View("Error") : View();
@@ -305,7 +311,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // POST: /Account/ResetPassword
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
@@ -331,7 +336,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // GET: /Account/ResetPasswordConfirmation
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
         {
             return View();
@@ -340,7 +344,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // GET: /Account/SendCode
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl = null, bool rememberMe = false)
         {
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -356,7 +359,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // POST: /Account/SendCode
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendCode(SendCodeViewModel model)
         {
@@ -395,7 +397,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // GET: /Account/VerifyCode
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> VerifyCode(string provider, bool rememberMe, string returnUrl = null)
         {
             // Require that the user has already logged in via username/password or external login
@@ -410,7 +411,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // POST: /Account/VerifyCode
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyCode(VerifyCodeViewModel model)
         {
@@ -442,7 +442,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // GET: /Account/VerifyAuthenticatorCode
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> VerifyAuthenticatorCode(bool rememberMe, string returnUrl = null)
         {
             // Require that the user has already logged in via username/password or external login
@@ -457,7 +456,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // POST: /Account/VerifyAuthenticatorCode
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyAuthenticatorCode(VerifyAuthenticatorCodeViewModel model)
         {
@@ -489,7 +487,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // GET: /Account/UseRecoveryCode
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> UseRecoveryCode(string returnUrl = null)
         {
             // Require that the user has already logged in via username/password or external login
@@ -504,7 +501,6 @@ using bacit_dotnet.MVC.Repositories;
         //
         // POST: /Account/UseRecoveryCode
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UseRecoveryCode(UseRecoveryCodeViewModel model)
         {
@@ -549,7 +545,6 @@ using bacit_dotnet.MVC.Repositories;
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
-        } 
+        }
     }
 }
-*/
