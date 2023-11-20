@@ -40,7 +40,7 @@
             @Html.AntiForgeryToken()
             <form asp-action="Edit" asp-controller="ServiceOrder" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <input type="hidden" asp-for="CustomerID" />
+                <input type="hidden" asp-for="ServiceOrderID" />
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label asp-for="CreatedBy" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opprettet av</label>
@@ -152,7 +152,7 @@
                         <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                             Tilbake
                         </button>
-                        <button asp-controller="WorkOrder" asp-action="WorkOrder" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                        <button asp-controller="Sjekkliste" asp-action="Edit" asp-route-CustomerID="@Model.CustomerID" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                             Neste
                         </button>
                     </div>
@@ -161,6 +161,10 @@
 
                     </div>
                 </div>
+            </form>
+            <form asp-action="RedirectToChecklist" asp-controller="ServiceOrder">
+                <input type="hidden" name="CustomerID" value="@Model.CustomerID" />
+                <input type="submit" value="Next" />
             </form>
 
 
