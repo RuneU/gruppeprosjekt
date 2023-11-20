@@ -76,7 +76,7 @@ create table if not exists CheckList
     PressureTest           varchar(255) null,
     CheckFunctions         varchar(255) null,
     PullingPower           varchar(255) null,
-    BrakePower             varchar(255) null
+    BrakePower             varchar(255) null,
      constraint CheckList_Customer_CustomerID_fk
         foreign key (CustomerID) references Customer (CustomerID)
 );
@@ -137,6 +137,7 @@ create table if not EXISTS AspNetUsers
     AccessFailedCount int not null,
     CONSTRAINT PK_AspNetUsers PRIMARY KEY (Id)
     );
+
 create table if not EXISTS AspNetUserTokens
 (
     UserId varchar(255) not null,
@@ -189,8 +190,3 @@ create table if not EXISTS AspNetUserRoles
     foreign key(RoleId)
     references AspNetRoles(Id)
     );
-
-      
-     
-
-
