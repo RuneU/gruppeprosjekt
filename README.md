@@ -22,11 +22,11 @@ To make this work, you need to have [Docker](https://www.docker.com/) installed 
 
 |Bash (Mac and Linux)|Powershell (Windows)|
 |--------------------|--------------------|
-|`docker run --rm --name mariadb -p 3308:3306/tcp -v "$(pwd)/database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=12345 -d mariadb:10.5.11`|`docker run --rm --name mariadb -p 3308:3306/tcp -v "%cd%\database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=12345 -d mariadb:10.5.11`|
+|`docker run --rm --name mariadb -p 3308:3306/tcp -v "$(pwd)/database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=12345 -d mariadb:10.5.11`|`docker run --name NoestedDatabase -p 3306:3306/tcp -v "%cd%\database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Gruppe4! -d mariadb:10.5.11`|
 
 ##### 3. Enter the database and create the database and table for this skeleton:    
-`docker exec -it mariadb mysql -p`    
-When prompted enter the password (`12345`), then type or copy in the SQL from [this file](CreateDb.sql) (line by line).
+`docker exec -it NoestedDatabase mysql -p`    
+When prompted enter the password (`Gruppe4!`), then type or copy in the SQL from [this file](CreateDb.sql) (line by line).
 
 ##### 4. Test out the code at http://localhost:80/
 
@@ -52,3 +52,11 @@ Code can be copied freely
 
 ## Changes that we have done to the reposetory
 To get this mvc project to run you have to install Node.js. This is because we use Tailwind CSS to style our views and this requirs Node.js to be install to work.
+
+<br>
+
+When building the database for this project run every command and script that is in the `CreateDb.sql`, exept the docker commands that you have already runed.
+
+<br>
+
+To login into this project after you built it and runned it in docker you need to create a admin user to get the full experiance of the project. To create this user you need first to comment out the all `[Authorize]` tags in `UserController.cs` & `AccountController.cs`. When all `[Authorize]` tags is commented out go to `https://localhost:00000/Account/Register` to register the first admin user. Login with you mail and create a strong passorwd and check off the `Sett som administrator` to create a admin user. When you have create a the admin user remove the comments from `[Authorize]` tags. Now the application is ready for you to use.
