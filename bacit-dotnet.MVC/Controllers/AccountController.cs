@@ -146,7 +146,6 @@ namespace bacit_dotnet.MVC.Controllers
             return RedirectToAction(nameof(AccountController.Login), "Account");
         }
 
-        //
         // POST: /Account/ExternalLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -158,7 +157,6 @@ namespace bacit_dotnet.MVC.Controllers
             return Challenge(properties, provider);
         }
 
-        //
         // GET: /Account/ExternalLoginCallback
         [HttpGet]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
@@ -202,7 +200,6 @@ namespace bacit_dotnet.MVC.Controllers
             }
         }
 
-        //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -256,7 +253,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        //
         // GET: /Account/ForgotPassword
         [HttpGet]
         public IActionResult ForgotPassword()
@@ -264,7 +260,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View();
         }
 
-        //
         // POST: /Account/ForgotPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -292,7 +287,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View(model);
         }
 
-        //
         // GET: /Account/ForgotPasswordConfirmation
         [HttpGet]
         public IActionResult ForgotPasswordConfirmation()
@@ -300,7 +294,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View();
         }
 
-        //
         // GET: /Account/ResetPassword
         [HttpGet]
         public IActionResult ResetPassword(string code = null)
@@ -308,7 +301,6 @@ namespace bacit_dotnet.MVC.Controllers
             return code == null ? View("Error") : View();
         }
 
-        //
         // POST: /Account/ResetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -333,7 +325,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View();
         }
 
-        //
         // GET: /Account/ResetPasswordConfirmation
         [HttpGet]
         public IActionResult ResetPasswordConfirmation()
@@ -341,7 +332,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View();
         }
 
-        //
         // GET: /Account/SendCode
         [HttpGet]
         public async Task<ActionResult> SendCode(string returnUrl = null, bool rememberMe = false)
@@ -356,7 +346,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
         // POST: /Account/SendCode
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -394,7 +383,6 @@ namespace bacit_dotnet.MVC.Controllers
             return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
-        //
         // GET: /Account/VerifyCode
         [HttpGet]
         public async Task<IActionResult> VerifyCode(string provider, bool rememberMe, string returnUrl = null)
@@ -408,7 +396,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
         // POST: /Account/VerifyCode
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -439,7 +426,6 @@ namespace bacit_dotnet.MVC.Controllers
             }
         }
 
-        //
         // GET: /Account/VerifyAuthenticatorCode
         [HttpGet]
         public async Task<IActionResult> VerifyAuthenticatorCode(bool rememberMe, string returnUrl = null)
@@ -453,7 +439,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View(new VerifyAuthenticatorCodeViewModel { ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
         // POST: /Account/VerifyAuthenticatorCode
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -484,7 +469,6 @@ namespace bacit_dotnet.MVC.Controllers
             }
         }
 
-        //
         // GET: /Account/UseRecoveryCode
         [HttpGet]
         public async Task<IActionResult> UseRecoveryCode(string returnUrl = null)
@@ -498,7 +482,6 @@ namespace bacit_dotnet.MVC.Controllers
             return View(new UseRecoveryCodeViewModel { ReturnUrl = returnUrl });
         }
 
-        //
         // POST: /Account/UseRecoveryCode
         [HttpPost]
         [ValidateAntiForgeryToken]

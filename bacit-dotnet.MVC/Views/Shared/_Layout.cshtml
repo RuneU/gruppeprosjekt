@@ -1,53 +1,70 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - bacit_dotnet.MVC</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/bacit_dotnet.MVC.site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bacit_dotnet.MVC.site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <img src="~/images/NøstedLogo.png" class="hidden" alt="Description of the Image">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.css" rel="stylesheet" />
 </head>
 <body>
-<header>
+    <header>
 
     <div class="top-0 bottom-0 left-0 bg-gray-800 w-64 fixed p-6 h-screen flex-col gap-y-5 overflow-y-auto bg-white sm:flex shadow-md">
         <div class="text-white font-bold text-xl mb-6">
             <img src="~/images/NøstedLogo.png" alt="NoostedLogo" class="h-30 w-60 rounded-full">
+        <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+            </svg>
+        </button>
 
-        </div>
+        <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 h-screen" aria-label="Sidebar">
 
-        <div class="text-white mt-6">
-            <input type="search" id="searchInput" placeholder="Søk i meny" class="bg-white bg-opacity-10 rounded-md p-3 w-full text-base">
-        </div>
+            <div class="absolute top-0 bottom-0 left-0 bg-gray-800 w-64 fixed p-6">
+                <div class="text-white font-bold text-xl mb-6">
+                    <img src="~/images/NøstedLogo.png" alt="NoostedLogo" class="h-30 w-60 rounded-full">
 
-        <nav id="menuItems" class="mt-6">
-            <a asp-controller="Home" asp-action="Index" id="menuItem_AlleSaker" class="flex items-center text-gray-400 p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
-                <i class="fas fa-home"></i>
-                <span class="ml-3">Alle saker</span>
-            </a>
-            <a asp-controller="DineSaker" asp-action="DineSaker" id="menuItem_DineSaker" class="flex items-center text-gray-400 p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
-                <i class="fas fa-user"></i>
-                <span class="ml-3">Dine saker</span>
-            </a>
-            @{
-                bool IsAdmin = User.IsInRole("Administrator");
-            }
+                </div>
 
-            @if (IsAdmin)
-            {
-                <a asp-controller="Users" asp-action="Index" id="menuItem_Admin" class="flex items-center text-gray-400 text-white p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
-                    <i class="fas fa-crown"></i>
-                    <span class="ml-3">Admin</span>
-                </a>
-            }
+                <div class="text-white mt-6">
+                    <input type="search" id="searchInput" placeholder="Søk i meny" class="bg-white bg-opacity-10 rounded-md p-3 w-full text-base">
+                </div>
 
-            <a asp-controller="Account" asp-action="LogOff" id="menuItem_Logout" class="flex items-center text-gray-400 p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
-                <i class="fas fa-sign-out-alt"></i>
-                <span class="ml-3">Logout</span>
+                <nav id="menuItems" class="mt-6">
+                    <a asp-controller="Home" asp-action="Index" id="menuItem_AlleSaker" class="flex items-center text-gray-400 p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                        <i class="fas fa-home"></i>
+                        <span class="ml-3">Alle saker</span>
+                    </a>
+                    <a asp-controller="DineSaker" asp-action="DineSaker" id="menuItem_DineSaker" class="flex items-center text-gray-400 p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                        <i class="fas fa-user"></i>
+                        <span class="ml-3">Dine saker</span>
+                    </a>
+                     @{
+                                    bool IsAdmin = User.IsInRole("Administrator");
+                                }
+                    
+                                @if (IsAdmin)
+                                {
+                                    <a asp-controller="Users" asp-action="Index" id="menuItem_Admin" class="flex items-center text-gray-400 text-white p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                                        <i class="fas fa-crown"></i>
+                                        <span class="ml-3">Admin</span>
+                                    </a>
+                                }
+                    <div class="flex items-center text-gray-400 text-white p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                        <partial name="LoginPartial" />
+                    </div>
+
+
+                    <a asp-controller="Account" asp-action="LogOff" id="menuItem_Logout" class="flex items-center text-gray-400 p-4 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="ml-3">Logout</span>
 
             </a>
             <div class="flex items-center text-gray-400 text-white p-4 rounded text-lg mt-6">
@@ -56,16 +73,20 @@
         </nav>
     </div>
 
+                    </a>
+                </nav>
+            </div>
+        </aside>
 
-</header>
-<div class="ml-40 container mx-auto">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-</div>
+    </header>
+    <div class="ml-40 container mx-auto">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-
-<script>
+   
+    <script>
         function toggleMenu() {
             var menu = document.getElementById("menu");
             menu.classList.toggle("hidden");
@@ -98,9 +119,16 @@
         });
 
     </script>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+
+
+
