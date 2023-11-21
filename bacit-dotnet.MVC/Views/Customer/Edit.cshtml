@@ -84,7 +84,7 @@
 
 
 <div>
-    <div class="absolute inset-x-0 right-20 top-5 h-16 left-1/2">
+    <div class="absolute inset-x-0 right-20 h-16 left-1/2">
         <div>
             <h1>
                 Kunde-Informasjon 1/4
@@ -120,12 +120,12 @@
                         <span asp-validation-for="Adress" class="text-danger"></span>
                     </div>
                     <div>
-                        <label asp-for="ZipCode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PostNummer</label>
+                        <label asp-for="ZipCode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Post nummer</label>
                         <input asp-for="ZipCode" type="text" id="ZipCode" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1234" required>
                         <span asp-validation-for="ZipCode" class="text-danger"></span>
                     </div>
                     <div>
-                        <label asp-for="PhoneNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">TelefonNummer</label>
+                        <label asp-for="PhoneNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefonnummer</label>
                         <input asp-for="PhoneNumber" type="text" id="PhoneNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="12345678" required>
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
@@ -154,22 +154,6 @@
                     </div>
                 </div>
             </form>
-
-            @*@<form asp-action="CreatePerson">
-            <div class="form-group">
-            <label asp-for="FirstName" class="control-label">First Name:</label>
-            <input asp-for="FirstName" class="form-control" />
-            <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-            <label asp-for="LastName" class="control-label">Last Name:</label>
-            <input asp-for="LastName" class="form-control" />
-            <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-            </form>@**@
         </div>
     </div>
 
