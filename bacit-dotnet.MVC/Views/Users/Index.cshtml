@@ -68,7 +68,7 @@
                         <td>
                             <form asp-action="index" asp-controller="users" method="get">
                                 <input type="hidden" name="Email" value="@user.Email"/>
-                                <input type="submit" value="Endre"/>
+                                <input type="submit" value="Endre" />
                             </form>
                         </td>
                     </tr>
@@ -80,6 +80,7 @@
 
 <script>
     function redirectOnClick() {
-        document.location = 'Account/Register';
-    }
+            document.location = 'Account/Register';
+        }
+
 </script>

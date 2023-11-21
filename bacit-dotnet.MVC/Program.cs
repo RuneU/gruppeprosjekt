@@ -34,7 +34,6 @@ namespace bacit_dotnet.MVC
             builder.Services.AddTransient<ServiceOrderRepository>();
             builder.Services.AddTransient<EmployeeRepository>();
             builder.Services.AddTransient<CheckListRepository>();
-            builder.Services.AddTransient<HomeRepository>();
 
             SetupAuthentication(builder);
 
@@ -58,7 +57,7 @@ namespace bacit_dotnet.MVC
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Login}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Login}/{id?}");
             app.MapRazorPages();
             app.MapControllers();
 
