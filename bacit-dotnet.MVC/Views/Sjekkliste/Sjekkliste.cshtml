@@ -214,7 +214,7 @@
                     <h2 class="font-bold text-4xl mb-4">Sjekkliste for service på vinsj</h2>
                     <div class="space-y-4">
                         <input asp-for="DokNr" type="text" placeholder="Dok.nr" class="p-2 w-full border rounded">
-                        <input asp-for="Date" type="text" placeholder="Dato" class="p-2 w-full border rounded">
+                        <input asp-for="Date" type="date" placeholder="Dato" class="p-2 w-full border rounded">
                         <input asp-for="ApprovedBy" type="text" placeholder="Godkjent av" class="p-2 w-full border rounded">
                     </div>
                 </div>
@@ -559,7 +559,7 @@
                         <div class="border p-2 grid grid-cols-4 gap-4 h-16 mt-10" id="funksjonerBox">
                             <span class="font-bold">Test vinsj og kjør alle funksjoner</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="CheckFunctions" type="text" placeholder="Bar" class="p-2 w-full border rounded">
+                            <input asp-for="CheckFunctions" type="text" placeholder="Test vinsj og kjør alle funksjoner" class="p-2 w-full border rounded">
                             </div>
                         </div>
 
@@ -569,7 +569,7 @@
                         <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="trekkraftBox">
                             <span class="font-bold">Trekkraft KN</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="PullingPower" type="text" placeholder="Bar" class="p-2 w-full border rounded">
+                            <input asp-for="PullingPower" type="text" placeholder="Trekkraft KN" class="p-2 w-full border rounded">
                                 
                             </div>
                             
@@ -581,7 +581,7 @@
                         <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="bremsekraftBox">
                             <span class="font-bold">Bremse kraft KN</span>
                             <div class="flex justify-center items-center">
-                                <input asp-for="BrakePower" type="text" placeholder="Bar" class="p-2 w-full border rounded">
+                            <input asp-for="BrakePower" type="text" placeholder="Bremse kraft KN" class="p-2 w-full border rounded">
                                 
                             </div>
                            
@@ -590,7 +590,7 @@
                         <input name="_RequestVerificationToken" type="hidden"
                                value="6fGBtLZmVBZ59oUad1Fr33uPxANKY9q3Srr5y[...]" />
                         <button type="submit" class="bg-gray-600 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded mt-20">
-                            Lagre
+                            Lagre sak
                         </button>
                     </div>
                 </div>

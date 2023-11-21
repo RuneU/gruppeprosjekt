@@ -49,7 +49,7 @@
                     </div>
                     <div>
                         <label asp-for="DateReceived" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mottatt dato</label>
-                        <input asp-for="DateReceived" type="date" id="DateReceived" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="01/01/2000" required>
+                        <input asp-for="DateReceived" type="date" id="DateReceived" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <span asp-validation-for="DateReceived" class="text-danger"></span>
                     </div>
                     @* <div>
@@ -115,7 +115,7 @@
                     </div>
                     <div>
                         <label asp-for="DateCompleted" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dato fullført</label>
-                        <input asp-for="DateCompleted" type="date" id="DateCompleted" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="01/01/2023" required>
+                        <input asp-for="DateCompleted" type="date" id="DateCompleted" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required>
                         <span asp-validation-for="DateCompleted" class="text-danger"></span>
                     </div>
                     <div>
@@ -152,7 +152,7 @@
                         <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                             Tilbake
                         </button>
-                        <button asp-controller="Sjekkliste" asp-action="Edit" asp-route-CustomerID="@Model.CustomerID" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
+                        <button asp-controller="ServiceOrder" asp-action="RedirectToChecklist" asp-route-CustomerID="@Model.CustomerID" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                             Neste
                         </button>
                     </div>
@@ -162,13 +162,6 @@
                     </div>
                 </div>
             </form>
-            <form asp-action="RedirectToChecklist" asp-controller="ServiceOrder">
-                <input type="hidden" name="CustomerID" value="@Model.CustomerID" />
-                <input type="submit" value="Next" />
-            </form>
-
-
-
         </div>
     </div>
 </div>

@@ -1,29 +1,62 @@
 ﻿@{
     ViewData["Title"] = "bacit_dotnet.MVC";
     var statusList = ViewBag.StatusList as List<SelectListItem>;
+    var customerName = TempData["CustomerName"] as string;
+    var customerEmail = TempData["CustomerEmail"] as string;
+    var phoneNumber = TempData["PhoneNumber"] as string;
 
 }
 @model bacit_dotnet.MVC.Models.ServiceOrder
 
 
 <div class="w-1/2">
-
-    <!-- Service order/skjema -->
-    <div class="p-6 bg-white border rounded-lg w-80">
+    <div class="absolute top-10 left-32 p-6 bg-white border rounded-lg w-80 shadow-lg">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">KundeInformasjon</h2>
-                <button asp-controller="KundeInformasjon" asp-action="KundeInformasjon" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded-full">Rediger</button>
-         </div>
-      </div>
-
-    <!-- Sjekkliste for service på vinsj -->
-    <div class="p-6 bg-white border rounded-lg w-80">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">Sjekkliste for vinsj</h2>
-                <button asp-controller="Sjekkliste" asp-action="Sjekkliste" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded-full">Rediger</button>
+            <h2 class="text-xl font-bold text-gray-800">Service ordre/skjema</h2>
+            <button class="bg-black text-white hover:bg-gray-700 font-bold py-2 px-4 rounded">Rediger</button>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="opprettet-av">
+                Navn
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="opprettet-av" type="text" placeholder="">
+            <p>@customerName</p>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="dato-mottatt">
+                Email
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dato-mottatt" type="text" placeholder="">
+        </div>
+        <div class="flex justify-between">
+            <div class="mb-4 w-1/2 mr-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="ordrenummer">
+                    Ordrenummer
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ordrenummer" type="text" placeholder="">
+            </div>
+            <div class="mb-4 w-1/2 ml-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="arsmodell">
+                    Årsmodell
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="arsmodell" type="text" placeholder="">
+            </div>
+        </div>
+        <div class="flex justify-between">
+            <div class="mb-4 w-1/2 mr-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="produkt-type">
+                    Produkt type
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="produkt-type" type="text" placeholder="">
+            </div>
+            <div class="mb-4 w-1/2 ml-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="serienummer">
+                    Serienummer
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="serienummer" type="text" placeholder="">
+            </div>
         </div>
     </div>
-
 </div>
 
 <div>
@@ -48,7 +81,7 @@
                         </div>
                         <div>
                             <label asp-for="DateReceived" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mottatt dato</label>
-                            <input asp-for="DateReceived" type="date" id="DateReceived" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="01/01/2000" required>
+                            <input asp-for="DateReceived" type="date" id="DateReceived" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                             <span asp-validation-for="DateReceived" class="text-danger"></span>
                         </div>
                    @* <div>
@@ -115,7 +148,7 @@
                         </div>
                         <div>
                             <label asp-for="DateCompleted" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dato fullført</label>
-                            <input asp-for="DateCompleted" type="date" id="DateCompleted" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="01/01/2023" required>
+                            <input asp-for="DateCompleted" type="date" id="DateCompleted" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                             <span asp-validation-for="DateCompleted" class="text-danger"></span>
                         </div>
                         <div>
@@ -151,12 +184,10 @@
                             <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                                 Tilbake
                             </button>
-                            <button asp-controller="Sjekkliste" asp-action="Sjekkliste" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
-                                Neste
-                            </button>
+                            
                         </div>
                         <div>
-                            <input type="submit" value="Create" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" />
+                            <input type="submit" value="Neste" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded" />
 
                         </div>
                     </div>
