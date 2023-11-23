@@ -14,5 +14,7 @@ namespace bacit_dotnet.MVC.Models.Users
         public List<UserEntity> Users { get; set; }
         
         public bool IsAdmin { get; set; }
+        public bool ShowEditForm { get; set; }
+
     }
 }

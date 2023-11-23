@@ -8,9 +8,6 @@ namespace bacit_dotnet.MVC.Models
        
         public Customer Customer { get; set; }
         public ServiceOrder ServiceOrder { get; set; }
-
-       
-
     }
 
 }

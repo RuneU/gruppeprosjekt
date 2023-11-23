@@ -30,6 +30,7 @@
 		<PackageReference Include="MySqlConnector" Version="2.2.7" />
 		<PackageReference Include="MySql.Data" Version="8.1.0" />
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -41,6 +42,11 @@
 	<ItemGroup>
 		<UpToDateCheckBuilt Include="wwwroot/css/site.css" Set="Css" />
 		<UpToDateCheckBuilt Include="tailwind.config.js" Set="Css" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Views\Login\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Views\DineSaker\DineSaker.cshtml" />
 	</ItemGroup>
 
 	<Target Name="Tailwind" BeforeTargets="Build">
