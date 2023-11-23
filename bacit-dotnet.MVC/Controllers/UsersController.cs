@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace bacit_dotnet.MVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class UsersController : Controller
     {
         private readonly IUserRepository userRepository;
@@ -29,6 +29,7 @@ namespace bacit_dotnet.MVC.Controllers
                     model.Email = currentUser.Email;
                     model.Name = currentUser.Name;
                     model.IsAdmin = userRepository.IsAdmin(currentUser.Email);
+                    model.ShowEditForm = true;
                 }
             }
             return View(model);

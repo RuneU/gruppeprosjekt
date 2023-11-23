@@ -1,132 +1,93 @@
-@*
-
-*@
 @{
+
 }
 @model bacit_dotnet.MVC.Models.HomeViewModel
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - NøstedWeb</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-      
-        
-        <div class="w-full fixed top-0 left-64 flex items-center bg-gray-800 p-5">
+<header>
+    <div class="justify-center table-fixed mt-20 max-w-5xl mx-auto ">
+        <div class="w-full fixed top-0 left-64 flex items-center p-5 ml-20">
+            <div class="absolute top-0 right-1/3 mt-5">
+                <a asp-area="" asp-controller="Customer" asp-action="Customer" class="flex items-center text-gray-400 bg-gray-800 p-4 hover:bg-yellow-500 hover:text-white rounded-full text-lg transition duration-300 ease-in-out">
+                    Opprett en ny sak
+                    <i class="fas fa-plus ml-3"></i>
+                </a>
+            </div>
             <span class="sr-only">Search</span>
             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                 <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"><!-- ... --></svg>
             </span>
-            
-            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
-{   // Dette er ikke beskyttet for Xss beskyttelse, det kommer snart
-    <table>
-        <tr>
-            <td>
-                <span><b>Search By: </b></span>
-                @Html.RadioButton("searchBy", "Navn", true) <text> navn </text>
-                @Html.RadioButton("searchBy", "Telefon") <text> Telefon </text>
-                @Html.RadioButton("searchBy", "Status") <text> Status </text>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.TextBox("searchValue", null, new { @class = "form-control", placeholder = "Enter Product Name or..." })
-            </td>
-            <td>
-                &nbsp;
-            </td>
-            <td>
-                <input type="submit" value="Search" class="btn btn-success" />
-            </td>
-        </tr>
-    </table>
-}
-
-            
-            <div class="flex-items-center ml-96">
-                
-                <a asp-area=""  asp-controller="Customer" asp-action="Customer" class="flex items-center text-gray-400 p-2 hover:bg-yellow-500 hover:text-white rounded text-lg transition duration-300 ease-in-out">
-                    Opprett en ny sak
-                    <i class="fas fa-plus ml-3"></i>
-                </a>
-                
-            </div>
-
-            
-
+            <form asp-action="Search" asp-controller="Home" method="get" class="flex items-center relative w-full max-w-xs">
+                <input type="text" class="w-full pr-10 pl-3 py-2 border rounded-full text-sm focus:outline-none border-gray-800" placeholder="Søk i tabellen..." name="term" id="term" required>
+                <button type="submit" class="absolute inset-y-0 right-0 flex items-center pr-3" value="Search">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-6a8 8 0 11-16 0 8 8 0 0116 0z"></path>
+                    </svg>
+                </button>
+            </form>
         </div>
+        <h3 class="text-4xl font-bold text-gray-900 text-center mb-5 ml-32">Saksoversikt</h3>
 
 
-        <div class="justify-center table-fixed mt-40 max-w-5xl mx-auto">
+        <table class="min-w-full table-auto ml-20 mt-10">
 
-            <table class="min-w-full table-auto">
+            <thead>
+            <tr>
+                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Sak.nr')">Saks.nr</th>
+                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Telefon')">Telefon</th>
+                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Navn')">Navn</th>
+                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Date')">Dato</th>
+                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Status')">Status</th>
+            </tr>
+            </thead>
+            <tbody>
 
-
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2 ...">Sak.nr</th>
-                        <th class="px-4 py-2 ...">Telefon</th>
-                        <th class="px-4 py-2 ...">Name</th>
-                        <th class="px-4 py-2 ...">Dato</th>
-                        <th class="px-4 py-2 ...">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach (var customer in Model.Customers)
+            @foreach (var customer in Model.Customers.OrderByDescending(c => c.CustomerID))
+            {
+                <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerID })'">
+                    <td class="text-center border p-2">@customer.CustomerID</td>
+                    <td class="text-center border p-2">@customer.PhoneNumber</td>
+                    <td class="text-center border p-2">@customer.FirstName</td>
+                    @if (Model.ServiceOrders.Any(o => o.CustomerID == customer.CustomerID))
                     {
-                        <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerID })'">
-                            <td class="text-center border p-2">@customer.CustomerID</td>
-                            <td class="text-center border p-2">@customer.PhoneNumber</td>
-                            <td class="text-center border p-2">@customer.FirstName</td>
-                            @if (Model.ServiceOrders.Any(o => o.CustomerID == customer.CustomerID))
-                            {
-                                var serviceOrder = Model.ServiceOrders.First(o => o.CustomerID == customer.CustomerID);
-                                <td class="text-center border p-2">@serviceOrder.DateReceived.ToString("dd-MM-yyyy")</td>
-                                <td class="text-center border p-2">@serviceOrder.Status</td>
-                            }
-                            else
-                            {                               
-                                <td class="text-center border p-2"></td>
-                                <td class="text-center border p-2"></td>
-                            }
-                        </tr>
+                        var serviceOrder = Model.ServiceOrders.First(o => o.CustomerID == customer.CustomerID);
+                        <td class="text-center border p-2">@serviceOrder.DateReceived.ToString("dd-MM-yyyy")</td>
+                        <td class="text-center border p-2">@serviceOrder.Status</td>
                     }
-                </tbody>
-            </table>
-        </div>
-    </header>
-    <script>
-        function searchFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("searchBox");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("yourTableId");
-        tr = table.getElementsByTagName("tr");
-
-        for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[2]; -
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
+                    else
+                    {
+                        <td class="text-center border p-2">dd-MM-yyyy</td>
+                        <td class="text-center border p-2">Ikke tildelt</td>
+                    }
+                </tr>
             }
+            </tbody>
+        </table>
+    </div>
+</header>
+<script>
+        function updateSearchBy(clickedElement, criteria) {
+            
+            document.getElementById('hiddenSearchBy').value = criteria;
         }
-    }
-}
-
+            // Count unique CustomerIDs using JavaScript
+            document.addEventListener("DOMContentLoaded", function () {
+                var uniqueCustomerIDs = Array.from(new Set(@Json.Serialize(Model.Customers.Select(c => c.CustomerID))));
+        
+                // Update the total customer count element
+                document.getElementById('totalCustomerCount').innerText = uniqueCustomerIDs.length;
+            });
+       
     </script>
 </body>
 </html>

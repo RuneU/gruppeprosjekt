@@ -45,7 +45,7 @@ namespace bacit_dotnet.MVC.Controllers
         new SelectListItem { Value = "Ikke tildelt", Text = "Ikke tildelt" },
         new SelectListItem { Value = "Vent internt", Text = "På vent internt" },
         new SelectListItem { Value = "Vent eksternt", Text = "På vent eksternt" },
-        new SelectListItem { Value = "UnderArbeid", Text = "Under arbeid" },
+        new SelectListItem { Value = "Under arbeid", Text = "Under arbeid" },
         new SelectListItem { Value = "Lukket", Text = "Lukket" },
         };
             return PartialView("~/Views/ServiceOrder/StatusDropdown.cshtml");

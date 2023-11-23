@@ -44,6 +44,11 @@
 		<UpToDateCheckBuilt Include="tailwind.config.js" Set="Css" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Views\Login\Index.cshtml" />
+	  <_ContentIncludedByDefault Remove="Views\DineSaker\DineSaker.cshtml" />
+	</ItemGroup>
+
 	<Target Name="Tailwind" BeforeTargets="Build">
 		<Exec Command="npm run css:build" />
 	</Target>

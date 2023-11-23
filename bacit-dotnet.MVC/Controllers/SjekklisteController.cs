@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace bacit_dotnet.MVC.Controllers
 {
     [Authorize]
-
     public class SjekklisteController : Controller
     {
         private readonly CheckListRepository _checkListrepository;

@@ -57,7 +57,7 @@ namespace bacit_dotnet.MVC
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=Login}/{id?}"); //Start screnn when application is running
+                pattern: "{controller=Account}/{action=Login}/{id?}");
             app.MapRazorPages();
             app.MapControllers();
 

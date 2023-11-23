@@ -17,8 +17,8 @@ using System.Data.Common;
 
 namespace bacit_dotnet.MVC.Controllers
 {
-    [Authorize]
 
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly CustomerRepository _customerRepository;
@@ -69,37 +69,43 @@ namespace bacit_dotnet.MVC.Controllers
         {
             using (IDbConnection dbConnection = Connection)
             {
-                dbConnection.Open();
+                var query = "SELECT Customer.*, ServiceOrder.* FROM Customer INNER JOIN ServiceOrder ON Customer.CustomerID = ServiceOrder.CustomerID ";
 
-                // Initialize the base query
-                var query = "SELECT * FROM Customer WHERE ";
-
-                // Adjust the query based on the search criteria selected
+               
                 switch (searchBy)
                 {
+                    case "Sak.nr":
+                        query += "WHERE Customer.CustomerID LIKE @SearchValue ";
+                        break;
                     case "Navn":
-                        query += "FirstName LIKE @SearchValue";
+                        query += "WHERE Customer.FirstName LIKE @SearchValue ";
                         break;
                     case "Telefon":
-                        query += "PhoneNumber LIKE @SearchValue";
+                        query += "WHERE Customer.PhoneNumber LIKE @SearchValue ";
+                        break;
+                    case "Date":
+                        query += "WHERE ServiceOrder.DateReceived LIKE @SearchValue ";
                         break;
                     case "Status":
-                        // Assuming you have a status column in your Customers table
-                        query += "Status LIKE @SearchValue";
+                        query += "WHERE ServiceOrder.Status LIKE @SearchValue ";
                         break;
                     default:
-                        // If no search type is selected, default to Name
-                        query += "FirstName LIKE @SearchValue";
+                        query += "WHERE Customer.FirstName LIKE @SearchValue ";
                         break;
                 }
-               
+
+              
+                
+
                 var customers = dbConnection.Query<Customer>(query, new { SearchValue = $"%{searchValue}%" }).ToList();
+                var serviceOrder = dbConnection.Query<ServiceOrder>(query, new { SearchValue = $"%{searchValue}%" }).ToList();
 
                 dbConnection.Close();
 
                 var viewModel = new HomeViewModel
                 {
                     Customers = customers,
+                    ServiceOrders = serviceOrder,
                     
                 };
 
@@ -107,7 +113,6 @@ namespace bacit_dotnet.MVC.Controllers
             }
         }
 
-        // Your other actions...
     }
 
 

@@ -28,4 +28,9 @@
     <ProjectReference Include="..\bacit-dotnet.MVC\bacit-dotnet.MVC.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>

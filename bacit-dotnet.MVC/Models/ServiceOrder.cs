@@ -8,64 +8,52 @@ namespace bacit_dotnet.MVC.Models
 
         public int CustomerID { get; set; }
 
-        [Required(ErrorMessage = "Name is required.")]
+        
         public string CreatedBy { get; set; }
 
-        [Required(ErrorMessage = "DateReceived is required.")]
+        
         public DateTime DateReceived { get; set; }
 
-        [Required(ErrorMessage = "ModelYear is required.")]
+       
         public string ModelYear { get; set; }
 
-        [Required(ErrorMessage = "ProductType is required.")]
+        
          public string ProductType { get; set; }
 
-        [Required(ErrorMessage = "SerialNumber is required.")]
+      
          public string SerialNumber { get; set; }
 
-        [Required(ErrorMessage = "ServiceType is required.")]
+        
          public string ServiceType { get; set; }
 
-        [Required(ErrorMessage = "WhatIsAgreedWithCustomer  is required.")]
+        
         public string WhatIsAgreedWithCustomer { get; set; }
 
-        [Required(ErrorMessage = "RepairDescription is required.")]
+        
         public string RepairDescription { get; set; }
 
-        [Required(ErrorMessage = "IncludedParts is required.")]
+        
         public string IncludedParts { get; set; }
 
-        [Required(ErrorMessage = "DateCompleted is required.")]
+        
         public DateTime DateCompleted { get; set; }
 
-        [Required(ErrorMessage = "WorkingHours is required.")]
+        
         public int WorkingHours { get; set; }
 
-        [Required(ErrorMessage = "ReplacedPartsReturned is required.")]
+        
         public string ReplacedPartsReturned { get; set; }
 
-        [Required(ErrorMessage = "ShippingMethod is required.")]
         public string ShippingMethod { get; set; }
 
-        [Required(ErrorMessage = "Status is required.")] 
         public string Status { get; set; }
-
-        [Required(ErrorMessage = "Subject is required.")]
+        
         public string Subject { get; set; }
 
-        [Required(ErrorMessage = "BookedServiceToWeek is required.")]
+        
         public string BookedServiceToWeek { get; set; }
 
-        [Required(ErrorMessage = "AgreedDeliveryDateWithCustomer is required.")]
+       
         public DateTime AgreedDeliveryDateWithCustomer { get; set; }
-
-
-
-
-
-
-
-
-
     }
 }

@@ -58,6 +58,7 @@ namespace bacit_dotnet.MVC
                 .AddDefaultTokenProviders();
 
             // Other services registration, such as your own services, can go here.
+           
         }
     }
 }
