@@ -17,42 +17,40 @@
 <body>
 <div class="absolute inset-y-0 right-0 left-1/2 text-center bg-gray-100">
     <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Opprett ny bruker
+        <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white mt-32">
+            Opprett en ny bruker
         </h1>
         <form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal" role="form">
             <div>
-                <div asp-validation-summary="ModelOnly" class="text-red-500">Email</div>
-                <label asp-for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
-                <input asp-for="Email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                <div asp-validation-summary="ModelOnly" class="text-red-500">Epost</div>
+                <label asp-for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3"></label>
+                <input asp-for="Email" placeholder="Olanordmann@nøsted.no" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                 <span asp-validation-for="Email" class="text-red-500"></span>
-                
+
             </div>
             <div>
-                <label asp-for="Password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Passord</label>
+                <label asp-for="Password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3">Passord</label>
                 <input asp-for="Password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                 <span asp-validation-for="Password" class="text-red-500"></span>
             </div>
             <div>
-                <label asp-for="ConfirmPassword" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                <label asp-for="ConfirmPassword" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3"></label>
                 <input asp-for="ConfirmPassword"placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                 <span asp-validation-for="ConfirmPassword" class="text-red-500"></span>
             </div>
-            <div>
+            <div class="mt-3">
                 <label for="Role">Sett som administrator</label>
                 <input asp-for="@Model.IsAdmin"/>
 
             </div>
 
-            <button type="submit" asp-route-returnurl="@ViewData["ReturnUrl"]" class="w-full text-gray-500 bg-gray-800 hover:text-yellow-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Opprett ny bruker</button>
+            <button type="submit" asp-route-returnurl="@ViewData["ReturnUrl"]" class="w-full text-gray-500 bg-gray-800 hover:text-yellow-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mt-3">Opprett ny bruker</button>
 
         </form>
     </div>
 </div>
 <div class="flex items-center justify-center h-screen absolute inset-y-0 left-0 right-1/2 bg-gray-800">
-    <h1 class="text-gray-500 font-mono text-6xl">
-        Nøsted&
-    </h1>
+    <img src="~/images/NøstedLogo.png" alt="NoostedLogo" class="h-90 w-90 rounded-full">
 </div>
 </body>
 </html>
