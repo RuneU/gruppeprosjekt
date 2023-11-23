@@ -29,7 +29,7 @@
                     </div>
                     <div>
                         <label asp-for="DateReceived" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mottatt dato</label>
-                        <input asp-for="DateReceived" type="date" id="DateReceived" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <input asp-for="DateReceived" type="date" id="DateReceived" class="set-default-date bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <span asp-validation-for="DateReceived" class="text-danger"></span>
                     </div>
 
@@ -83,7 +83,7 @@
                     </div>
                     <div>
                         <label asp-for="DateCompleted" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dato fullført</label>
-                        <input asp-for="DateCompleted" type="date" id="DateCompleted" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <input asp-for="DateCompleted" type="date" id="DateCompleted" class="set-default-date bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
                     <div>
                         <label asp-for="ReplacedPartsReturned" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Byttede deler returnert</label>
@@ -98,8 +98,8 @@
                         <input asp-for="BookedServiceToWeek" type="text" id="BookedServiceToWeek" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Booket service til uke" required>
                     </div>
                     <div>
-                        <label asp-for="AgreedDeliveryDateWithCustomer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Avtalt leveranse til kunde</label>
-                        <input asp-for="AgreedDeliveryDateWithCustomer" type="date" id="AgreedDeliveryDateWithCustomer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Avtalt leveranse til kunde" required>
+                        <label asp-for="AgreedDeliveryDateWithCustomer" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-white">Avtalt leveranse til kunde</label>
+                        <input asp-for="AgreedDeliveryDateWithCustomer" type="date" id="AgreedDeliveryDateWithCustomer" class=" set-default-date bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Avtalt leveranse til kunde" required>
                     </div>
 
 
@@ -121,8 +121,16 @@
                     </div>
                 </div>
             </form>
-
-
         </div>
     </div>
 </div>
+<script>
+    const currentDate = new Date().toISOString().split('T')[0];
+
+    // Get all elements with the class 'set-default-date' and set their values
+    const dateFields = document.querySelectorAll('.set-default-date');
+
+    dateFields.forEach(field => {
+        field.value = currentDate;
+    });
+</script>
