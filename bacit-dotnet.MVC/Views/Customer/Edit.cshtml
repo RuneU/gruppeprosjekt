@@ -17,9 +17,10 @@
         <br>
         <div>
 
-
+            @using (Html.BeginForm("Edit", "Customer"))
+            {
             @Html.AntiForgeryToken()
-            <form asp-action="Edit" method="post">
+            <form asp-action="Edit" asp-controller="Customer" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="grid gap-6 mb-6 max-w-2xl ml-32">
                     <input type="hidden" asp-for="CustomerID"/>
@@ -60,8 +61,6 @@
 
                         <div class="grid mb-6 md:grid-cols-2">
                             <div class="inline-flex gap-6">
-                                <input name="_RequestVerificationToken" type="hidden"
-                                       value="6fGBtLZmVBZ59oUad1Fr33uPxANKY9q3Srr5y[...]"/>
                                 <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                                     Tilbake
                                 </button>
@@ -78,6 +77,7 @@
                     </div>
                 </div>
             </form>
+            }
         </div>
     </div>
 

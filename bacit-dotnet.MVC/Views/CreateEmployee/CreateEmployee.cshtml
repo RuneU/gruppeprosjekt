@@ -2,6 +2,9 @@
     ViewData["Title"] = "bacit_dotnet.MVC";
 }
 @model bacit_dotnet.MVC.Models.Employee
+@using (Html.BeginForm("CreateEmployee", "CreateEmployee"))
+{
+    @Html.AntiForgeryToken()
 <form asp-action="CreateEmployee" asp-controller="CreateEmployee" method="post">
 
 
@@ -15,7 +18,6 @@
             </div>
             <br>
             <div>
-
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -95,3 +97,4 @@
 
     </div>
 </form>
+}

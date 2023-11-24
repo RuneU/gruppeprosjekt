@@ -3,6 +3,9 @@
     ViewData["Title"] = "bacit_dotnet.MVC";
 }
 @model bacit_dotnet.MVC.Models.CreateUser.CreateUserViewModel
+@using (Html.BeginForm("Save", "KundeInfo"))
+{
+    @Html.AntiForgeryToken()
 <form asp-action="Save" asp-controller="KundeInfo" method="post">
   
 
@@ -88,3 +91,4 @@
        
     </div>
   </form>
+  }
