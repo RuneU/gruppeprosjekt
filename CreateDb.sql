@@ -167,8 +167,3 @@ create table if not EXISTS AspNetUserRoles
     foreign key (RoleId)
         references AspNetRoles (Id)
 );
-
-      
-     
-
-
