@@ -27,6 +27,7 @@ To make this work, you need to have
 |Bash (Mac and Linux)|Powershell (Windows)|
 |--------------------|--------------------|
 |`docker run --name NoestedDatabase -p 3306:3306/tcp -v "%cd%\database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Gruppe4! -d mariadb:10.5.11`|`docker run --name NoestedDatabase -p 3306:3306/tcp -v "%cd%\database":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Gruppe4! -d mariadb:10.5.11`|
+> Note: If you get a build error try changing the ports to 3308:3306
 
 ##### 3. Enter the database and create the database and table for this skeleton:    
 `docker exec -it NoestedDatabase mysql -p`
@@ -43,9 +44,9 @@ After opening the project run `npm install` in the terminal of directory of the 
 Comment out all of the `[Authorize]` tags in `UserController.cs` & `AccountController.cs`.
 
 #### 7. Run project and create the first admin user
-Run and build the project. After successfully building the project, go to `https://localhost:00000/Account/Register` 
+Run and build the project. After successfully building the project, go to https://localhost:port`/Account/Register`
 to register the first admin user. Login with an email account and create a strong password, and check off the `Sett 
-som administrator` button. Then click the create button.
+som administrator` button. Then click the `Opprett ny bruker` button.
 
 #### 8. After running the project
 Remove the comments of the `[Authorize]` tags in `UserController.cs` & `AccountController.cs`.
