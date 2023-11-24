@@ -1,6 +1,6 @@
 # -bacit_dotnet
-Base project for IS202 in dotnet
-Text provided by Trym (https://github.com/Nosp1) - Modified slightly to fit this project. 
+Base text and project for IS202 in dotnet provided by [Trym](https://github.com/Nosp1).
+Modified by group 4 to fit this project. Goal of this documentaion **Get the Project Running** 
 
 ## Notice
 Please read and understand how the dockerfile works. 
