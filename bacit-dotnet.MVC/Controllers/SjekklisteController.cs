@@ -55,7 +55,7 @@ namespace bacit_dotnet.MVC.Controllers
         }
 
         [HttpPost]
-
+        [ValidateAntiForgeryToken]
         public IActionResult Create(SjekklisteViewModel sjekkliste)
         {
             if (!ModelState.IsValid)

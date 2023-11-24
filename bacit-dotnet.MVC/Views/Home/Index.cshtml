@@ -27,6 +27,10 @@
             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                 <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"><!-- ... --></svg>
             </span>
+                @using (Html.BeginForm("Search", "Home"))
+                {
+                    @Html.AntiForgeryToken()
+                
             <form asp-action="Search" asp-controller="Home" method="get" class="flex items-center relative w-full max-w-xs">
                 <input type="text" class="w-full pr-10 pl-3 py-2 border rounded-full text-sm focus:outline-none border-gray-800" placeholder="Søk i tabellen..." name="term" id="term" required>
                 <button type="submit" class="absolute inset-y-0 right-0 flex items-center pr-3" value="Search">
@@ -35,6 +39,7 @@
                     </svg>
                 </button>
             </form>
+            }
         </div>
         <h3 class="text-4xl font-bold text-gray-900 text-center mb-5 ml-32">Saksoversikt</h3>
 
