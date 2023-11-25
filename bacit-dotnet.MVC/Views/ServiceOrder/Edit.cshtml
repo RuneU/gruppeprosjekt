@@ -4,8 +4,21 @@
 
 }
 @model bacit_dotnet.MVC.Models.ServiceOrder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NøstedWeb</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
 <div>
-    <div class="text-center mt-10 ml-60">
+     <div class="text-center mt-10 mr-20 md:ml-64">
         <div>
             <h1 class="text-3xl font-bold mr-20">
                 Serviceordre 2/3
@@ -17,7 +30,7 @@
             <form asp-action="Edit" asp-controller="ServiceOrder" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <input type="hidden" asp-for="ServiceOrderID"/>
-                <div class="grid gap-6 mb-6 md:grid-cols-2 max-w-2xl ml-32">
+                   <div class="grid gap-6 mb-6 md:grid-cols-2 max-w-2xl md:ml-64">
                     <div>
                         <label asp-for="CreatedBy" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opprettet av</label>
                         <input asp-for="CreatedBy" type="text" id="CreatedBy" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
@@ -111,24 +124,25 @@
 
                 </div>
 
-                <input name="_RequestVerificationToken" type="hidden"
-                       value="6fGBtLZmVBZ59oUad1Fr33uPxANKY9q3Srr5y[...]"/>
                 <div class="grid mb-6 md:grid-cols-2">
                     <div class="inline-flex gap-6">
-
+                       <input name="_RequestVerificationToken" type="hidden"
+                          value="6fGBtLZmVBZ59oUad1Fr33uPxANKY9q3Srr5y[...]" />
                         <button asp-controller="Home" asp-action="Index" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
-                            Tilbake
+                            Tilbake til saksoversikt
                         </button>
                         <button asp-controller="ServiceOrder" asp-action="RedirectToChecklist" asp-route-CustomerID="@Model.CustomerID" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">
                             Neste
                         </button>
                     </div>
                     <div>
-                        <input type="submit" value="Lagre" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded"/>
-
+                      <input type="submit" value="Lagre" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 mt-7 md:mt-0" rounded" />
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+    </header>
+</body>
+</html>

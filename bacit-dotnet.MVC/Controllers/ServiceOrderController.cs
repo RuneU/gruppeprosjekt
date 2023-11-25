@@ -6,6 +6,7 @@ using bacit_dotnet.MVC.Views.FormsMain;
 using Microsoft.AspNetCore.Authorization;
 using NuGet.Protocol.Core.Types;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Net;
 
 namespace bacit_dotnet.MVC.Controllers
 {
@@ -92,8 +93,21 @@ namespace bacit_dotnet.MVC.Controllers
                 
                 return BadRequest(ModelState);
             }
-
-
+            // XXS beskyttelse for DOM-basert angrep
+            serviceOrder.CreatedBy = WebUtility.HtmlEncode(serviceOrder.CreatedBy);
+            serviceOrder.ModelYear = WebUtility.HtmlEncode(serviceOrder.ModelYear);
+            serviceOrder.ProductType = WebUtility.HtmlEncode(serviceOrder.ProductType);
+            serviceOrder.SerialNumber = WebUtility.HtmlEncode(serviceOrder.SerialNumber);
+            serviceOrder.ServiceType = WebUtility.HtmlEncode(serviceOrder.ServiceType);
+            serviceOrder.WhatIsAgreedWithCustomer = WebUtility.HtmlEncode(serviceOrder.WhatIsAgreedWithCustomer);
+            serviceOrder.RepairDescription = WebUtility.HtmlEncode(serviceOrder.RepairDescription);
+            serviceOrder.IncludedParts = WebUtility.HtmlEncode(serviceOrder.IncludedParts);
+            serviceOrder.ReplacedPartsReturned = WebUtility.HtmlEncode(serviceOrder.ReplacedPartsReturned);
+            serviceOrder.ShippingMethod = WebUtility.HtmlEncode(serviceOrder.ShippingMethod);
+            serviceOrder.Status = WebUtility.HtmlEncode(serviceOrder.Status);
+            serviceOrder.Subject = WebUtility.HtmlEncode(serviceOrder.Subject);
+            serviceOrder.BookedServiceToWeek = WebUtility.HtmlEncode(serviceOrder.BookedServiceToWeek);
+        
             _serviceOrderrepository.Insert(serviceOrder);
             int customerId = serviceOrder.CustomerID;
             return RedirectToAction("Sjekkliste", "Sjekkliste", new { CustomerID = customerId });
@@ -110,7 +124,20 @@ namespace bacit_dotnet.MVC.Controllers
                 return View(serviceOrder);
             }
 
-           
+            serviceOrder.CreatedBy = WebUtility.HtmlEncode(serviceOrder.CreatedBy);
+            serviceOrder.ModelYear = WebUtility.HtmlEncode(serviceOrder.ModelYear);
+            serviceOrder.ProductType = WebUtility.HtmlEncode(serviceOrder.ProductType);
+            serviceOrder.SerialNumber = WebUtility.HtmlEncode(serviceOrder.SerialNumber);
+            serviceOrder.ServiceType = WebUtility.HtmlEncode(serviceOrder.ServiceType);
+            serviceOrder.WhatIsAgreedWithCustomer = WebUtility.HtmlEncode(serviceOrder.WhatIsAgreedWithCustomer);
+            serviceOrder.RepairDescription = WebUtility.HtmlEncode(serviceOrder.RepairDescription);
+            serviceOrder.IncludedParts = WebUtility.HtmlEncode(serviceOrder.IncludedParts);
+            serviceOrder.ReplacedPartsReturned = WebUtility.HtmlEncode(serviceOrder.ReplacedPartsReturned);
+            serviceOrder.ShippingMethod = WebUtility.HtmlEncode(serviceOrder.ShippingMethod);
+            serviceOrder.Status = WebUtility.HtmlEncode(serviceOrder.Status);
+            serviceOrder.Subject = WebUtility.HtmlEncode(serviceOrder.Subject);
+            serviceOrder.BookedServiceToWeek = WebUtility.HtmlEncode(serviceOrder.BookedServiceToWeek);
+
             var existingServiceOrder = _serviceOrderrepository.GetServiceOrderByID(serviceOrder.ServiceOrderID);
 
             if (existingServiceOrder == null)
@@ -121,9 +148,12 @@ namespace bacit_dotnet.MVC.Controllers
 
             UpdateServiceOrderFromForm(existingServiceOrder, serviceOrder);
 
+           
+
             bool updateSuccess = _serviceOrderrepository.Update(existingServiceOrder);
             if (updateSuccess)
             {
+                
                 return RedirectToAction("Index", "Home"); 
             }
             else
