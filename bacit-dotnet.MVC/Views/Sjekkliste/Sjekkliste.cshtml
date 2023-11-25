@@ -8,409 +8,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - NøstedWeb</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true" />
 
 </head>
 <body class="bg-white">
 
-@Html.AntiForgeryToken()
-
-<form asp-action="Create" asp-controller="Sjekkliste" method="post">
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-<div class="w-2/3 ml-auto p-8 space-y-6">
-<!-- Sjekkliste for service på vinsj -->
-<div>
-    <h1 class="text-3xl font-bold mr-20">3/3</h1>
-    <h2 class="font-bold text-4xl mb-4">Sjekkliste for service på vinsj</h2>
-    <div class="space-y-4">
-        <input asp-for="DokNr" type="text" placeholder="Dok.nr" class="p-2 w-full border rounded">
-        <input asp-for="Date" type="date" placeholder="Dato" class="p-2 w-full border rounded">
-        <input asp-for="ApprovedBy" type="text" placeholder="Godkjent av" class="p-2 w-full border rounded">
-    </div>
-</div>
-
-<div class="p-6 space-y-6">
-<div>
-    <h2 class="font-bold text-4xl mb-4">Mekanisk</h2>
-    <button type="button" onclick="checkAllOkMek()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">Check OK på alt mekanisk</button>
-    <div class="grid grid-cols-4 gap-4">
-        <span></span>
-        <span class="text-center text-xl">Ok</span>
-        <span class="text-center text-xl">Bør skiftes</span>
-        <span class="text-center text-xl">Defekt</span>
-    </div>
-</div>
-<div>
-<!-- Sjekk clutch lameller for slitasje -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckClutch">
-    <span class="font-bold">Sjekk clutch lameller for slitasje</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckClutch" type="radio" value="ok" id="1" onchange="updateColorMek('CheckClutch', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckClutch" type="radio" value="skiftes" id="2" onchange="updateColorMek('CheckClutch', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckClutch" type="radio" value="defekt" id="3" onchange="updateColorMek('CheckClutch', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-<!-- Sjekk bremser. Bånd/pedal -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="WearBrakes">
-    <span class="font-bold">Sjekk bremser. Bånd/pedal</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="WearBrakes" type="radio" value="ok" onchange="updateColorMek('WearBrakes', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="WearBrakes" type="radio" value="skiftes" onchange="updateColorMek('WearBrakes', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="WearBrakes" type="radio" value="defekt" onchange="updateColorMek('WearBrakes', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Sjekk lager for trommel -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckDrums">
-    <span class="font-bold">Sjekk lager for trommel</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckDrums" type="radio" value="ok" onchange="updateColorMek('CheckDrums', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckDrums" type="radio" value="skiftes" onchange="updateColorMek('CheckDrums', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckDrums" type="radio" value="defekt" onchange="updateColorMek('CheckDrums', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Sjekk PTO og opplagring -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckPto">
-    <span class="font-bold">Sjekk PTO og opplagring</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckPto" type="radio" value="ok" onchange="updateColorMek('CheckPto', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckPto" type="radio" value="skiftes" onchange="updateColorMek('CheckPto', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckPto" type="radio" value="defekt" onchange="updateColorMek('CheckPto', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Sjekk kjedestrammer -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckChainTensioner">
-    <span class="font-bold">Sjekk kjedestrammer</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckChainTensioner" type="radio" value="ok" onchange="updateColorMek('CheckChainTensioner', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckChainTensioner" type="radio" value="skiftes" onchange="updateColorMek('CheckChainTensioner', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckChainTensioner" type="radio" value="defekt" onchange="updateColorMek('CheckChainTensioner', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Sjekk wire -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckWire">
-    <span class="font-bold">Sjekk wire</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckWire" type="radio" value="ok" onchange="updateColorMek('CheckWire', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckWire" type="radio" value="skiftes" onchange="updateColorMek('CheckWire', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckWire" type="radio" value="defekt" onchange="updateColorMek('CheckWire', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Sjekk pinion lager -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckPinionBearing">
-    <span class="font-bold">Sjekk pinion lager</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckPinionBearing" type="radio" value="ok" onchange="updateColorMek('CheckPinionBearing', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckPinionBearing" type="radio" value="skiftes" onchange="updateColorMek('CheckPinionBearing', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckPinionBearing" type="radio" value="defekt" onchange="updateColorMek('CheckPinionBearing', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-<!-- Sjekk kile på kjedehjul -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckSprocket">
-    <span class="font-bold">Sjekk kile på kjedehjul</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckSprocket" type="radio" value="ok" onchange="updateColorMek('CheckSprocket', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckSprocket" type="radio" value="skiftes" onchange="updateColorMek('CheckSprocket', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckSprocket" type="radio" value="defekt" onchange="updateColorMek('CheckSprocket', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-<!-- Hydralisk -->
-
-
-<div>
-    <h2 class="font-bold text-4xl mt-10">Hydralisk</h2>
-    <button type="button" onclick="checkAllOkHyd()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded center-left mt-5">Check OK på alt hydralisk</button>
-</div>
-
-
-<!-- Sjekk hydraulikk sylinder for lekkasje -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="sylinderBox">
-    <span class="font-bold">Sjekk hydraulikk sylinder for lekkasje</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckHydraulicSylinder" type="radio" value="ok" onchange="updateColorHyd('sylinderBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckHydraulicSylinder" type="radio" value="skiftes" onchange="updateColorHyd('sylinderBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckHydraulicSylinder" type="radio" value="defekt" onchange="updateColorHyd('sylinderBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Sjekk slanger for skader og lekkasje -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="slangerBox">
-    <span class="font-bold">Sjekk slanger for skader og lekkasje</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckHose" type="radio" value="ok" onchange="updateColorHyd('slangerBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckHose" type="radio" value="skiftes" onchange="updateColorHyd('slangerBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckHose" type="radio" value="defekt" onchange="updateColorHyd('slangerBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Test hydraulikkblokk i testbenk -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="hydraulikkblokkBox">
-    <span class="font-bold">Test hydraulikkblokk i testbenk</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckHydraulicBlock" type="radio"value="ok" onchange="updateColorHyd('hydraulikkblokkBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckHydraulicBlock" type="radio" value="skiftes" onchange="updateColorHyd('hydraulikkblokkBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckHydraulicBlock" type="radio" value="defekt" onchange="updateColorHyd('hydraulikkblokkBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Skift olje i tank -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="tankBox">
-    <span class="font-bold">Skift olje i tank</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckOilTank" type="radio" value="ok" onchange="updateColorHyd('tankBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckOilTank" type="radio" value="skiftes" onchange="updateColorHyd('tankBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckOilTank" type="radio" value="defekt" onchange="updateColorHyd('tankBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Skift olje på gir boks  -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="boksBox">
-    <span class="font-bold">Skift olje på gir boks </span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckOilBox" type="radio" value="ok" onchange="updateColorHyd('boksBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckOilBox" type="radio" value="skiftes" onchange="updateColorHyd('boksBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckOilBox" type="radio" value="defekt" onchange="updateColorHyd('boksBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Sjekk ringsylinder åpne og skifteretninger -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="ringsylinderBox">
-    <span class="font-bold text-sm">Sjekk ringsylinder åpne og skifteretninger</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckRingCylinder" type="radio" value="ok" onchange="updateColorHyd('ringsylinderBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckRingCylinder" type="radio" value="skiftes" onchange="updateColorHyd('ringsylinderBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckRingCylinder" type="radio" value="defekt" onchange="updateColorHyd('ringsylinderBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-<!-- Sjekk bremse sylinder åpne og skifte tetninger -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="tetningerBox">
-    <span class="font-bold text-sm">Sjekk bremse sylinder åpne og skifte tetninger</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckBrakeCylinder" type="radio" value="ok" onchange="updateColorHyd('tetningerBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckBrakeCylinder" type="radio"value="skiftes" onchange="updateColorHyd('tetningerBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckBrakeCylinder" type="radio" value="defekt" onchange="updateColorHyd('tetningerBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-<!-- Elektro -->
-
-
-<div>
-    <h2 class="font-bold text-4xl mt-10">Elektro</h2>
-    <button type="button" onclick="checkAllOkEl()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded center-left mt-5">Check OK på alt Elektro</button>
-</div>
-
-
-<!-- Sjekk ledningsnett på vinsj -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="ledningsnettBox">
-    <span class="font-bold">Sjekk ledningsnett på vinsj</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckWiring" type="radio"value="ok" onchange="updateColorEl('ledningsnettBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckWiring" type="radio" value="skiftes" onchange="updateColorEl('ledningsnettBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckWiring" type="radio" value="defekt" onchange="updateColorEl('ledningsnettBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Sjekk og test på radio -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="radioBox">
-    <span class="font-bold">Sjekk og test på radio</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckRadio" type="radio" value="ok" onchange="updateColorEl('radioBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckRadio" type="radio" value="skiftes" onchange="updateColorEl('radioBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckRadio" type="radio" value="defekt" onchange="updateColorEl('radioBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<!-- Sjekk og test knappekasse -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="knappekasseBox">
-    <span class="font-bold">Sjekk og test knappekasse</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckButtonBox" type="radio" value="ok" onchange="updateColorEl('knappekasseBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckButtonBox" type="radio" value="skiftes" onchange="updateColorEl('knappekasseBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckButtonBox" type="radio" value="defekt" onchange="updateColorSet('knappekasseBox', this.value)" style="width: 24px; height: 24px;">
-    </div>
-</div>
-
-
-<div>
-    <h2 class="font-bold text-4xl mt-10">Trykk setninger</h2>
-
-</div>
-
-
-<!-- Trykk setninger -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16 mt-10" id="trykksetningerBox">
-    <span class="font-bold">Bar</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="PressureTest" type="text" placeholder="Bar" class="p-2 w-full border rounded">
-    </div>
-</div>
-
-<div>
-    <h2 class="font-bold text-4xl mt-10">Funksjons test</h2>
-</div>
-
-
-<!-- Test vinsj og kjør alle funskjoner -->
-
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16 mt-10" id="funksjonerBox">
-    <span class="font-bold">Test vinsj og kjør alle funksjoner</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="CheckFunctions" type="text" placeholder="Test vinsj og kjør alle funksjoner" class="p-2 w-full border rounded">
-    </div>
-</div>
-
-
-<!-- Trekkraft KN -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="trekkraftBox">
-    <span class="font-bold">Trekkraft KN</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="PullingPower" type="text" placeholder="Trekkraft KN" class="p-2 w-full border rounded">
-
-    </div>
-
-</div>
-
-
-<!-- Bremse kraft KN -->
-
-<div class="border p-2 grid grid-cols-4 gap-4 h-16" id="bremsekraftBox">
-    <span class="font-bold">Bremse kraft KN</span>
-    <div class="flex justify-center items-center">
-        <input asp-for="BrakePower" type="text" placeholder="Bremse kraft KN" class="p-2 w-full border rounded">
-
-    </div>
-
-</div>
-
-<input name="_RequestVerificationToken" type="hidden"
-       value="6fGBtLZmVBZ59oUad1Fr33uPxANKY9q3Srr5y[...]"/>
-<button type="submit" class="bg-gray-600 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded mt-20">
-    Lagre sak
-</button>
-</div>
-</div>
-</div>
-</form>
-<script>
+    @Html.AntiForgeryToken()
+
+    <form asp-action="Create" asp-controller="Sjekkliste" method="post">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="w-2/3 ml-auto p-8 space-y-6">
+            <!-- Sjekkliste for service på vinsj -->
+            <div>
+                <h1 class="text-3xl font-bold mr-20">3/3</h1>
+                <h2 class="font-bold text-4xl mb-4">Sjekkliste for service på vinsj</h2>
+                <div class="space-y-4">
+                    <input asp-for="DokNr" type="text" placeholder="Dok.nr" class="p-2 w-full border rounded">
+                    <input asp-for="Date" type="date" placeholder="Dato" class="p-2 w-full border rounded">
+                    <input asp-for="ApprovedBy" type="text" placeholder="Godkjent av" class="p-2 w-full border rounded">
+                </div>
+            </div>
+
+            <div class="p-6 space-y-6">
+                <div>
+                    <h2 class="font-bold text-4xl mb-4">Mekanisk</h2>
+                    <button type="button" onclick="checkAllOkMek()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded">Check OK på alt mekanisk</button>
+                    <div class="grid grid-cols-4 gap-4">
+                        <span></span>
+                        <span class="text-center text-xl">Ok</span>
+                        <span class="text-center text-xl">Bør skiftes</span>
+                        <span class="text-center text-xl">Defekt</span>
+                    </div>
+                </div>
+                <div>
+                    <!-- Sjekk clutch lameller for slitasje -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckClutch">
+                        <span class="font-bold">Sjekk clutch lameller for slitasje</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckClutch" type="radio" value="ok" id="1" onchange="updateColorMek('CheckClutch', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckClutch" type="radio" value="skiftes" id="2" onchange="updateColorMek('CheckClutch', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckClutch" type="radio" value="defekt" id="3" onchange="updateColorMek('CheckClutch', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+                    <!-- Sjekk bremser. Bånd/pedal -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="WearBrakes">
+                        <span class="font-bold">Sjekk bremser. Bånd/pedal</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="WearBrakes" type="radio" value="ok" onchange="updateColorMek('WearBrakes', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="WearBrakes" type="radio" value="skiftes" onchange="updateColorMek('WearBrakes', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="WearBrakes" type="radio" value="defekt" onchange="updateColorMek('WearBrakes', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk lager for trommel -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckDrums">
+                        <span class="font-bold">Sjekk lager for trommel</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckDrums" type="radio" value="ok" onchange="updateColorMek('CheckDrums', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckDrums" type="radio" value="skiftes" onchange="updateColorMek('CheckDrums', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckDrums" type="radio" value="defekt" onchange="updateColorMek('CheckDrums', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk PTO og opplagring -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckPto">
+                        <span class="font-bold">Sjekk PTO og opplagring</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckPto" type="radio" value="ok" onchange="updateColorMek('CheckPto', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckPto" type="radio" value="skiftes" onchange="updateColorMek('CheckPto', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckPto" type="radio" value="defekt" onchange="updateColorMek('CheckPto', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk kjedestrammer -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckChainTensioner">
+                        <span class="font-bold">Sjekk kjedestrammer</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckChainTensioner" type="radio" value="ok" onchange="updateColorMek('CheckChainTensioner', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckChainTensioner" type="radio" value="skiftes" onchange="updateColorMek('CheckChainTensioner', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckChainTensioner" type="radio" value="defekt" onchange="updateColorMek('CheckChainTensioner', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk wire -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckWire">
+                        <span class="font-bold">Sjekk wire</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckWire" type="radio" value="ok" onchange="updateColorMek('CheckWire', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckWire" type="radio" value="skiftes" onchange="updateColorMek('CheckWire', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckWire" type="radio" value="defekt" onchange="updateColorMek('CheckWire', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk pinion lager -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckPinionBearing">
+                        <span class="font-bold">Sjekk pinion lager</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckPinionBearing" type="radio" value="ok" onchange="updateColorMek('CheckPinionBearing', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckPinionBearing" type="radio" value="skiftes" onchange="updateColorMek('CheckPinionBearing', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckPinionBearing" type="radio" value="defekt" onchange="updateColorMek('CheckPinionBearing', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+                    <!-- Sjekk kile på kjedehjul -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="CheckSprocket">
+                        <span class="font-bold">Sjekk kile på kjedehjul</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckSprocket" type="radio" value="ok" onchange="updateColorMek('CheckSprocket', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckSprocket" type="radio" value="skiftes" onchange="updateColorMek('CheckSprocket', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckSprocket" type="radio" value="defekt" onchange="updateColorMek('CheckSprocket', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+                    <!-- Hydralisk -->
+
+
+                    <div>
+                        <h2 class="font-bold text-4xl mt-10">Hydralisk</h2>
+                        <button type="button" onclick="checkAllOkHyd()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded center-left mt-5">Check OK på alt hydralisk</button>
+                    </div>
+
+
+                    <!-- Sjekk hydraulikk sylinder for lekkasje -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="sylinderBox">
+                        <span class="font-bold">Sjekk hydraulikk sylinder for lekkasje</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckHydraulicSylinder" type="radio" value="ok" onchange="updateColorHyd('sylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckHydraulicSylinder" type="radio" value="skiftes" onchange="updateColorHyd('sylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckHydraulicSylinder" type="radio" value="defekt" onchange="updateColorHyd('sylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk slanger for skader og lekkasje -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="slangerBox">
+                        <span class="font-bold">Sjekk slanger for skader og lekkasje</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckHose" type="radio" value="ok" onchange="updateColorHyd('slangerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckHose" type="radio" value="skiftes" onchange="updateColorHyd('slangerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckHose" type="radio" value="defekt" onchange="updateColorHyd('slangerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Test hydraulikkblokk i testbenk -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="hydraulikkblokkBox">
+                        <span class="font-bold">Test hydraulikkblokk i testbenk</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckHydraulicBlock" type="radio" value="ok" onchange="updateColorHyd('hydraulikkblokkBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckHydraulicBlock" type="radio" value="skiftes" onchange="updateColorHyd('hydraulikkblokkBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckHydraulicBlock" type="radio" value="defekt" onchange="updateColorHyd('hydraulikkblokkBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Skift olje i tank -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="tankBox">
+                        <span class="font-bold">Skift olje i tank</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckOilTank" type="radio" value="ok" onchange="updateColorHyd('tankBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckOilTank" type="radio" value="skiftes" onchange="updateColorHyd('tankBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckOilTank" type="radio" value="defekt" onchange="updateColorHyd('tankBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Skift olje på gir boks  -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="boksBox">
+                        <span class="font-bold">Skift olje på gir boks </span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckOilBox" type="radio" value="ok" onchange="updateColorHyd('boksBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckOilBox" type="radio" value="skiftes" onchange="updateColorHyd('boksBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckOilBox" type="radio" value="defekt" onchange="updateColorHyd('boksBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk ringsylinder åpne og skifteretninger -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="ringsylinderBox">
+                        <span class="font-bold text-sm">Sjekk ringsylinder åpne og skifteretninger</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckRingCylinder" type="radio" value="ok" onchange="updateColorHyd('ringsylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckRingCylinder" type="radio" value="skiftes" onchange="updateColorHyd('ringsylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckRingCylinder" type="radio" value="defekt" onchange="updateColorHyd('ringsylinderBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+                    <!-- Sjekk bremse sylinder åpne og skifte tetninger -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="tetningerBox">
+                        <span class="font-bold text-sm">Sjekk bremse sylinder åpne og skifte tetninger</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckBrakeCylinder" type="radio" value="ok" onchange="updateColorHyd('tetningerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckBrakeCylinder" type="radio" value="skiftes" onchange="updateColorHyd('tetningerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckBrakeCylinder" type="radio" value="defekt" onchange="updateColorHyd('tetningerBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+                    <!-- Elektro -->
+
+
+                    <div>
+                        <h2 class="font-bold text-4xl mt-10">Elektro</h2>
+                        <button type="button" onclick="checkAllOkEl()" class="bg-gray-800 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded center-left mt-5">Check OK på alt Elektro</button>
+                    </div>
+
+
+                    <!-- Sjekk ledningsnett på vinsj -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="ledningsnettBox">
+                        <span class="font-bold">Sjekk ledningsnett på vinsj</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckWiring" type="radio" value="ok" onchange="updateColorEl('ledningsnettBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckWiring" type="radio" value="skiftes" onchange="updateColorEl('ledningsnettBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckWiring" type="radio" value="defekt" onchange="updateColorEl('ledningsnettBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk og test på radio -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="radioBox">
+                        <span class="font-bold">Sjekk og test på radio</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckRadio" type="radio" value="ok" onchange="updateColorEl('radioBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckRadio" type="radio" value="skiftes" onchange="updateColorEl('radioBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckRadio" type="radio" value="defekt" onchange="updateColorEl('radioBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <!-- Sjekk og test knappekasse -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="knappekasseBox">
+                        <span class="font-bold">Sjekk og test knappekasse</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckButtonBox" type="radio" value="ok" onchange="updateColorEl('knappekasseBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckButtonBox" type="radio" value="skiftes" onchange="updateColorEl('knappekasseBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckButtonBox" type="radio" value="defekt" onchange="updateColorSet('knappekasseBox', this.value)" style="width: 24px; height: 24px;">
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <h2 class="font-bold text-4xl mt-10">Trykk setninger</h2>
+
+                    </div>
+
+
+                    <!-- Trykk setninger -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16 mt-10" id="trykksetningerBox">
+                        <span class="font-bold">Bar</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="PressureTest" type="text" placeholder="Bar" class="p-2 w-full border rounded">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="font-bold text-4xl mt-10">Funksjons test</h2>
+                    </div>
+
+
+                    <!-- Test vinsj og kjør alle funskjoner -->
+
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16 mt-10" id="funksjonerBox">
+                        <span class="font-bold">Test vinsj og kjør alle funksjoner</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="CheckFunctions" type="text" placeholder="Test vinsj og kjør alle funksjoner" class="p-2 w-full border rounded">
+                        </div>
+                    </div>
+
+
+                    <!-- Trekkraft KN -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="trekkraftBox">
+                        <span class="font-bold">Trekkraft KN</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="PullingPower" type="text" placeholder="Trekkraft KN" class="p-2 w-full border rounded">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Bremse kraft KN -->
+
+                    <div class="border p-2 grid grid-cols-4 gap-4 h-16" id="bremsekraftBox">
+                        <span class="font-bold">Bremse kraft KN</span>
+                        <div class="flex justify-center items-center">
+                            <input asp-for="BrakePower" type="text" placeholder="Bremse kraft KN" class="p-2 w-full border rounded">
+
+                        </div>
+
+                    </div>
+
+                    <input name="_RequestVerificationToken" type="hidden"
+                           value="6fGBtLZmVBZ59oUad1Fr33uPxANKY9q3Srr5y[...]" />
+                    <button type="submit" class="bg-gray-600 text-gray-500 hover:text-yellow-500 font-bold py-2 px-4 rounded mt-20">
+                        Lagre sak
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
         function checkAllOkMek() {
             let lamellerRadios = document.querySelectorAll('input[name="CheckClutch"]');
             let BremserRadios = document.querySelectorAll('input[name="WearBrakes"]');

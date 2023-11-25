@@ -29,7 +29,7 @@ namespace bacit_dotnet.MVC.Controllers
         [HttpGet]
         public ActionResult Sjekkliste(int customerId)
         {
-            
+
             var sjekklisteViewModel = new SjekklisteViewModel { CustomerID = customerId };
             var checkLists = _checkListrepository.GetAll();
 
@@ -106,7 +106,7 @@ namespace bacit_dotnet.MVC.Controllers
                 return View(checkList);
             }
 
-            
+
             var existingcheckList = _checkListrepository.GetCheckListByID(checkList.CheckListID);
 
             if (existingcheckList == null)
@@ -115,13 +115,13 @@ namespace bacit_dotnet.MVC.Controllers
                 return View(checkList);
             }
 
-            
+
             UpdateCheckListFromForm(existingcheckList, checkList);
 
             bool updateSuccess = _checkListrepository.Update(existingcheckList);
             if (updateSuccess)
             {
-                return RedirectToAction("Index", "Home"); 
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -132,7 +132,7 @@ namespace bacit_dotnet.MVC.Controllers
 
         private void UpdateCheckListFromForm(SjekklisteViewModel toUpdate, SjekklisteViewModel form)
         {
-            
+
             toUpdate.DokNr = form.DokNr;
             toUpdate.Date = form.Date;
             toUpdate.ApprovedBy = form.ApprovedBy;
@@ -158,7 +158,7 @@ namespace bacit_dotnet.MVC.Controllers
             toUpdate.CheckFunctions = form.CheckFunctions;
             toUpdate.PullingPower = form.PullingPower;
             toUpdate.BrakePower = form.BrakePower;
-            
+
         }
 
     }
