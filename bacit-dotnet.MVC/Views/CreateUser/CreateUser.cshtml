@@ -3,6 +3,19 @@
     ViewData["Title"] = "bacit_dotnet.MVC";
 }
 @model bacit_dotnet.MVC.Models.CreateUser.CreateUserViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NøstedWeb</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bacit_dotnet.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
 <form asp-action="Save" asp-controller="KundeInfo" method="post">
   
 
@@ -88,3 +101,7 @@
        
     </div>
   </form>
+   </header>
+</body>
+</html>
+
