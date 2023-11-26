@@ -53,7 +53,7 @@ namespace bacit_dotnet.MVC
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(10, 5, 11))));
 
             // Configure Identity
-            services.AddIdentity<Employee, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
