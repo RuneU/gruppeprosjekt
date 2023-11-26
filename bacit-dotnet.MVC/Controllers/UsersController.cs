@@ -1,10 +1,8 @@
 ﻿using bacit_dotnet.MVC.Entities;
-using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Models.Users;
 using bacit_dotnet.MVC.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace bacit_dotnet.MVC.Controllers
 {
@@ -41,18 +39,14 @@ namespace bacit_dotnet.MVC.Controllers
         public IActionResult Save(UserViewModel model)
         {
 
-            string encodedName = WebUtility.HtmlEncode(model.Name);
-
             UserEntity newUser = new UserEntity
             {
-                Name = encodedName,
+                Name = model.Name,
                 Email = model.Email,
             };
-            model.Name = WebUtility.HtmlEncode(model.Name);
             var roles = new List<string>();
             if (model.IsAdmin)
                 roles.Add("Administrator");
-            
 
             if (userRepository.GetUsers().FirstOrDefault(x => x.Email.Equals(newUser.Email, StringComparison.InvariantCultureIgnoreCase)) != null)
                 userRepository.Update(newUser, roles);

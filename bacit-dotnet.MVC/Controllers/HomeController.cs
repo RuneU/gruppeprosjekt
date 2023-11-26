@@ -1,8 +1,10 @@
-﻿using bacit_dotnet.MVC.Models;
+﻿
+using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Diagnostics;
+using bacit_dotnet.MVC.Models.DineSaker;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.EntityFrameworkCore;
 using bacit_dotnet.MVC.Views.FormsMain;
@@ -68,6 +70,7 @@ namespace bacit_dotnet.MVC.Controllers
             using (IDbConnection dbConnection = Connection)
             {
                 var query = "SELECT Customer.*, ServiceOrder.* FROM Customer INNER JOIN ServiceOrder ON Customer.CustomerID = ServiceOrder.CustomerID ";
+
                
                 switch (searchBy)
                 {
@@ -91,6 +94,9 @@ namespace bacit_dotnet.MVC.Controllers
                         break;
                 }
 
+              
+                
+
                 var customers = dbConnection.Query<Customer>(query, new { SearchValue = $"%{searchValue}%" }).ToList();
                 var serviceOrder = dbConnection.Query<ServiceOrder>(query, new { SearchValue = $"%{searchValue}%" }).ToList();
 
@@ -100,10 +106,9 @@ namespace bacit_dotnet.MVC.Controllers
                 {
                     Customers = customers,
                     ServiceOrders = serviceOrder,
-
                     
                 };
-                ViewBag.Term = searchValue;
+
                 return View("Index", viewModel);
             }
         }
