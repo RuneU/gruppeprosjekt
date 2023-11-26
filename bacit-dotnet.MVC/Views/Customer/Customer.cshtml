@@ -25,7 +25,10 @@
         </div>
        <br>
         <div>
-            @Html.AntiForgeryToken()
+            @using (Html.BeginForm("Create", "Customer"))
+            {
+                @Html.AntiForgeryToken()
+            
             <form asp-action="Create" asp-controller="Customer" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="grid gap-6 mb-6 max-w-2xl md:ml-64">
@@ -78,6 +81,7 @@
                   
                 </div>
             </form>
+            }
         </div>
     </div>
 </div>

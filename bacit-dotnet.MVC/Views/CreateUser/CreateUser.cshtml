@@ -16,6 +16,11 @@
 </head>
 <body>
     <header>
+
+@using (Html.BeginForm("Save", "KundeInfo"))
+{
+    @Html.AntiForgeryToken()
+      
 <form asp-action="Save" asp-controller="KundeInfo" method="post">
   
 
@@ -101,7 +106,11 @@
        
     </div>
   </form>
+
    </header>
 </body>
 </html>
+
+
+  }
 
