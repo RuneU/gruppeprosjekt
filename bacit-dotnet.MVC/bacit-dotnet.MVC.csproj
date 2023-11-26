@@ -10,6 +10,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Migrations\**" />
+	  <Compile Remove="Models\Home\**" />
+	  <Content Remove="Migrations\**" />
+	  <Content Remove="Models\Home\**" />
+	  <EmbeddedResource Remove="Migrations\**" />
+	  <EmbeddedResource Remove="Models\Home\**" />
+	  <None Remove="Migrations\**" />
+	  <None Remove="Models\Home\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Content Remove="Views\ServiceOrder\CreateServiceOrder.cshtml" />
 	</ItemGroup>
 
@@ -34,8 +45,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Migrations\" />
-	  <Folder Include="Models\Home\" />
 	  <Folder Include="wwwroot\images\" />
 	</ItemGroup>
 

@@ -55,7 +55,7 @@ namespace bacit_dotnet.MVC.Controllers
                         Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}"); // validate model state, insert customer, and redirect to 'ServiceOrder' action
                     }
                 }
-                return View(customer);
+                return BadRequest(ModelState);
             }
 
 

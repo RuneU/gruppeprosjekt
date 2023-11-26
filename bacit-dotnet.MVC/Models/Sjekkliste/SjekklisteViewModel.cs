@@ -8,8 +8,11 @@ namespace bacit_dotnet.MVC.Models.Sjekkliste
     {
         public int CheckListID { get; set; }
         public int CustomerID { get; set; }
+        [Required(ErrorMessage = "DokNr is required.")]
         public string DokNr { get; set; }
+        [Required(ErrorMessage = "Date is required.")]
         public string Date { get; set; }
+        [Required(ErrorMessage = "ApprovedBy is required.")]
         public string ApprovedBy {  get; set; }
         public string CheckClutch { get; set; }
         public string WearBrakes { get; set; }
