@@ -101,9 +101,10 @@ namespace bacit_dotnet.MVC.Controllers
                 {
                     Customers = customers,
                     ServiceOrders = serviceOrder,
+
                     
                 };
-
+                ViewBag.Term = searchValue;
                 return View("Index", viewModel);
             }
         }

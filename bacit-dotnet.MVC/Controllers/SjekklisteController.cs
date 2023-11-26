@@ -6,6 +6,8 @@ using System.Diagnostics;
 using bacit_dotnet.MVC.Repositories;
 using bacit_dotnet.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Encodings.Web;
+using System.Net;
 
 namespace bacit_dotnet.MVC.Controllers
 {
@@ -55,8 +57,11 @@ namespace bacit_dotnet.MVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
 
-        public IActionResult Create(SjekklisteViewModel sjekkliste)
+
+        public IActionResult Create(SjekklisteViewModel checkList, string msg)
+
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +77,16 @@ namespace bacit_dotnet.MVC.Controllers
                 return BadRequest(ModelState);
             }
 
-            _checkListrepository.Insert(sjekkliste);
+            checkList.DokNr = WebUtility.HtmlEncode(checkList.DokNr);
+            checkList.ApprovedBy = WebUtility.HtmlEncode(checkList.ApprovedBy);
+            checkList.PressureTest = WebUtility.HtmlEncode(checkList.PressureTest);
+            checkList.CheckFunctions = WebUtility.HtmlEncode(checkList.CheckFunctions);
+            checkList.PullingPower = WebUtility.HtmlEncode(checkList.PullingPower);
+            checkList.BrakePower = WebUtility.HtmlEncode(checkList.BrakePower);
+
+
+
+            _checkListrepository.Insert(checkList);
 
             // Return SJekkliste view
             return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
@@ -106,6 +120,12 @@ namespace bacit_dotnet.MVC.Controllers
                 return View(checkList);
             }
 
+            checkList.DokNr = WebUtility.HtmlEncode(checkList.DokNr);
+            checkList.ApprovedBy = WebUtility.HtmlEncode(checkList.ApprovedBy);
+            checkList.PressureTest = WebUtility.HtmlEncode(checkList.PressureTest);
+            checkList.CheckFunctions = WebUtility.HtmlEncode(checkList.CheckFunctions);
+            checkList.PullingPower = WebUtility.HtmlEncode(checkList.PullingPower);
+            checkList.BrakePower = WebUtility.HtmlEncode(checkList.BrakePower);
 
             var existingcheckList = _checkListrepository.GetCheckListByID(checkList.CheckListID);
 
@@ -117,6 +137,9 @@ namespace bacit_dotnet.MVC.Controllers
 
 
             UpdateCheckListFromForm(existingcheckList, checkList);
+
+          
+
 
             bool updateSuccess = _checkListrepository.Update(existingcheckList);
             if (updateSuccess)

@@ -8,8 +8,9 @@ using Newtonsoft.Json;
 using NuGet.Protocol.Core.Types;
 using System;
 using Microsoft.AspNetCore.Authorization;
-using Humanizer;
-using Microsoft.AspNetCore.Http.HttpResults;
+using System.Net;
+
+
 namespace bacit_dotnet.MVC.Controllers
 {
     [Authorize] // This attribute restricts access to the entire `CustomerController` to only authenticated users.
@@ -56,7 +57,14 @@ namespace bacit_dotnet.MVC.Controllers
                 }
                 return View(customer);
             }
-            
+
+
+            customer.FirstName = WebUtility.HtmlEncode(customer.FirstName);
+            customer.LastName = WebUtility.HtmlEncode(customer.LastName);
+            customer.CustomerEmail = WebUtility.HtmlEncode(customer.CustomerEmail);
+            customer.Adress = WebUtility.HtmlEncode(customer.Adress);
+            customer.PhoneNumber = WebUtility.HtmlEncode(customer.PhoneNumber);
+            customer.ZipCode = WebUtility.HtmlEncode(customer.ZipCode);
 
             int newCustomerId = _customerRepository.Insert(customer);
             return RedirectToAction("ServiceOrder", "ServiceOrder", new { CustomerID = newCustomerId });
@@ -71,7 +79,15 @@ namespace bacit_dotnet.MVC.Controllers
                 
                 return View(customer);
             }
-           
+
+
+            customer.FirstName = WebUtility.HtmlEncode(customer.FirstName);
+            customer.LastName = WebUtility.HtmlEncode(customer.LastName);
+            customer.CustomerEmail = WebUtility.HtmlEncode(customer.CustomerEmail);
+            customer.Adress = WebUtility.HtmlEncode(customer.Adress);
+            customer.PhoneNumber = WebUtility.HtmlEncode(customer.PhoneNumber);
+            customer.ZipCode = WebUtility.HtmlEncode(customer.ZipCode);
+
             _customerRepository.Update(customer);
             return RedirectToAction("Index", "Home");  // Validate model state, update customer, and redirect to 'Index' action of 'Home' controller
         }
