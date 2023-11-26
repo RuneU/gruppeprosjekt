@@ -27,15 +27,18 @@
         <br>
         <div>
             @*@using (Html.BeginForm("Save", "ServiceOrder", FormMethod.Post))*@
-            @using (Html.BeginForm("Create", "ServiceOrder"))
-            {
+
+            @*This generates a hidden anti-forgery token in the form, providing protection against cross-site request forgery (CSRF) attacks.
+            It ensures that the form is submitted by the intended user.*@
             @Html.AntiForgeryToken()
+
+            @*The form is configured to submit to the 'Create' action of the 'ServiceOrder' controller using the HTTP POST method.*@
             <form asp-controller="ServiceOrder" asp-action="Create" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="grid gap-6 mb-6 md:grid-cols-2 max-w-2xl md:ml-64">
                     <div>
                         <label asp-for="CreatedBy" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opprettet av</label>
-                        <input asp-for="CreatedBy" type="text" id="CreatedBy" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Simon Helgen" required>
+                        <input asp-for="CreatedBy" type="text" id="CreatedBy" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ola Nordmann">
                         <span asp-validation-for="CreatedBy" class="text-danger"></span>
                     </div>
                     <div>
@@ -44,6 +47,7 @@
                         <span asp-validation-for="DateReceived" class="text-danger"></span>
                     </div>
 
+                    @*Provides a dropdown list for selecting the service order status, dynamically populated with options from the ViewBag.StatusList.*@
                     <div>
                         <label asp-for="Status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
                         <select asp-for="Status" asp-items="@(ViewBag.StatusList != null ? new SelectList(ViewBag.StatusList, "Value", "Text") : new SelectList(new List<SelectListItem>(), "Value", "Text"))" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -52,45 +56,45 @@
                     </div>
                     <div>
                         <label asp-for="Subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Emne</label>
-                        <input asp-for="Subject" type="text" id="Subject" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Emne" required>
+                        <input asp-for="Subject" type="text" id="Subject" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Emne">
                         <span asp-validation-for="Subject" class="text-danger"></span>
                     </div>
                     <div>
                         <label asp-for="ModelYear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Årsmodell</label>
-                        <input asp-for="ModelYear" type="number" min="1939" max="3000" id="ModelYear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1997" required>
+                        <input asp-for="ModelYear" type="number" min="1939" max="3000" id="ModelYear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1997">
                         <span asp-validation-for="ModelYear" class="text-danger"></span>
                     </div>
                     <div>
                         <label asp-for="ProductType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Produkt type</label>
-                        <input asp-for="ProductType" type="text" id="ProductType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Produkt type" required>
+                        <input asp-for="ProductType" type="text" id="ProductType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Produkt type">
                     </div>
                     <div>
                         <label asp-for="SerialNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Serienummer</label>
-                        <input asp-for="SerialNumber" type="text" id="SerialNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="X1234567" required>
+                        <input asp-for="SerialNumber" type="text" id="SerialNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="X1234567">
                     </div>
                     <div>
                         <label asp-for="ServiceType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tjenestetype</label>
-                        <input asp-for="ServiceType" type="text" id="ServiceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Service/Reperasjon/Garanti" required>
+                        <input asp-for="ServiceType" type="text" id="ServiceType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Service/Reperasjon/Garanti">
                     </div>
                 </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-1">
                     <div>
                         <label asp-for="WhatIsAgreedWithCustomer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hva er avtalt med kunde</label>
-                        <textarea asp-for="WhatIsAgreedWithCustomer" rows="5" cols="50" id="WhatIsAgreedWithCustomer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Hva har du avtalt med kunden?" required> </textarea>
+                        <textarea asp-for="WhatIsAgreedWithCustomer" rows="5" cols="50" id="WhatIsAgreedWithCustomer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Hva har du avtalt med kunden?"> </textarea>
                     </div>
                     <div>
                         <label asp-for="RepairDescription" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reparasjonsbeskrivelse</label>
-                        <textarea asp-for="RepairDescription" rows="5" cols="50" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Reparasjonsbeskrivelse" required> </textarea>
+                        <textarea asp-for="RepairDescription" rows="5" cols="50" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Reparasjonsbeskrivelse"> </textarea>
                     </div>
                     <div>
                         <label asp-for="IncludedParts" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Inkluderte deler</label>
-                        <textarea asp-for="IncludedParts" rows="5" cols="50" id="IncludedParts" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Inkluderte deler" required> </textarea>
+                        <textarea asp-for="IncludedParts" rows="5" cols="50" id="IncludedParts" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Inkluderte deler"> </textarea>
                     </div>
                 </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label asp-for="WorkingHours" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Arbeidstimer</label>
-                        <input asp-for="WorkingHours" type="number" id="WorkingHours" min="0" max="20000" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="20" required>
+                        <input asp-for="WorkingHours" type="number" id="WorkingHours" min="0" max="20000" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="20">
                     </div>
                     <div>
                         <label asp-for="DateCompleted" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dato fullført</label>
@@ -98,15 +102,15 @@
                     </div>
                     <div>
                         <label asp-for="ReplacedPartsReturned" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Byttede deler returnert</label>
-                        <input asp-for="ReplacedPartsReturned" type="text" id="ReplacedPartsReturned" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Byttede deler returnert" required>
+                        <input asp-for="ReplacedPartsReturned" type="text" id="ReplacedPartsReturned" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Byttede deler returnert">
                     </div>
                     <div>
                         <label asp-for="ShippingMethod" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Forsendelsesmetode</label>
-                        <input asp-for="ShippingMethod" type="text" id="ShippingMethod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Forsendelsesmetode" required>
+                        <input asp-for="ShippingMethod" type="text" id="ShippingMethod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Forsendelsesmetode">
                     </div>
                     <div>
                         <label asp-for="BookedServiceToWeek" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Booket service til uke</label>
-                        <input asp-for="BookedServiceToWeek" type="text" id="BookedServiceToWeek" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Booket service til uke" required>
+                        <input asp-for="BookedServiceToWeek" type="text" id="BookedServiceToWeek" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Booket service til uke">
                     </div>
                     <div>
                         <label asp-for="AgreedDeliveryDateWithCustomer" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-white">Avtalt leveranse til kunde</label>

@@ -18,9 +18,12 @@ To make this work, you need to have
 
 ### Building of docker container
 ##### 1. Build then start the docker container with the web application:
-`docker image build -t webapp .`
-
-`docker container run --rm -it -d --name webapp --publish 80:80 webapp`
+```cmd
+docker image build -t webapp .
+```
+```cmd
+docker container run --rm -it -d --name webapp --publish 80:80 webapp
+```
 
 ##### 2. Start a mariadb container using the localdirectory "database" to store the data:    
 
@@ -30,7 +33,9 @@ To make this work, you need to have
 > Note: If you get a build error try changing the ports to 3308:3306
 
 ##### 3. Enter the database and create the database and table for this skeleton:    
-`docker exec -it NoestedDatabase mysql -p`
+```cmd
+docker exec -it NoestedDatabase mysql -p
+```
 
 When prompted enter the password (`Gruppe4!`), then type or copy in the SQL from [this file](CreateDb.sql). 
 First write the first line, thereafter you can write or copy the rest of the script.
