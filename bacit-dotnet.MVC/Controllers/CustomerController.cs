@@ -15,7 +15,6 @@ namespace bacit_dotnet.MVC.Controllers
 {
     [Authorize] // This attribute restricts access to the entire `CustomerController` to only authenticated users.
                 // This is a security measure to ensure that only authorized users can interact with customer-related actions.
-
     public class CustomerController : Controller
     {
         // Dependency injection is used here to ensure that the `CustomerController` has access to a `CustomerRepository` instance.

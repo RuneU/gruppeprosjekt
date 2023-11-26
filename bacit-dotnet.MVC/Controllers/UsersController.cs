@@ -8,7 +8,7 @@ using System.Net;
 
 namespace bacit_dotnet.MVC.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    // [Authorize(Roles = "Administrator")]
     public class UsersController : Controller
     {
         private readonly IUserRepository userRepository;

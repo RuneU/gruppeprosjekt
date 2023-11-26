@@ -11,7 +11,7 @@ using bacit_dotnet.MVC.Repositories;
 namespace bacit_dotnet.MVC.Controllers
 {
     //- Krever at brukeren er autentisert for å få tilgang til denne kontrolleren.
-    [Authorize]
+    // [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -84,7 +84,7 @@ namespace bacit_dotnet.MVC.Controllers
 
         // GET: /Account/Register
         //- Krever at brukeren har rollen "Administrator" for å få tilgang.
-        [Authorize(Roles = "Administrator")]
+        // [// Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult Register(string returnUrl = null)
         {
@@ -94,7 +94,7 @@ namespace bacit_dotnet.MVC.Controllers
 
         // POST: /Account/Register
         //- Krever at brukeren har rollen "Administrator" for å få tilgang.
-        [Authorize(Roles = "Administrator")]
+        // [// Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
