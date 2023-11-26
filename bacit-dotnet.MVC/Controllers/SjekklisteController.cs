@@ -11,9 +11,11 @@ using System.Net;
 
 namespace bacit_dotnet.MVC.Controllers
 {
-    [Authorize]
+    [Authorize] // This attribute restricts access to the entire `SjekklisteController` to only authenticated users.
+                // This is a security measure to ensure that only authorized users can interact with Sjekklis-related actions.
     public class SjekklisteController : Controller
     {
+        // Dependency injection is used here to ensure that the `SjekklisteController` has access to a `SjekklistRepository` instance.
         private readonly CheckListRepository _checkListrepository;
 
 
@@ -22,23 +24,23 @@ namespace bacit_dotnet.MVC.Controllers
             _checkListrepository = checkListrepository;
         }
 
+        // This action handles GET requests to create a new checklist associated with a customer.
         public IActionResult Create(int customerId)
         {
             var checklist = new SjekklisteViewModel { CustomerID = customerId };
             return View(checklist);
         }
 
+        // This action handles GET requests to display a checklist for a specific customer.
         [HttpGet]
         public ActionResult Sjekkliste(int customerId)
         {
-
             var sjekklisteViewModel = new SjekklisteViewModel { CustomerID = customerId };
             var checkLists = _checkListrepository.GetAll();
-
-
             return View(sjekklisteViewModel);
         }
 
+        // This action handles GET requests to edit a checklist associated with a customer
         [HttpGet]
         public ActionResult Edit(int customerId)
         {
@@ -56,12 +58,11 @@ namespace bacit_dotnet.MVC.Controllers
             return View(checkList);
         }
 
+        // This action handles POST requests to create a new checklist.
+        // It performs validation, encodes some properties, and inserts the checklist into the repository.
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-
         public IActionResult Create(SjekklisteViewModel checkList, string msg)
-
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +73,6 @@ namespace bacit_dotnet.MVC.Controllers
                         Debug.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
                     }
                 }
-
                 // Return a 400 Bad Request status code for invalid input
                 return BadRequest(ModelState);
             }
@@ -92,27 +92,11 @@ namespace bacit_dotnet.MVC.Controllers
             return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
         }
 
+        // This action handles POST requests to edit an existing checklist.
+        // It performs validation, encodes some properties, retrieves the existing checklist, updates it,
+        // and then redirects based on the success or failure of the update.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        /*public ActionResult Edit(SjekklisteViewModel checkList)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(checkList);
-            }
-
-            bool updateSuccess = _checkListrepository.Update(checkList);
-            if (updateSuccess)
-            {
-                return RedirectToAction("Index", "Home"); // Or wherever you want to redirect after successful update
-            }
-            else
-            {
-                ModelState.AddModelError("", "Unable to update the checklist.");
-                return View(checkList);
-            }
-        }*/
-
         public ActionResult Edit(SjekklisteViewModel checkList)
         {
             if (!ModelState.IsValid)
@@ -135,11 +119,7 @@ namespace bacit_dotnet.MVC.Controllers
                 return View(checkList);
             }
 
-
             UpdateCheckListFromForm(existingcheckList, checkList);
-
-          
-
 
             bool updateSuccess = _checkListrepository.Update(existingcheckList);
             if (updateSuccess)
@@ -153,6 +133,7 @@ namespace bacit_dotnet.MVC.Controllers
             }
         }
 
+        // This is a private method used to update properties of an existing checklist based on the values provided in the form.
         private void UpdateCheckListFromForm(SjekklisteViewModel toUpdate, SjekklisteViewModel form)
         {
 

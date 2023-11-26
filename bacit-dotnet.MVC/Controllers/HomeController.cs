@@ -15,8 +15,9 @@ using System.Data.Common;
 
 namespace bacit_dotnet.MVC.Controllers
 {
-
-    [Authorize]
+    
+    [Authorize] // This attribute restricts access to the entire `CustomerController` to only authenticated users.
+                // This is a security measure to ensure that only authorized users can interact with customer-related actions.
     public class HomeController : Controller
     {
         private readonly CustomerRepository _customerRepository;
@@ -32,6 +33,7 @@ namespace bacit_dotnet.MVC.Controllers
 
         }
 
+        // This property provides a database connection using MySqlConnection, and the connection string is retrieved from the application configuration.
         public IDbConnection Connection
         {
             get
@@ -40,11 +42,12 @@ namespace bacit_dotnet.MVC.Controllers
             }
         }
 
+        // This action retrieves all customers and service orders and passes them to the Index view.
+        // If either Customers or ServiceOrders is null, it initializes them as empty lists to prevent null reference exceptions.
         public IActionResult Index()
         {
             var viewModel = new HomeViewModel
             {
-    
                 Customers = _customerRepository.GetAll(),
                 ServiceOrders = _serviceOrderRepository.GetAll()
             };
@@ -57,12 +60,15 @@ namespace bacit_dotnet.MVC.Controllers
 
             return View(viewModel);
         }
-        
+
+        // This action returns a view for creating new entities
         public IActionResult Create()
         {
             return View();
         }
 
+        // This action handles searches based on different criteria (e.g., customer name, phone number, date, status)
+        // and returns a filtered set of customers and service orders. It uses Dapper for parameterized queries and dynamic SQL.
         public IActionResult Search(string searchBy, string searchValue)
         {
             using (IDbConnection dbConnection = Connection)
@@ -107,13 +113,5 @@ namespace bacit_dotnet.MVC.Controllers
                 return View("Index", viewModel);
             }
         }
-
     }
-
-
 }
-
-
-
-
-    
