@@ -15,38 +15,50 @@
 </head>
 <body>
 <header>
-    <div class="justify-center table-fixed mt-20 max-w-5xl mx-auto ">
-        <div class="w-full fixed top-0 left-64 flex items-center p-5 ml-20">
+   <div class="justify-center table-fixed mt-20 max-w-5xl mx-auto mr-20 md:mr-64">
+       <div class="w-full fixed top-0 sm:left-10 md:left-32 lg:left-64 flex items-center p-5 ml-0 md:ml-20">
             <div class="absolute top-0 right-1/3 mt-5">
-                <a asp-area="" asp-controller="Customer" asp-action="Customer" class="flex items-center text-gray-400 bg-gray-800 p-4 hover:bg-yellow-500 hover:text-white rounded-full text-lg transition duration-300 ease-in-out">
+                <a asp-area="" asp-controller="Customer" asp-action="Customer" class="flex items-center text-gray-400 bg-gray-800 p-4 hover:bg-yellow-500 hover:text-white rounded-full text-lg transition duration-300 ease-in-out mt-10 md:mt-0">
                     Opprett en ny sak
                     <i class="fas fa-plus ml-3"></i>
                 </a>
             </div>
-            <span class="sr-only">Search</span>
-            <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+            
                 <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"><!-- ... --></svg>
+
+           
+                
+
+
             </span>
-            <form asp-action="Search" asp-controller="Home" method="get" class="flex items-center relative w-full max-w-xs">
-                <input type="text" class="w-full pr-10 pl-3 py-2 border rounded-full text-sm focus:outline-none border-gray-800" placeholder="Søk i tabellen..." name="term" id="term" required>
-                <button type="submit" class="absolute inset-y-0 right-0 flex items-center pr-3" value="Search">
-                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-6a8 8 0 11-16 0 8 8 0 0116 0z"></path>
-                    </svg>
-                </button>
-            </form>
+                @using (Html.BeginForm("Search", "Home"))
+                {
+                    @Html.AntiForgeryToken()
+                <form id="searchForm" asp-action="Search" asp-controller="Home" method="get" class="flex items-center relative w-full max-w-xs lg:max-w-md">
+                    <input type="text" class="w-full pr-10 pl-3 py-2 border rounded-full text-sm focus:outline-none border-gray-800" placeholder="Søk i tabellen..." name="searchValue" id="searchValue" required>
+                    <input type="hidden" name="searchBy" id="hiddenSearchBy" value="Navn">
+                    <button type="submit" class="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-6a8 8 0 11-16 0 8 8 0 0116 0z"></path>
+                        </svg>
+                    </button>
+                </form>
+            
+            }
+
         </div>
-        <h3 class="text-4xl font-bold text-gray-900 text-center mb-5 ml-32">Saksoversikt</h3>
+        <h3 class="text-4xl font-bold text-gray-900 text-center mb-5 ml-0 md:ml-32">Saksoversikt</h3>
 
+        <h4 class="flex-items-center ml=64 mt-4 text-gray-400 font-semibold text-lg">Søket etter: @ViewBag.Term</h4>
 
-        <table class="min-w-full table-auto ml-20 mt-10">
+        <table class="min-w-full table-auto ml-0 md:ml-20 mt-10">
 
             <thead>
             <tr>
                 <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Sak.nr')">Saks.nr</th>
-                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Telefon')">Telefon</th>
+                <th class="hidden sm:table-cell px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Telefon')">Telefon</th>
                 <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Navn')">Navn</th>
-                <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Date')">Dato</th>
+                <th class="hidden sm:table-cell px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Date')">Dato</th>
                 <th class="px-4 py-2 bg-gradient-to-t from-gray-600 to-gray-800 text-gray-100 text-center" onclick="updateSearchBy(this, 'Status')">Status</th>
             </tr>
             </thead>
@@ -56,17 +68,17 @@
             {
                 <tr onclick="location.href='@Url.Action("Edit", "Customer", new { id = customer.CustomerID })'">
                     <td class="text-center border p-2">@customer.CustomerID</td>
-                    <td class="text-center border p-2">@customer.PhoneNumber</td>
-                    <td class="text-center border p-2">@customer.FirstName</td>
+                    <td class="text-center border p-2 hidden sm:table-cell">@customer.PhoneNumber</td>
+                    <td class="text-center border p-2">@customer.FullName</td>
                     @if (Model.ServiceOrders.Any(o => o.CustomerID == customer.CustomerID))
                     {
                         var serviceOrder = Model.ServiceOrders.First(o => o.CustomerID == customer.CustomerID);
-                        <td class="text-center border p-2">@serviceOrder.DateReceived.ToString("dd-MM-yyyy")</td>
+                        <td class="text-center border p-2 hidden sm:table-cell">@serviceOrder.DateReceived.ToString("dd-MM-yyyy")</td>
                         <td class="text-center border p-2">@serviceOrder.Status</td>
                     }
                     else
                     {
-                        <td class="text-center border p-2">dd-MM-yyyy</td>
+                        <td class="hidden sm:table-cell text-center border p-2">dd-MM-yyyy</td>
                         <td class="text-center border p-2">Ikke tildelt</td>
                     }
                 </tr>

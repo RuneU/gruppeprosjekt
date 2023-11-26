@@ -4,8 +4,9 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    @Html.AntiForgeryToken()
     <form>
-        @Html.AntiForgeryToken()
+        
         <ul class="navbar-nav">
             <li class="nav-item">
                 <span class="navbar-text">@UserManager.GetUserName(User) </span>
