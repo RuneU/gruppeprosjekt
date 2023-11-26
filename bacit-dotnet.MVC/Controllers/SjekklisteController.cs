@@ -6,8 +6,6 @@ using System.Diagnostics;
 using bacit_dotnet.MVC.Repositories;
 using bacit_dotnet.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
-using System.Text.Encodings.Web;
-using System.Net;
 
 namespace bacit_dotnet.MVC.Controllers
 {
@@ -31,7 +29,7 @@ namespace bacit_dotnet.MVC.Controllers
         [HttpGet]
         public ActionResult Sjekkliste(int customerId)
         {
-
+            
             var sjekklisteViewModel = new SjekklisteViewModel { CustomerID = customerId };
             var checkLists = _checkListrepository.GetAll();
 
@@ -57,11 +55,8 @@ namespace bacit_dotnet.MVC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
 
-
-        public IActionResult Create(SjekklisteViewModel checkList, string msg)
-
+        public IActionResult Create(SjekklisteViewModel sjekkliste)
         {
             if (!ModelState.IsValid)
             {
@@ -77,16 +72,7 @@ namespace bacit_dotnet.MVC.Controllers
                 return BadRequest(ModelState);
             }
 
-            checkList.DokNr = WebUtility.HtmlEncode(checkList.DokNr);
-            checkList.ApprovedBy = WebUtility.HtmlEncode(checkList.ApprovedBy);
-            checkList.PressureTest = WebUtility.HtmlEncode(checkList.PressureTest);
-            checkList.CheckFunctions = WebUtility.HtmlEncode(checkList.CheckFunctions);
-            checkList.PullingPower = WebUtility.HtmlEncode(checkList.PullingPower);
-            checkList.BrakePower = WebUtility.HtmlEncode(checkList.BrakePower);
-
-
-
-            _checkListrepository.Insert(checkList);
+            _checkListrepository.Insert(sjekkliste);
 
             // Return SJekkliste view
             return View("~/Views/Sjekkliste/Sjekkliste.cshtml");
@@ -120,13 +106,7 @@ namespace bacit_dotnet.MVC.Controllers
                 return View(checkList);
             }
 
-            checkList.DokNr = WebUtility.HtmlEncode(checkList.DokNr);
-            checkList.ApprovedBy = WebUtility.HtmlEncode(checkList.ApprovedBy);
-            checkList.PressureTest = WebUtility.HtmlEncode(checkList.PressureTest);
-            checkList.CheckFunctions = WebUtility.HtmlEncode(checkList.CheckFunctions);
-            checkList.PullingPower = WebUtility.HtmlEncode(checkList.PullingPower);
-            checkList.BrakePower = WebUtility.HtmlEncode(checkList.BrakePower);
-
+            
             var existingcheckList = _checkListrepository.GetCheckListByID(checkList.CheckListID);
 
             if (existingcheckList == null)
@@ -135,16 +115,13 @@ namespace bacit_dotnet.MVC.Controllers
                 return View(checkList);
             }
 
-
+            
             UpdateCheckListFromForm(existingcheckList, checkList);
-
-          
-
 
             bool updateSuccess = _checkListrepository.Update(existingcheckList);
             if (updateSuccess)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home"); 
             }
             else
             {
@@ -155,7 +132,7 @@ namespace bacit_dotnet.MVC.Controllers
 
         private void UpdateCheckListFromForm(SjekklisteViewModel toUpdate, SjekklisteViewModel form)
         {
-
+            
             toUpdate.DokNr = form.DokNr;
             toUpdate.Date = form.Date;
             toUpdate.ApprovedBy = form.ApprovedBy;
@@ -181,7 +158,7 @@ namespace bacit_dotnet.MVC.Controllers
             toUpdate.CheckFunctions = form.CheckFunctions;
             toUpdate.PullingPower = form.PullingPower;
             toUpdate.BrakePower = form.BrakePower;
-
+            
         }
 
     }

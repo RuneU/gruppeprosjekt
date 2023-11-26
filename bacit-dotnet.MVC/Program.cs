@@ -32,6 +32,7 @@ namespace bacit_dotnet.MVC
             builder.Services.AddScoped<IUserRepository, EFUserRepository>();
             builder.Services.AddTransient<CustomerRepository>();
             builder.Services.AddTransient<ServiceOrderRepository>();
+            builder.Services.AddTransient<EmployeeRepository>();
             builder.Services.AddTransient<CheckListRepository>();
 
             SetupAuthentication(builder);
