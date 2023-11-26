@@ -27,7 +27,9 @@
         <div>
             @*This generates a hidden anti-forgery token in the form, providing protection against cross-site request forgery (CSRF) attacks.
             It ensures that the form is submitted by the intended user.*@
-            @Html.AntiForgeryToken()
+                    @using (Html.BeginForm("Create", "Customer"))
+                    {
+                        @Html.AntiForgeryToken()
 
             @*The form is configured to submit to the 'Create' action of the 'Customer' controller using the HTTP POST method.*@
             <form asp-action="Create" asp-controller="Customer" method="post">
