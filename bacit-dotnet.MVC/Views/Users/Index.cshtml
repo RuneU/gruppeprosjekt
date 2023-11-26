@@ -47,16 +47,24 @@
                     <td class="text-center border p-2">@user.Name</td>
                     <td class="text-center border p-2">@user.Email</td>
                     <td>
+                                @using (Html.BeginForm("delete", "users"))
+                                {
+                                    @Html.AntiForgeryToken()
                         <form asp-action="delete" asp-controller="users" method="post" class="text-center border p-2">
                             <input type="hidden" name="Email" value="@user.Email"/>
                              <button class="bg-red-200 rounded-md text-black p-2" type="submit" value="Slett">Slett</button>
                         </form>
+                                }
                     </td>
                     <td>
+                                @using (Html.BeginForm("index", "users"))
+                                        {
+                                            @Html.AntiForgeryToken()
                         <form asp-action="index" asp-controller="users" method="get" class="text-center border p-2">
                             <input type="hidden" name="Email" value="@user.Email"/>
                             <button class="bg-yellow-200 rounded-md text-black p-2" type="submit" value="Endre">Endre</button>
                         </form>
+                                        }
                     </td>
                 </tr>
             }
@@ -65,6 +73,9 @@
         {
             <div class="ml-32">
             <h3 class="text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white mt-10">Endre brukerinfo</h3>
+                        @using (Html.BeginForm("save", "users"))
+                        {
+                            @Html.AntiForgeryToken()
                 <form asp-action="save" asp-controller="users" method="post" class=form asp-action="save" asp-controller="users" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xs mx-auto">
                     <ul>
                         <li>
@@ -86,6 +97,7 @@
                         </li>
                     </ul>
                 </form>
+                }
                 </div>
         }
     </div>
