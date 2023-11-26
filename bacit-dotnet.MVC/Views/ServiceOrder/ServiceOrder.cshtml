@@ -26,8 +26,6 @@
         </div>
         <br>
         <div>
-            @*@using (Html.BeginForm("Save", "ServiceOrder", FormMethod.Post))*@
-
             @*This generates a hidden anti-forgery token in the form, providing protection against cross-site request forgery (CSRF) attacks.
             It ensures that the form is submitted by the intended user.*@
                     @using (Html.BeginForm("Create", "ServiceOrder"))

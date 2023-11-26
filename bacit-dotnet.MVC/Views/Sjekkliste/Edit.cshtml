@@ -17,8 +17,11 @@
 </head>
 <body class="bg-white">
 
+    @*This generates a hidden anti-forgery token in the form, providing protection against cross-site request forgery (CSRF) attacks.
+    It ensures that the form is submitted by the intended user.*@
     @using (Html.BeginForm("Edit", "Sjekkliste"))
     {
+        @*The form is configured to submit to the 'Create' action of the 'Sjekkliste' controller using the HTTP POST method.*@
         @Html.AntiForgeryToken()
         <form asp-action="Edit" asp-controller="Sjekkliste" method="post">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -416,6 +419,9 @@
 </body>
 </html>
 <script>
+
+    // Checks all checkboxes related to the mechanical system.
+    // Intended to be called when a user wants to mark all checkboxes as "ok" in the mechanical system category.
     function checkAllOkMek() {
         let lamellerRadios = document.querySelectorAll('input[name="CheckClutch"]');
         let BremserRadios = document.querySelectorAll('input[name="WearBrakes"]');
@@ -445,7 +451,6 @@
         updateColorMek('CheckWire', 'ok');
         updateColorMek('CheckPinionBearing', 'ok');
         updateColorMek('CheckSprocket', 'ok');
-
     }
 
 
@@ -491,7 +496,6 @@
         updateColorHyd('boksBox', 'ok');
         updateColorHyd('ringsylinderBox', 'ok');
         updateColorHyd('tetningerBox', 'ok');
-
     }
 
     function updateColorHyd(boxId, value) {
@@ -525,8 +529,6 @@
         updateColorEl('ledningsnettBox', 'ok');
         updateColorEl('radioBox', 'ok');
         updateColorEl('knappekasseBox', 'ok');
-
-
     }
 
     function updateColorEl(boxId, value) {
@@ -578,8 +580,6 @@
         updateColorTest('funksjonerBox', 'ok');
         updateColorTest('trekkraftBox', 'ok');
         updateColorTest('bremsekraftBox', 'ok');
-
-
     }
 
     function updateColorTest(boxId, value) {

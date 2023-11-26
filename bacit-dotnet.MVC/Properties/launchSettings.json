@@ -1,12 +1,4 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:14800",
-      "sslPort": 44321
-    }
-  },
   "profiles": {
     "bacit_dotnet.MVC": {
       "commandName": "Project",
@@ -20,6 +12,23 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
       "useSSL": true
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:7064",
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "https://localhost:7064;http://localhost:5064"
+      },
+      "distributionName": ""
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:14800",
+      "sslPort": 44321
     }
   }
 }
