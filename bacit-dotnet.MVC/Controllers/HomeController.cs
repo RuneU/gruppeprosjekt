@@ -1,5 +1,4 @@
-﻿
-using bacit_dotnet.MVC.Models;
+﻿using bacit_dotnet.MVC.Models;
 using bacit_dotnet.MVC.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
@@ -70,7 +69,6 @@ namespace bacit_dotnet.MVC.Controllers
             using (IDbConnection dbConnection = Connection)
             {
                 var query = "SELECT Customer.*, ServiceOrder.* FROM Customer INNER JOIN ServiceOrder ON Customer.CustomerID = ServiceOrder.CustomerID ";
-
                
                 switch (searchBy)
                 {
@@ -93,9 +91,6 @@ namespace bacit_dotnet.MVC.Controllers
                         query += "WHERE Customer.FirstName LIKE @SearchValue ";
                         break;
                 }
-
-              
-                
 
                 var customers = dbConnection.Query<Customer>(query, new { SearchValue = $"%{searchValue}%" }).ToList();
                 var serviceOrder = dbConnection.Query<ServiceOrder>(query, new { SearchValue = $"%{searchValue}%" }).ToList();
