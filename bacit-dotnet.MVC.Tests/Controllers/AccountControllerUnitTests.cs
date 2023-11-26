@@ -19,7 +19,7 @@ namespace bacit_dotnet.MVC.Tests.Controllers
         public void Login_ReturnsViewForInvalidModel()
         {
             // ARRANGE
-            // Mock UserManager with necessary dependencies
+            // Create mock objects for dependencies
             var userManagerMock = new Mock<UserManager<IdentityUser>>(
                 Mock.Of<IUserStore<IdentityUser>>(),
                 Mock.Of<IOptions<IdentityOptions>>(),
@@ -31,7 +31,7 @@ namespace bacit_dotnet.MVC.Tests.Controllers
                 Mock.Of<IServiceProvider>(),
                 Mock.Of<ILogger<UserManager<IdentityUser>>>()
             );
-            // Mock SignInManager with necessary dependencies, including userManagerMock
+            // Create the controller with the mock dependencies
             var signInManagerMock = new Mock<SignInManager<IdentityUser>>(
                 userManagerMock.Object,
                 Mock.Of<IHttpContextAccessor>(),
@@ -52,15 +52,15 @@ namespace bacit_dotnet.MVC.Tests.Controllers
                 emailSenderMock.Object, loggerFactory, userRepositoryMock.Object);
 
             // ACT
-            // Invoke the Login action with null model
+            // Attempt to log in with null model
             var result = controller.Login(null);
 
             // ASSERT
-            // Verify that the result is of type ViewResult and the ViewName is null
+            // Verify that the result is a ViewResult with null ViewName
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Null(viewResult.ViewName);
 
-            // Verify that the expected methods on mocked objects are called
+            // Verify that all expected methods on mock objects were called
             userManagerMock.VerifyAll();
             signInManagerMock.VerifyAll();
             emailSenderMock.VerifyAll();
